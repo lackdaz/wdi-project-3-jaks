@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class ConsumerControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should get consumer_profile" do
+    get consumer_consumer_profile_url
+    assert_response :success
+  end
+
 end
