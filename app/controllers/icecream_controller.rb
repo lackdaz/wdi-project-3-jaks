@@ -1,0 +1,2 @@
+class IcecreamController < ApplicationController
+end

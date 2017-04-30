@@ -1,7 +1,7 @@
 class CreateConsumers < ActiveRecord::Migration[5.0]
   def change
     create_table :consumers do |t|
-      t.string :id
+      t.string :consumer_id
       t.string :first_name
       t.string :last_name
       t.string :email
