@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  co_name: MyString
+  email: MyString
+  password: MyString
+  address: MyString
+  locx: 
+  precision: MyString
+  locy: 
+  precision: MyString
+  contact: 1
+  owner_firstname: 
+
+two:
+  id: MyString
+  co_name: MyString
+  email: MyString
+  password: MyString
+  address: MyString
+  locx: 
+  precision: MyString
+  locy: 
+  precision: MyString
+  contact: 1
+  owner_firstname: 
