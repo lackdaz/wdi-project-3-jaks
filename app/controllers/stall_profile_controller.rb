@@ -1,2 +1,0 @@
-class StallProfileController < ApplicationController
-end
