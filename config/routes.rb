@@ -3,8 +3,6 @@ Rails.application.routes.draw do
 
   get 'consumer/consumer_profile'
 
-  get 'address/customer_addresses'
-
   get 'company/company_profile'
 
   get 'pages/homepage'
