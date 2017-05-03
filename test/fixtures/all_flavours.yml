@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  all_icecream_container: one
-  transaction: one
+  name: MyString
+  price: 1
+  supplier: one
 
 two:
-  all_icecream_container: two
-  transaction: two
+  name: MyString
+  price: 1
+  supplier: two
