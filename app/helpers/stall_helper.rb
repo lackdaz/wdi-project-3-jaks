@@ -1,2 +1,0 @@
-module StallHelper
-end
