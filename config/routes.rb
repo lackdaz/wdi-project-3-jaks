@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'stall#index'
+
   get 'order/all_orders'
 
   get 'consumer/consumer_profile'
