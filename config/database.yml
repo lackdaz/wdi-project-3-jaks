@@ -24,7 +24,4 @@ production:
   # <<: *default
   # database: db/production.sqlite3
   adapter: postgresql
-
- <<: *default
-  database: airporter_production
   url: <%= ENV['DATABASE_URL'] %>
