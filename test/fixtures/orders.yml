@@ -2,14 +2,12 @@
 
 one:
   order_id: MyString
-  in_a: MyString
   order_price: 1
   dbox_id: MyString
   address_id: MyString
 
 two:
   order_id: MyString
-  in_a: MyString
   order_price: 1
   dbox_id: MyString
   address_id: MyString

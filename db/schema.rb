@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430040512) do
+ActiveRecord::Schema.define(version: 20170501093320) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address_id"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20170430040512) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "order_id"
-    t.string   "in_a"
     t.integer  "order_price"
     t.string   "dbox_id"
     t.string   "address_id"
