@@ -1,0 +1,16 @@
+<h1>Stall#index</h1>
+<p>Find me in app/views/stall/index.html.erb</p>
+
+<%= @stall.inspect%>
+
+<ul>
+<% @stall.each_with_index do  |stall, index|  %>
+
+<li><%= stall %></li>
+
+<% end %>
+</ul>
+
+<pre>
+  <%= @stall.inspect %>
+</pre>
