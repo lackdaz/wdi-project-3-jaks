@@ -12,14 +12,14 @@ class SessionsController < ApplicationController
   else
     flash[:danger] = "Credentials Invalid!!"
     p 'login fail'
-    redirect_to :back
+    redirect_to login_path
   end
 end
 
 def destroy
   session[:consumer_id] = nil
+  redirect_to login_path
   flash[:success] = "User logged out!!"
-  redirect_to :back
 end
 
 private

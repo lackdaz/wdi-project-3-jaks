@@ -10,103 +10,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430040512) do
+ActiveRecord::Schema.define(version: 20170503034958) do
 
-  create_table "addresses", force: :cascade do |t|
-    t.string   "address_id"
+  create_table "all_flavours", force: :cascade do |t|
     t.string   "name"
-    t.string   "custid"
-    t.float    "locx"
-    t.float    "locy"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "price"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_all_flavours_on_supplier_id"
   end
 
-  create_table "companies", force: :cascade do |t|
-    t.string   "co_id"
-    t.string   "stall"
-    t.string   "email"
-    t.string   "password"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "contact"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "all_icecream_containers", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_all_icecream_containers_on_supplier_id"
   end
 
   create_table "consumers", force: :cascade do |t|
-    t.string   "consumer_id"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "firstname"
+    t.string   "lastname"
     t.string   "email"
+    t.integer  "contact"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "password_digest"
-    t.integer  "contact"
+  end
+
+  create_table "delivery_addresses", force: :cascade do |t|
+    t.integer  "consumer_id"
+    t.string   "address"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "dboxes", force: :cascade do |t|
-    t.string   "dbox_id"
-    t.string   "dman_firstname"
-    t.string   "dman_lastname"
-    t.string   "email"
-    t.string   "password"
-    t.integer  "contact"
-    t.float    "locx"
-    t.float    "locy"
-    t.integer  "temp"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  create_table "flavors", force: :cascade do |t|
-    t.string   "flavor_id"
-    t.string   "flavor_name"
-    t.string   "co_id"
-    t.string   "co_name"
-    t.integer  "flavor_price"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "icecreams", force: :cascade do |t|
-    t.string   "icecream_id"
-    t.string   "stall_id"
-    t.string   "flavor_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "order_icecreams", force: :cascade do |t|
-    t.string   "order_id"
-    t.string   "icecream_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.index ["consumer_id"], name: "index_delivery_addresses_on_consumer_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "order_id"
-    t.string   "in_a"
-    t.integer  "order_price"
-    t.string   "dbox_id"
-    t.string   "address_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "all_icecream_container_id"
+    t.integer  "transaction_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["all_icecream_container_id"], name: "index_orders_on_all_icecream_container_id"
+    t.index ["transaction_id"], name: "index_orders_on_transaction_id"
   end
 
-  create_table "stalls", force: :cascade do |t|
-    t.string   "stall_id"
-    t.string   "co_name"
-    t.string   "email"
-    t.string   "password"
+  create_table "suppliers", force: :cascade do |t|
+    t.string   "name"
     t.string   "address"
-    t.float    "locx"
-    t.float    "locy"
     t.integer  "contact"
-    t.string   "owner_firstname"
-    t.string   "owner_lastname"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "website"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "consumer_id"
+    t.integer  "address_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["address_id"], name: "index_transactions_on_address_id"
+    t.index ["consumer_id"], name: "index_transactions_on_consumer_id"
   end
 
 end

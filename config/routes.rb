@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  root 'stall#index'
+
+  get 'order/all_orders'
+
   resources :consumers
 
   get 'order/all_orders'
@@ -8,7 +12,9 @@ Rails.application.routes.draw do
 
   get 'pages/homepage'
 
-  get 'test/testnew'
+  # get 'stall_profile/stall_profile'
+
+  resources :stall
 
   get "login" => "sessions#new"
   post "login" => "sessions#create"

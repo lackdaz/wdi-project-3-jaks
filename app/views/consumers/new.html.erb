@@ -1,8 +1,10 @@
+<%= render "partials/flash" %>
 <h1>Consumers signup</h1>
-<%= form_for :consumer, url: consumers_path do |f| %>
+<%= form_for @consumer do |f| %>
+<%= render 'partials/error_messages', form_object: @consumer %>
 
   <%= f.label :first_name %>
-  <%= f.text_field :first_name %> <br />
+  <%= f.text_field :first_name  %> <br />
 
   <%= f.label :last_name %>
   <%= f.text_field :last_name %> <br />

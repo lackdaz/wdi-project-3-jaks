@@ -5,6 +5,7 @@ class ConsumersController < ApplicationController
   end
 
 def new
+  @consumer = Consumer.new
 end
 
 def create
@@ -13,11 +14,14 @@ def create
   if
    @consumer.save
     flash[:success] = "Account Created. Please Login"
+    p params
     p 'successful signup'
-    redirect_to consumers_path
+    redirect_to login_path
   else
     p 'failed signup'
-    redirect_back
+    flash[:danger] = "Wrong Credentials"
+    render :new
+
 
   end
 end
@@ -54,7 +58,7 @@ end
     render :show
   else
     p 'failed'
-    redirect_back
+    redirect_to edit_consumer_path
   end
 end
 
@@ -65,7 +69,7 @@ def destroy
     p 'deleted'
     redirect_to new_consumer_path
   else
-    redirect_back
+    redirect_to consumers_url(@consumer)
   end
 
 

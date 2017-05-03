@@ -1,3 +1,4 @@
 Welcome!
+<%= render "partials/flash" %>
 <%= link_to 'Show', consumer_path(@current_user) %>
 <%= button_to 'Logout', logout_path, :method => :delete %>

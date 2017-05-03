@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OrderIcecreamTest < ActiveSupport::TestCase
+class DeliveryAddressTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
