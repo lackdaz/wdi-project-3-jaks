@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503034233) do
+ActiveRecord::Schema.define(version: 20170503034958) do
+
+  create_table "all_flavours", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_all_flavours_on_supplier_id"
+  end
+
+  create_table "all_icecream_containers", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_all_icecream_containers_on_supplier_id"
+  end
 
   create_table "consumers", force: :cascade do |t|
     t.string   "firstname"
@@ -30,6 +48,15 @@ ActiveRecord::Schema.define(version: 20170503034233) do
     t.index ["consumer_id"], name: "index_delivery_addresses_on_consumer_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "all_icecream_container_id"
+    t.integer  "transaction_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["all_icecream_container_id"], name: "index_orders_on_all_icecream_container_id"
+    t.index ["transaction_id"], name: "index_orders_on_transaction_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -39,6 +66,15 @@ ActiveRecord::Schema.define(version: 20170503034233) do
     t.string   "website"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "consumer_id"
+    t.integer  "address_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["address_id"], name: "index_transactions_on_address_id"
+    t.index ["consumer_id"], name: "index_transactions_on_consumer_id"
   end
 
 end
