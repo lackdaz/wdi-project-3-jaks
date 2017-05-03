@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'order/all_orders'
 
-  get 'consumer/consumer_profile'
+  resources :consumers
+
+  get 'order/all_orders'
 
   get 'company/company_profile'
 
@@ -9,5 +10,8 @@ Rails.application.routes.draw do
 
   get 'test/testnew'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  delete "logout" => "sessions#destroy"
+
 end

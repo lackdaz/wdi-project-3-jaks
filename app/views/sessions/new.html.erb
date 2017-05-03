@@ -1,0 +1,12 @@
+
+<%= render "partials/flash" %>
+<h1>Login</h1>
+
+<%= form_for :consumer do |f| %>
+  <%= f.email_field :email, placeholder: "Enter your email" %>
+  <%= f.password_field :password, placeholder: "Enter your password" %>
+  <%= f.submit "Login" %>
+<% end %>
+
+
+ <a href="consumers/new"><p>New user? Sign Up first </p></a>
