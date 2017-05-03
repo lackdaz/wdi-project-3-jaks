@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170503034958) do
   end
 
   create_table "consumers", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.integer  "contact"
     t.datetime "created_at",      null: false

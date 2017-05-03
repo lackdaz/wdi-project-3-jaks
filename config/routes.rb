@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
 
-  root 'stall#index'
+  root 'supplier#index'
 
-  get 'order/all_orders'
+  resources:supplier
+
 
   resources :consumers
-
-  get 'order/all_orders'
-
-  get 'company/company_profile'
-
   get 'pages/homepage'
 
-  # get 'stall_profile/stall_profile'
 
   resources :stall
 
