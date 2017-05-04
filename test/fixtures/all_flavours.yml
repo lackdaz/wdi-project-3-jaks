@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  price: 1
+  price: 1.5
   supplier: one
 
 two:
   name: MyString
-  price: 1
+  price: 1.5
   supplier: two

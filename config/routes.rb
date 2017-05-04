@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
 
 
-  get 'suppliers/index'
 
-  get 'suppliers/new'
 
-  root 'suppliers#index'
-
-  resources :suppliers
+  devise_for :suppliers
+  devise_for :consumers
+  root to: "home#index"
 
 
 
