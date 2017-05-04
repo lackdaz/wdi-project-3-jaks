@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users
-  root 'supplier#index'
+  get 'suppliers/index'
 
-  resources:supplier
+  get 'suppliers/new'
+
+  root 'suppliers#index'
+
+  resources :suppliers
 
 
 
