@@ -9,51 +9,11 @@ def new
 end
 
 def create
+  p consumer_params
+
+  @cosumer = Consumer.new(consumer_params)
+
   @consumer = Consumer.new(consumer_params)
-
-  if
-   @consumer.save
-    flash[:success] = "Account Created. Please Login"
-    p params
-    p 'successful signup'
-    redirect_to login_path
-  else
-
-    render :new
-    p 'failed signup'
-    flash[:danger] = "Wrong Credentials"
-
-
-  end
-end
-
-def show
-    @consumer = Consumer.find(params[:id])
-    if @current_user.id == @consumer.id
-      render 'show'
-    else redirect_to :consumers
-    end
-
-end
-
-def edit
-  @consumer = Consumer.find(params[:id])
-  p 'editing route'
-  if @current_user == @consumer
-    render 'edit'
-  else
-    p @current_user
-    p @consumer
-     redirect_to :consumers
-  end
-
-
-
-end
-
-  def update
-  @consumer = Consumer.find(params[:id])
-
   if @consumer.update(consumer_params)
     p 'updated'
     render :show
