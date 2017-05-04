@@ -1,7 +1,4 @@
 class Consumer < ApplicationRecord
-
-has_secure_password
-
 validates :email, presence: true,
           uniqueness: {case_sensitive: false},
           format:/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -17,8 +14,11 @@ validates :first_name,
           length: { in: 8..72 }
 
 
+has_secure_password
+
+
  def self.find_and_authenticate_consumer(params)
- Consumer.find_by_email(params[:email]).try(:authenticate, params[:password])
+   Consumer.find_by_email(params[:email]).try(:authenticate, params[:password])
  end
 
 end

@@ -11,6 +11,7 @@ end
 def create
   @consumer = Consumer.new(consumer_params)
 
+
   if
    @consumer.save
     flash[:success] = "Account Created. Please Login"
@@ -78,7 +79,7 @@ end
 
   private
   def consumer_params
-  params.require(:consumer).permit(:first_name, :last_name, :email, :password)
+  params.require(:consumer).permit(:first_name, :last_name, :email, :password ,:password_confirmation)
   end
 
 end
