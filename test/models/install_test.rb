@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SupplierControllerTest < ActionDispatch::IntegrationTest
+class InstallTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
