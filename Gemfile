@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.2'
 #Use pry for console purposes
 gem 'pry'
 gem 'bulma-rails'
+gem 'faker'
+gem 'devise'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

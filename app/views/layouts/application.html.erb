@@ -9,7 +9,9 @@
   </head>
 
   <body>
-    <%= render "partials/nav"%>
+    <p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
+$ bin/rails generate model Comment commenter:string body:text article:references

@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503034958) do
+ActiveRecord::Schema.define(version: 20170504104648) do
 
   create_table "all_flavours", force: :cascade do |t|
     t.string   "name"
-    t.integer  "price"
+    t.float    "price"
     t.integer  "supplier_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -31,13 +31,20 @@ ActiveRecord::Schema.define(version: 20170503034958) do
   end
 
   create_table "consumers", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "email"
-    t.integer  "contact"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_consumers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_consumers_on_reset_password_token", unique: true
   end
 
   create_table "delivery_addresses", force: :cascade do |t|
@@ -46,6 +53,11 @@ ActiveRecord::Schema.define(version: 20170503034958) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["consumer_id"], name: "index_delivery_addresses_on_consumer_id"
+  end
+
+  create_table "flavours_orders", id: false, force: :cascade do |t|
+    t.integer "order_id",   null: false
+    t.integer "flavour_id", null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -58,23 +70,29 @@ ActiveRecord::Schema.define(version: 20170503034958) do
   end
 
   create_table "suppliers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address"
-    t.integer  "contact"
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "website"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_suppliers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_suppliers_on_reset_password_token", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "consumer_id"
-    t.integer  "address_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["address_id"], name: "index_transactions_on_address_id"
+    t.integer  "delivery_address_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["consumer_id"], name: "index_transactions_on_consumer_id"
+    t.index ["delivery_address_id"], name: "index_transactions_on_delivery_address_id"
   end
 
 end
