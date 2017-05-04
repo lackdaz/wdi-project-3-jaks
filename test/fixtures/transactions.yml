@@ -2,8 +2,8 @@
 
 one:
   consumer: one
-  address: one
+  delivery_address: one
 
 two:
   consumer: two
-  address: two
+  delivery_address: two
