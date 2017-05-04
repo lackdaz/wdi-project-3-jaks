@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
 
+  get 'transactions/index'
 
+  root 'supplier#index'
 
-  devise_for :suppliers
-  devise_for :consumers
-  root to: "home#index"
+  resources:supplier
+
+  resources:orders
 
 
 
