@@ -1,6 +1,6 @@
 class Consumer < ApplicationRecord
 
-
+has_secure_password
 
 validates :email, presence: true,
           uniqueness: {case_sensitive: false},
@@ -15,11 +15,6 @@ validates :last_name,
 validates :first_name,
           presence: true,
           length: { in: 8..72 }
-
-  has_secure_password
-
-
-
 
 
  def self.find_and_authenticate_consumer(params)

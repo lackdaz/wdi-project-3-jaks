@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   def new
   end
   def create
-    p  consumer_params
   consumer = Consumer.find_and_authenticate_consumer(consumer_params)
 
   if consumer

@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 20170503034958) do
   end
 
   create_table "consumers", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
-    t.string   "password_digest"
     t.integer  "contact"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
   create_table "delivery_addresses", force: :cascade do |t|
