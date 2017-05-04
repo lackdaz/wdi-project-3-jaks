@@ -22,6 +22,20 @@ gem 'bulma-rails'
 gem 'faker'
 gem 'devise'
 
+# Google APIs gems
+gem 'geocoder'
+gem 'polylines'
+gem 'gmaps4rails'
+
+# mqtt
+gem 'mqtt'
+
+# ENV helper
+gem 'foreman'
+
+# daemon task
+gem 'daemons-rails'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
