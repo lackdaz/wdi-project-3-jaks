@@ -18,9 +18,10 @@ def create
     p 'successful signup'
     redirect_to login_path
   else
+
+    render :new
     p 'failed signup'
     flash[:danger] = "Wrong Credentials"
-    render :new
 
 
   end

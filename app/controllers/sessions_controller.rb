@@ -10,9 +10,10 @@ class SessionsController < ApplicationController
     p 'login successful'
     redirect_to consumers_url(@consumer)
   else
-    flash[:danger] = "Credentials Invalid!!"
+
     p 'login fail'
     redirect_to login_path
+      flash[:danger] = "Credentials Invalid!!"
   end
 end
 

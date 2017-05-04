@@ -1,6 +1,6 @@
 class StallController < ApplicationController
-<<<<<<< HEAD
-=======
+
+
 
   def new
     Stall.new
@@ -15,5 +15,5 @@ class StallController < ApplicationController
 
   def edit
   end
->>>>>>> 29d518b0e2551ab8dd7353b9078ed12903a09365
+
 end

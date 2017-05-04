@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+
+
   root 'supplier#index'
 
-  resources:supplier
+  resources :suppliers
 
 
   resources :consumers
