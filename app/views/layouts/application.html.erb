@@ -11,7 +11,10 @@
   <body>
     <%= render "partials/nav"%>
     <%= yield %>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&callback=initMap"
-    async defer></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&callback=initMap">
+    </script>
+    
+    <%= javascript_include_tag( 'transaction' ) %>
   </body>
 </html>
