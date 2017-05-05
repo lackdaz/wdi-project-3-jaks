@@ -7,10 +7,10 @@
   uri = URI.parse ENV['CLOUDMQTT_URL'] || 'mqtt://localhost:1883'
 
   conn_opts = {
-    remote_host: uri.host,
-    remote_port: uri.port,
+    host: uri.host,
+    port: uri.port,
     username: uri.user,
-    password: uri.password,
+    password: uri.password
   }
   puts conn_opts
 
