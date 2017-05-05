@@ -3,6 +3,7 @@ class CreateAllFlavours < ActiveRecord::Migration[5.0]
     create_table :all_flavours do |t|
       t.string :name
       t.float :price
+      t.string :image
       t.references :supplier, foreign_key: true
 
       t.timestamps

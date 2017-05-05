@@ -39,37 +39,12 @@
   <!-- Add the modifier "is-active" to display it on mobile -->
   <div class="nav-right nav-menu">
     <p class="navbar-text pull-right">
-<%= link_to "Register a Business", new_supplier_path, :class => 'navbar-link' %>
+      <% if supplier_signed_in?  %>
+      <%= link_to "Menu","/suppliers/2", :class => 'navbar-link' %>
+      <%= link_to "Logout", supplier_registration_path, class: "navbar-link", method: :delete %>
+        <% else %>
+        <%= link_to "Register a Business", new_supplier_registration_path, :class => 'navbar-link' %>
+      <% end %>
 </p>
-    <a class="nav-item">
-      Home
-    </a>
-    <a class="nav-item">
-      Documentation
-    </a>
-    <a class="nav-item">
-      Blog
-    </a>
-
-    <div class="nav-item">
-      <div class="field is-grouped">
-        <p class="control">
-          <a class="button" >
-            <span class="icon">
-              <i class="fa fa-twitter"></i>
-            </span>
-            <span>Tweet</span>
-          </a>
-        </p>
-        <p class="control">
-          <a class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-download"></i>
-            </span>
-            <span>Download</span>
-          </a>
-        </p>
-      </div>
-    </div>
   </div>
 </nav>
