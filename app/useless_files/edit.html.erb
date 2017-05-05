@@ -1,0 +1,12 @@
+<section id="show-order" class="section">
+
+<h1 class = "title">Edit Order </h1>
+ID: <%= @individual_order.transaction_id %><br>
+Created: <%= @individual_order.created_at %><br>
+Flavor: <%= @individual_order.flavor.name %><br>
+Price: <%= @individual_order.flavor.price %><br>
+
+<%= render "orders/form", order_data: @individual_order  %>
+
+
+</section>
