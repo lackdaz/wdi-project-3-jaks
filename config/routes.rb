@@ -1,17 +1,24 @@
 Rails.application.routes.draw do
-root 'suppliers#index'
 
 
-  devise_for :users
+
+  devise_for :users, controllers: {
+    session: 'users/session'
+  }
+
+  devise_for :suppliers, controllers: {
+    session: 'users/session'
+  }
+
+
+  root to: 'suppliers#index'
+
+  resources :suppliers
+
   # resources :consumers
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'
-
-
-
-
-  resources :stall
 
 
   # devise_for :suppliers

@@ -27,35 +27,22 @@
   <!-- This "nav-menu" is hidden on mobile -->
   <!-- Add the modifier "is-active" to display it on mobile -->
   <div class="nav-right nav-menu">
-    <%= link_to "Home", root_path, class: "nav-item" %>
-    <%if user_signed_in?%>
-    <%= link_to "Profile", profile_path(current_user.id), class: "nav-item" %>
-    <%= link_to "LogOut", destroy_user_session_path , class: "nav-item", method: :delete %>
 
-    <% else %>
-    <%= link_to "Login", new_user_session_path, class: "nav-item" %>
-     <%= link_to "Register", new_user_registration_path, class: "nav-item" %>
-    <% end %>
 
-    <!-- <div class="nav-item">
-      <div class="field is-grouped">rai
-        <p class="control">
-          <a class="button" >
-            <span class="icon">
-              <i class="fa fa-twitter"></i>
-            </span>
-            <span>Tweet</span>
-          </a>
-        </p>
-        <p class="control">
-          <a class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-download"></i>
-            </span>
-            <span>Download</span>
-          </a>
-        </p>
-      </div>
-    </div> -->
+    <p class="navbar-text pull-right">
+        <% if supplier_signed_in? %>
+      <%= link_to "Menu","/suppliers/2", :class => 'navbar-link' %>
+      <%= link_to "Logout", supplier_registration_path, class: "navbar-link", method: :delete %>
+      <% elsif user_signed_in?%>
+      <%= link_to "Profile", profile_path(current_user.id), class: "nav-item" %>
+      <%= link_to "LogOut", destroy_user_session_path , class: "nav-item", method: :delete %>
+        <% else %>
+        <%= link_to "Login", new_user_session_path, class: "nav-item" %>
+         <%= link_to "Register", new_user_registration_path, class: "nav-item" %>
+        <%= link_to "Login", new_supplier_session_path, class: "nav-item" %>
+        <%= link_to "Register a Business", new_supplier_registration_path, :class => 'navbar-link' %>
+      <% end %>
+    </p>
+
   </div>
 </nav>

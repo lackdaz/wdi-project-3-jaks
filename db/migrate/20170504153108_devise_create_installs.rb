@@ -5,6 +5,11 @@ class DeviseCreateInstalls < ActiveRecord::Migration[5.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      #customize fields
+      t.string :firstname
+      t.string :lastname
+      t.integer :contact
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
