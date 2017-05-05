@@ -4,10 +4,9 @@
 <div id="right-panel">
       <div id="inputs">
         <pre>
-var origin1 = {lat: 55.930, lng: -3.118};
-var origin2 = 'Greenwich, England';
-var destinationA = 'Stockholm, Sweden';
-var destinationB = {lat: 50.087, lng: 14.421};
+var origin1 =
+var destinationA =
+
         </pre>
       </div>
       <div>
@@ -21,26 +20,25 @@ var destinationB = {lat: 50.087, lng: 14.421};
     function initMap() {
       var bounds = new google.maps.LatLngBounds;
       var markersArray = [];
-
-      var origin1 = {lat: 55.93, lng: -3.118};
-      var origin2 = 'Greenwich, England';
-      var destinationA = 'Stockholm, Sweden';
-      var destinationB = {lat: 50.087, lng: 14.421};
+      var origin1 = {lat: 1.3521, lng: 103.8198};
+      var destinationA = 'Chinatown, Singapore';
 
       var destinationIcon = 'https://chart.googleapis.com/chart?' +
           'chst=d_map_pin_letter&chld=D|FF0000|000000';
       var originIcon = 'https://chart.googleapis.com/chart?' +
           'chst=d_map_pin_letter&chld=O|FFFF00|000000';
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 55.53, lng: 9.4},
+        center: {lat: 35.3521, lng: 103.8198},
         zoom: 10
       });
+
       var geocoder = new google.maps.Geocoder;
 
       var service = new google.maps.DistanceMatrixService;
+
       service.getDistanceMatrix({
-        origins: [origin1, origin2],
-        destinations: [destinationA, destinationB],
+        origins: [origin1],
+        destinations: [destinationA],
         travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.METRIC,
         avoidHighways: false,
@@ -48,7 +46,10 @@ var destinationB = {lat: 50.087, lng: 14.421};
       }, function(response, status) {
         if (status !== 'OK') {
           alert('Error was: ' + status);
-        } else {
+          }
+        else {
+          var directionsDisplay = new google.maps.DirectionsRenderer;
+          var directionsService = new google.maps.DirectionsService()
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var outputDiv = document.getElementById('output');
@@ -60,11 +61,32 @@ var destinationB = {lat: 50.087, lng: 14.421};
             return function(results, status) {
               if (status === 'OK') {
                 map.fitBounds(bounds.extend(results[0].geometry.location));
-                markersArray.push(new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location,
-                  icon: icon
-                }));
+                // markersArray.push(new google.maps.Marker({
+                //   map: map,
+                //   position: results[0].geometry.location,
+                //   icon: icon
+                // })
+              // );
+
+
+                directionsDisplay.setMap(map)
+                directionsService.route({origin: origin1, destination: destinationA, travelMode: 'DRIVING'}, function(result, status) {
+                  if (status == 'OK') {
+                    directionsDisplay.setDirections(result);
+                    console.log('direction service')
+              } else {
+                alert('Geocode was not successful due to: ' + status);
+              }
+            });
+
+
+
+
+
+
+
+
+
               } else {
                 alert('Geocode was not successful due to: ' + status);
               }
@@ -77,7 +99,7 @@ var destinationB = {lat: 50.087, lng: 14.421};
                 showGeocodedAddressOnMap(false));
             for (var j = 0; j < results.length; j++) {
               geocoder.geocode({'address': destinationList[j]},
-                  showGeocodedAddressOnMap(true));
+                  showGeocodedAddressOnMap(false));
               outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
                   ': ' + results[j].distance.text + ' in ' +
                   results[j].duration.text + '<br>';
@@ -94,41 +116,11 @@ var destinationB = {lat: 50.087, lng: 14.421};
       }
       markersArray = [];
     }
-    var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-    var origin2 = 'Greenwich, England';
-    var destinationA = 'Stockholm, Sweden';
-    var destinationB = new google.maps.LatLng(50.087692, 14.421150);
 
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [origin1, origin2],
-        destinations: [destinationA, destinationB],
-        travelMode: 'DRIVING',
-        transitOptions: TransitOptions,
-        drivingOptions: DrivingOptions,
-        unitSystem: UnitSystem,
-        avoidHighways: Boolean,
-        avoidTolls: Boolean,
-      }, callback);
 
-      function callback(response, status) {
-        if (status == 'OK') {
-          var origins = response.originAddresses;
-          var destinations = response.destinationAddresses;
 
-          for (var i = 0; i < origins.length; i++) {
-            var results = response.rows[i].elements;
-            for (var j = 0; j < results.length; j++) {
-              var element = results[j];
-              var distance = element.distance.text;
-              var duration = element.duration.text;
-              var from = origins[i];
-              var to = destinations[j];
-            }
-          }
-        }
-      }
+
+
 
 
 
