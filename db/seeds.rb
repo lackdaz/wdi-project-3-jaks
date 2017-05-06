@@ -9,11 +9,8 @@
 
 5.times do
   Supplier.create(
-    name: Faker::Company.name,
-    address: Faker::Address,
-    contact: Faker::Number.number(8),
+    
     email: Faker::Internet.email,
-    password_digest: Faker::Internet.password(8),
-    website: Faker::Internet.url
+
   )
 end

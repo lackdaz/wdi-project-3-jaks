@@ -17,9 +17,21 @@ var destinationA =
     <div id="map"></div>
     <script>
 
-    // put geolocation code here
-
     function initMap() {
+      var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng({lat: 1.3521, lng: 103.8198}), new google.maps.LatLng({lat: 1.30838, lng: 103.83264})) / 1000
+
+      console.log(distance, 'geocoder km distance')
+if (distance <6){
+  console.log('yes')
+}
+
+
+
+
+
+
+
+
       var bounds = new google.maps.LatLngBounds;
       var markersArray = [];
       var origin1 = {lat: gon.lat, lng: gon.long};
@@ -30,7 +42,7 @@ var destinationA =
       var originIcon = 'https://chart.googleapis.com/chart?' +
           'chst=d_map_pin_letter&chld=O|FFFF00|000000';
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 35.3521, lng: 103.8198},
+        center: {lat: 1.3521, lng: 103.8198},
         zoom: 10
       });
 
@@ -56,10 +68,10 @@ var destinationA =
           var destinationList = response.destinationAddresses;
           var outputDiv = document.getElementById('output');
           outputDiv.innerHTML = '';
-          deleteMarkers(markersArray);
+          // deleteMarkers(markersArray);
 
           var showGeocodedAddressOnMap = function(asDestination) {
-            var icon = asDestination ? destinationIcon : originIcon;
+            // var icon = asDestination ? destinationIcon : originIcon;
             return function(results, status) {
               if (status === 'OK') {
                 map.fitBounds(bounds.extend(results[0].geometry.location));
@@ -112,12 +124,12 @@ var destinationA =
     }
 
 
-    function deleteMarkers(markersArray) {
-      for (var i = 0; i < markersArray.length; i++) {
-        markersArray[i].setMap(null);
-      }
-      markersArray = [];
-    }
+    // function deleteMarkers(markersArray) {
+    //   for (var i = 0; i < markersArray.length; i++) {
+    //     markersArray[i].setMap(null);
+    //   }
+    //   markersArray = [];
+    // }
 
 
 
