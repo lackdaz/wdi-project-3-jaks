@@ -1,5 +1,16 @@
 class TransactionsController < ApplicationController
+  @@message = ""
+
   def index
+    # arr = []
+    # arr.push(gon.lat)
+    # arr.push(gon.long)
+    MqttJob.set(wait: 2.seconds).perform_later
+    puts gon.lat = @@message.split(',').first
+    puts gon.long = @@message.split(',').last
+    gon.lat = 1.3521
+    gon.long = 103.8198
+
     # @all_transactions = current_user.transaction
   end
 

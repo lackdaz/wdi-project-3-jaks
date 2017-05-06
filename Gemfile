@@ -34,8 +34,8 @@ gem 'mqtt'
 # ENV helper
 gem 'foreman'
 
-# daemon task
-gem 'daemons-rails'
+# gon
+gem 'gon'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -76,4 +76,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.3.3'
+ruby '2.4.0'
