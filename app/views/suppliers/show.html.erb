@@ -1,0 +1,33 @@
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <%= current_supplier.name %>
+      </h1>
+      <h2 class="subtitle">
+        <%= current_supplier.address %>
+      </h2>
+    </div>
+  </div>
+  <div class="tabs is-centered">
+<ul>
+  <li class="is-active"><a href="/suppliers/<%= current_supplier.id %>">Menu</a></li>
+  <li><%= link_to "+IceCream", new_flavour_path, class: "navbar-link" %></li>
+  <li><%= link_to "Edit Store Profile", edit_supplier_registration_path, class: "navbar-link" %></li>
+</ul>
+</div>
+</section>
+
+<div class="column">
+<%  @flavours.each do |flavour| %>
+<div class="columns is-multiline is-mobile is-centered">
+  <div class="column is-three-quarters">
+    <p class="notification is-info">
+      <code class="html"><%= flavour.name %></code>
+      <code class="html"><%= flavour.price %></code>
+      <code class="html"><%= flavour.image %></code>
+    </p>
+  </div>
+</div>
+<% end %>
+</div>

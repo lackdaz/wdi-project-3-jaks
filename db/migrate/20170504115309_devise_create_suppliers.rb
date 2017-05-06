@@ -8,9 +8,9 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       #custom fields
       t.string :name
       t.string :address
+      t.integer :postal
       t.integer :contact
       t.string :website
-
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

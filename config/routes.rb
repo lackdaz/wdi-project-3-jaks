@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :suppliers
 
+  resources :flavours
+
   # resources :consumers
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
