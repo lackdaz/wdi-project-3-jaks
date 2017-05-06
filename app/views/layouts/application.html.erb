@@ -3,6 +3,7 @@
   <head>
     <title>WdiProject3Jaks</title>
     <%= csrf_meta_tags %>
+    <%= include_gon %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,6 +16,10 @@
     <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
     <%= yield %>
-    
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap">
+    </script>
+
+    <%= javascript_include_tag( 'transaction' ) %>
   </body>
 </html>

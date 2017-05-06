@@ -2,6 +2,7 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
   def change
     create_table :suppliers do |t|
       ## Database authenticatable
+      t.string :name
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 

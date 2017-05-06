@@ -1,0 +1,42 @@
+<%= form_for order_data do |f| %>
+  <div class="field">
+
+    ID: <%= @individual_order.transaction_id %><br>
+    Created: <%= @individual_order.created_at %><br>
+    Flavor: <%= @individual_order.flavor.name %><br>
+    Price: <%= @individual_order.flavor.price %><br>
+
+
+    <%= f.label :name, class: 'label' %>
+    <p class="control">
+      <%= f.text_field :name, class: 'input' %>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= f.label :to, class: 'label' %>
+    <p class="control">
+      <%= f.text_field :to, class: 'input' %>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= f.label :airline, class: 'label' %>
+    <p class="control">
+      <%= f.text_field :airline, class: 'input' %>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= f.label :num_passenger, class: 'label' %>
+    <p class="control">
+      <%= f.text_field :num_passenger, class: 'input' %>
+    </p>
+  </div>
+
+  <div class="field">
+    <p class="control">
+      <%= f.submit 'Submit', class: 'button is-primary' %>
+    </p>
+  </div>
+<% end %>
