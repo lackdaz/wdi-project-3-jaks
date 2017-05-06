@@ -34,7 +34,7 @@ class MqttJob < ApplicationJob
         # publish a message to the topic 'test'
         loop do
           c.publish('action', '1', retain=false)
-          sleep 2
+          sleep 10
         end
       end
   end
