@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504202450) do
+ActiveRecord::Schema.define(version: 20170507021052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 20170504202450) do
     t.index ["supplier_id"], name: "index_all_flavours_on_supplier_id", using: :btree
   end
 
-  create_table "all_icecream_containers", force: :cascade do |t|
+  create_table "containers", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
     t.integer  "supplier_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["supplier_id"], name: "index_all_icecream_containers_on_supplier_id", using: :btree
+    t.index ["supplier_id"], name: "index_containers_on_supplier_id", using: :btree
   end
 
   create_table "delivery_addresses", force: :cascade do |t|
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20170504202450) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_delivery_addresses_on_user_id", using: :btree
+  end
+
+  create_table "flavours", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.string   "image"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_flavours_on_supplier_id", using: :btree
   end
 
   create_table "flavours_orders", id: false, force: :cascade do |t|
@@ -128,6 +138,5 @@ ActiveRecord::Schema.define(version: 20170504202450) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "orders", "all_icecream_containers"
-  add_foreign_key "orders", "transactions"
+  add_foreign_key "containers", "suppliers"
 end

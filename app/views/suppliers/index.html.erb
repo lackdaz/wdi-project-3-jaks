@@ -1,1 +1,28 @@
-<h1>Supplier Index</h1>
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        The ice-cream man is here..
+      </h1>
+      <h2 class="subtitle">
+          pee pooo peee pooo
+      </h2>
+    </div>
+  </div>
+  <div class="tabs is-centered">
+</div>
+</section>
+
+<div class="column"></div>
+
+<div class="columns">
+<% @suppliers.each do |supplier|  %>
+<a href="/suppliers/<%= supplier.id %>"class="column is-half is multiline">
+  <div id="<%= supplier.id %>"
+    <p class="notification is-info">
+      <code class="html"><%= supplier.name %></code>
+    </p>
+  </div>
+</a>
+<% end  %>
+</div>

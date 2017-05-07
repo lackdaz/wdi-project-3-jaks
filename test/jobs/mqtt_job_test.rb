@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AllIcecreamContainerTest < ActiveSupport::TestCase
+class MqttJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

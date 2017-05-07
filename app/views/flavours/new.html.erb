@@ -1,0 +1,21 @@
+<h1>Add A New Flavour</h1>
+
+<%= form_for @flavour do |f| %>
+
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+
+<div class="field">
+  <%= f.label :price %><br />
+  <%= f.text_field :price %>
+</div>
+
+<div class="field">
+  <%= f.label :image %><br />
+  <%= f.text_field :image %>
+</div>
+
+<%= f.submit %>
+<% end %>
