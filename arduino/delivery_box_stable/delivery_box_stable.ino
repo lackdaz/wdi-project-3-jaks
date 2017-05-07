@@ -3,8 +3,18 @@
 #include <PubSubClient.h>                               // for Websockets broker
 #include <ESP8266WiFi.h>                                // for ESP8266 to Wifi
 
+#include <Adafruit_Sensor.h>                            // For sensors
+#include <DHT.h>                                        // For DHT sensors
+#include <DHT_U.h>
+
 #include <Adafruit_ssd1306syp.h>                        // Adafruit oled library for display
 Adafruit_ssd1306syp display(4,5);                       // OLED display (SDA to Pin 4), (SCL to Pin 5)
+
+// Uncomment the type of sensor in use:
+//#define DHTTYPE           DHT11     // DHT 11
+#define DHTTYPE           DHT22     // DHT 22 (AM2302)
+//#define DHTTYPE           DHT21     // DHT 21 (AM2301)
+
 
 /* wiring the UBLOX NEO-6M + OLED to ESP8266 (WeMos D1 Mini)
 RX      = TX
@@ -12,30 +22,33 @@ TX      = RX
 SDA     = D2
 SCL     = D1
 GND     = GND
-VCC      = 5V
+VCC     = 5V
+
+buzzer  = D5
+DHTPIN  = D4
 */
 
+// Pin Assignments
 static const int RXPin = RX, TXPin = TX;                // Ublox 6m GPS module to pins 12 and 13
+#define DHTPIN D6         // Pin which is connected to the DHT sensor.
+#define buzzer D5         // Pin connect to the DHT sensor
+
 static const uint32_t GPSBaud = 9600;                   // Ublox GPS default Baud Rate is 9600
 
+/* VARIABLES */
+/*Setting home locations */
 const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
-
-TinyGPSPlus gps;                                        // Create an Instance of the TinyGPS++ object called gps
-SoftwareSerial ss(RXPin, TXPin);                        // The serial connection to the GPS device
 
 /* WIFI SSID/PASS*/
 //const char* ssid = "GA@Spacemob";
 //const char* password = "yellowpencil";
 
-//const char* ssid = "chewchew";
-//const char* password = "chewkumwing";
+const char* ssid = "chewchew";
+const char* password = "chewkumwing";
 
 //const char* ssid = "iPhone (5)";
 //const char* password = "abrasion";
-
-const char* ssid = "The Prototyping Lab";
-const char* password = "OMG188969";
 
 /*MQTT USER/PASS*/
 const char* mqtt_server = "m13.cloudmqtt.com";
@@ -43,6 +56,20 @@ const int mqtt_port = 14188;
 const char* mqtt_user = "lnpapqmm";
 const char* mqtt_pass = "vQmZfvY1tHUc";
 
+/* Initializing library routines */
+// For GPS
+TinyGPSPlus gps;                                        // Create an Instance of the TinyGPS++ object called gps
+SoftwareSerial ss(RXPin, TXPin);                        // The serial connection to the GPS device
+
+// For sensors
+DHT_Unified dht(DHTPIN, DHTTYPE);
+uint32_t delayMS;
+sensor_t sensor;
+float temp_reading;
+float hum_reading;
+unsigned long start_dht = millis();
+
+// For Wifi
 WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
@@ -64,8 +91,16 @@ void setup()
   display.update();                                     // Update display
   delay(1500);                                          // Pause 1.5 seconds
   ss.begin(GPSBaud);                                    // Set Software Serial Comm Speed to 9600
+
+  /* Assigning output pins */
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
+  pinMode(buzzer, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
+  digitalWrite(buzzer, LOW);   // Turn the buzzer off
+
+  dht.begin();
+  dht_intro();
+  delayMS = sensor.min_delay / 1000;
 
   setup_wifi();
 
@@ -82,6 +117,7 @@ void loop() {
   }
   client.loop();
 
+/* Start of GPS routine */
   // display output on OLED
   display.clear();
   display.setCursor(0,0);
@@ -91,30 +127,105 @@ void loop() {
   display.println(gps.location.lng(), 4);
   display.print("Satellites: ");
   display.println(gps.satellites.value());
-  display.print("Elevation : ");
-  display.print(gps.altitude.feet());
-  display.println("ft");
+//  display.print("Elevation : ");
+//  display.print(gps.altitude.feet());
+//  display.println("ft");
   display.print("Time UTC  : ");
   display.print(gps.time.hour());                       // GPS time UTC
   display.print(":");
   display.print(gps.time.minute());                     // Minutes
   display.print(":");
   display.println(gps.time.second());                   // Seconds
-  display.print("Heading   : ");
-  display.println(gps.course.deg());
-  display.print("Speed     : ");
-  display.println(gps.speed.mph());
+//  display.print("Heading   : ");
+//  display.println(gps.course.deg());
+//  display.print("Speed     : ");
+//  display.println(gps.speed.mph());
 
   unsigned long Distance_To_Home = (unsigned long)TinyGPSPlus::distanceBetween(gps.location.lat(),gps.location.lng(),Home_LAT, Home_LNG);
   display.print("M to Home: ");                        // Have TinyGPS Calculate distance to home and display it
-  display.print(Distance_To_Home);
-  display.update();                                     // Update display
+  display.println(Distance_To_Home);
+//  display.update();                                     // Update display
+
+/* End of GPS routine */
+
+/* Start of DHT routine */
+//    display.println(millis()-start_dht);
+
+if (millis() - start_dht < delayMS) {
+    display.print("Temperature: ");
+    if (isnan(temp_reading)) {
+    display.print("NA");
+    }
+    else display.print(temp_reading);
+    display.println("*C");
+    display.print("Humidity: ");
+    if (isnan(hum_reading)) {
+    display.print("NA");
+    }
+    else display.print(hum_reading);
+    display.println("%");
+    display.update();
+    return;
+}
+
+// Delay between measurements.
+//  delay(delayMS);
+//  display.clear();
+//  display.setCursor(0,0);
+
+  // Get temperature event and print its value.
+  sensors_event_t event;
+  dht.temperature().getEvent(&event);
+  if (isnan(event.temperature)) {
+    Serial.println("Error reading temperature!");
+    display.print("Error reading temperature!");
+    display.update();
+  }
+  else {
+    Serial.print("Temperature: ");
+    temp_reading = event.temperature;
+    Serial.print(temp_reading);
+    Serial.println(" *C");
+    display.print("Temperature: ");
+    display.print(temp_reading);
+    display.println("*C");
+  }
+  // Get humidity event and print its value.
+  dht.humidity().getEvent(&event);
+  if (isnan(event.relative_humidity)) {
+    Serial.println("Error reading humidity!");
+    display.print("Error reading humidity!");
+    display.update();
+  }
+  else {
+    Serial.print("Humidity: ");
+    hum_reading = event.relative_humidity;
+    Serial.print(hum_reading);
+    Serial.println("%");
+    display.print("Humidity: ");
+    display.print(hum_reading);
+    display.println("%");
+    display.update();
+
+  }
+  if (event.relative_humidity > 65) {
+      tone(buzzer, 1000);   // Turn the SOUND off
+  }
+  else noTone(buzzer);   // Turn the SOUND off
+  start_dht = millis();
+
+/* end of dht routine */
+
   delay(200);
 
   smartDelay(500);                                      // Run Procedure smartDelay
 
   if (millis() > 5000 && gps.charsProcessed() < 10)
     display.println(F("No GPS data received: check wiring"));
+}
+
+void dht_routine(unsigned long start_dht) {
+
 }
 
 static void smartDelay(unsigned long ms)                // This custom version of delay() ensures that the gps object is being "fed".
@@ -180,30 +291,47 @@ void callback(char* topic, byte* payload, unsigned int length) {
   // Preparing for mqtt send
     String gpslat_str = String(gps.location.lat(),5);
     display.println(gpslat_str.substring(0,7));
-    display.update();
-//    delay(2000);
     String gpslong_str = String(gps.location.lng(),5);
     display.println(gpslong_str.substring(0,9));
     display.update();
-//    delay(2000);
     char message_arr[18];
-    String message = gpslat_str.substring(0,7) + "," + gpslong_str.substring(0,9);
+    String gps_message = gpslat_str.substring(0,7) + "," + gpslong_str.substring(0,9);
 
-    display.println(message);
+    display.println(gps_message);
+    display.print("charCount: ");
+    display.println(gps_message.length()+1);
     display.update();
-//    delay(2000);
-    display.println(message.length()+1);
-    display.update();
-    delay(2000);
-    message.toCharArray(message_arr, message.length() + 1); //packaging up the data to publish to mqtt whoa...
+
+    gps_message.toCharArray(message_arr, gps_message.length() + 1); //packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
     client.publish("current_GPS", message_arr);
+    display.println("GPS message sent");
+    display.update();
+    delay(500);
+    digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
+
+    String temp_str = String(temp_reading);
+    display.println(temp_str);
+    String hum_str = String(hum_reading);
+    display.println(hum_str);
+    display.update();
+
+    String dht_message = hum_str + "," + temp_str;
+
+    display.println(dht_message);
+    display.print("charCount: ");
+    display.println(dht_message.length()+1);
+    display.update();
+
+    dht_message.toCharArray(message_arr, dht_message.length() + 1); //packaging up the data to publish to mqtt whoa...
+
+  // Publishing the message
+    client.publish("current_DHT", message_arr);
     display.println("message sent");
     display.update();
+    delay(500);
     digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
-//    digitalWrite(D8, LOW);
-
   } else {
     display.println("received nothing");
     display.update();
@@ -254,4 +382,32 @@ void reconnect() {
       delay(5000);
     }
   }
+}
+
+void dht_intro() {
+    Serial.println("DHTxx Unified Sensor Example");
+  // Print temperature sensor details.
+  dht.temperature().getSensor(&sensor);
+  Serial.println("------------------------------------");
+  Serial.println("Temperature");
+  Serial.print  ("Sensor:       "); Serial.println(sensor.name);
+  Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
+  Serial.print  ("Unique ID:    "); Serial.println(sensor.sensor_id);
+  Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" *C");
+  Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" *C");
+  Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" *C");
+  Serial.println("------------------------------------");
+  // Print humidity sensor details.
+  dht.humidity().getSensor(&sensor);
+  Serial.println("------------------------------------");
+  Serial.println("Humidity");
+  Serial.print  ("Sensor:       "); Serial.println(sensor.name);
+  Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
+  Serial.print  ("Unique ID:    "); Serial.println(sensor.sensor_id);
+  Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println("%");
+  Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println("%");
+  Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println("%");
+  Serial.println("------------------------------------");
+  // Set delay between sensor readings based on sensor details.
+
 }
