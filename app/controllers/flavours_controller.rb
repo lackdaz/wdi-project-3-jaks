@@ -8,7 +8,7 @@ def create
   @submitted_flavour = Flavour.new(filter_params)
   @submitted_flavour.supplier_id = current_supplier.id
   if @submitted_flavour.save
-    
+
       # # ActionCable.server.broadcast(<stream>, <messages>)
       # ActionCable.server.broadcast 'flavour_update_channel',
       #                               content: @submitted_flavour,
@@ -17,6 +17,13 @@ def create
 
       redirect_to "/suppliers/#{current_supplier.id}"
     end
+end
+
+def destroy
+  @deleted_flavour = Flavour.find(params[:id])
+    @deleted_flavour.destroy
+
+    redirect_to "/suppliers/#{current_supplier.id}"
 end
 
 private
