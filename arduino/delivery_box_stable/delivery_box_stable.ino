@@ -15,7 +15,6 @@ Adafruit_ssd1306syp display(4,5);                       // OLED display (SDA to 
 #define DHTTYPE           DHT22     // DHT 22 (AM2302)
 //#define DHTTYPE           DHT21     // DHT 21 (AM2301)
 
-
 /* wiring the UBLOX NEO-6M + OLED to ESP8266 (WeMos D1 Mini)
 RX      = TX
 TX      = RX
@@ -61,7 +60,7 @@ const char* mqtt_pass = "vQmZfvY1tHUc";
 TinyGPSPlus gps;                                        // Create an Instance of the TinyGPS++ object called gps
 SoftwareSerial ss(RXPin, TXPin);                        // The serial connection to the GPS device
 
-// For sensors
+// For Temperature/Humidity (DHT) Sensors
 DHT_Unified dht(DHTPIN, DHTTYPE);
 uint32_t delayMS;
 sensor_t sensor;
@@ -98,14 +97,17 @@ void setup()
   digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
   digitalWrite(buzzer, LOW);   // Turn the buzzer off
 
-  dht.begin();
-  dht_intro();
-  delayMS = sensor.min_delay / 1000;
+  /* DHT Initialise */
+  dht.begin();  // Turn the sensor on
+  // dht_intro(); // More detailed sensor reading specifications
+  delayMS = sensor.min_delay / 1000; // Seting of min. delay for DHT sensor (usually 2 secs)
 
-  setup_wifi();
+  /* Wifi Initialise */
+  setup_wifi(); // Start the wifi via the helper routine
 
-  client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
+  /* MQTT Initialise */
+  client.setServer(mqtt_server, mqtt_port); // set the mqtt server and ports
+  client.setCallback(callback); // set the mqtt callback
   display.println("Set client-MQTT servers");
   display.update();
 }
@@ -113,9 +115,9 @@ void setup()
 void loop() {
   // keep client connected
   if (!client.connected()) {
-    reconnect();
+    reconnect(); // This is to reconnect MQTT if disc.
   }
-  client.loop();
+  client.loop(); // call this to check to check for connection
 
 /* Start of GPS routine */
   // display output on OLED
@@ -149,11 +151,12 @@ void loop() {
 /* End of GPS routine */
 
 /* Start of DHT routine */
-//    display.println(millis()-start_dht);
+//    display.println(millis()-start_dht);   // call this to check for min. delay needed for DHT sensor
 
+// Checks if time < min. delay (TRUE => return and do not take reading)
 if (millis() - start_dht < delayMS) {
     display.print("Temperature: ");
-    if (isnan(temp_reading)) {
+    if (isnan(temp_reading)) {   // unlikely, but will display zero for first value
     display.print("NA");
     }
     else display.print(temp_reading);
@@ -168,11 +171,6 @@ if (millis() - start_dht < delayMS) {
     return;
 }
 
-// Delay between measurements.
-//  delay(delayMS);
-//  display.clear();
-//  display.setCursor(0,0);
-
   // Get temperature event and print its value.
   sensors_event_t event;
   dht.temperature().getEvent(&event);
@@ -183,7 +181,7 @@ if (millis() - start_dht < delayMS) {
   }
   else {
     Serial.print("Temperature: ");
-    temp_reading = event.temperature;
+    temp_reading = event.temperature; // takes and updates temp_reading
     Serial.print(temp_reading);
     Serial.println(" *C");
     display.print("Temperature: ");
@@ -199,24 +197,27 @@ if (millis() - start_dht < delayMS) {
   }
   else {
     Serial.print("Humidity: ");
-    hum_reading = event.relative_humidity;
+    hum_reading = event.relative_humidity; // takes and updates hum_reading
     Serial.print(hum_reading);
     Serial.println("%");
     display.print("Humidity: ");
     display.print(hum_reading);
     display.println("%");
     display.update();
-
   }
+
+  /* real-time logic goes here */
   if (event.relative_humidity > 65) {
       tone(buzzer, 1000);   // Turn the SOUND off
   }
   else noTone(buzzer);   // Turn the SOUND off
+
+  // resets timer to count for min. delay again
   start_dht = millis();
 
 /* end of dht routine */
 
-  delay(200);
+  delay(200); // just leave this delay here
 
   smartDelay(500);                                      // Run Procedure smartDelay
 
@@ -224,54 +225,11 @@ if (millis() - start_dht < delayMS) {
     display.println(F("No GPS data received: check wiring"));
 }
 
-void dht_routine(unsigned long start_dht) {
+/* END OF VOID LOOP */
 
-}
+/* START OF HELPER ROUTINES */
 
-static void smartDelay(unsigned long ms)                // This custom version of delay() ensures that the gps object is being "fed".
-{
-  unsigned long start = millis();
-  do
-  {
-    while (ss.available())
-      gps.encode(ss.read());
-  } while (millis() - start < ms);
-}
-
-void setup_wifi() {
-
-  delay(10);
-  // We start by connecting to a WiFi network
-  Serial.println();
-  Serial.print("Connecting to ");
-  display.clear();
-  display.setCursor(0,0);
-  // Clear OLED display
-  display.println("Connecting to");
-  Serial.println(ssid);
-  display.print(ssid);
-  display.update();                                     // Update display
-
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    display.print(".");
-    display.update();
-  }
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  display.println("WiFi connected");
-  Serial.println("IP address: ");
-  display.println("IP address: ");
-  Serial.println(WiFi.localIP());
-  display.println(WiFi.localIP());
-  display.update();
-  delay(2000);
-}
-
+// Called when message is received
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -279,8 +237,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
-
-  // Switch on the LED if an 1 was received as first character
+  // Switch on the LED if a 1 was received as first character
   if ((char)payload[0] == '1') {
     display.clear();
     display.setCursor(0,0);
@@ -302,7 +259,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     display.println(gps_message.length()+1);
     display.update();
 
-    gps_message.toCharArray(message_arr, gps_message.length() + 1); //packaging up the data to publish to mqtt whoa...
+    gps_message.toCharArray(message_arr, gps_message.length() + 1); // packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
     client.publish("current_GPS", message_arr);
@@ -337,9 +294,53 @@ void callback(char* topic, byte* payload, unsigned int length) {
     display.update();
     digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
 //    digitalWrite(D8, LOW);
+  }
+}
 
+// used to ensure GPS readings has at least 500 ms
+static void smartDelay(unsigned long ms)                // This custom version of delay() ensures that the gps object is being "fed".
+{
+  unsigned long start = millis();
+  do
+  {
+    while (ss.available())
+      gps.encode(ss.read());
+  } while (millis() - start < ms);
+}
+
+// Helper routine to connect to Wifi
+void setup_wifi() {
+
+  delay(10);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  display.clear();
+  display.setCursor(0,0);
+  // Clear OLED display
+  display.println("Connecting to");
+  Serial.println(ssid);
+  display.print(ssid);
+  display.update();                                     // Update display
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    display.print(".");
+    display.update();
   }
 
+  Serial.println("");
+  Serial.println("WiFi connected");
+  display.println("WiFi connected");
+  Serial.println("IP address: ");
+  display.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  display.println(WiFi.localIP());
+  display.update();
+  delay(2000);
 }
 
 void reconnect() {
