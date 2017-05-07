@@ -1,3 +1,16 @@
+/* Arduino compiler code for a GPS + DHT22 sensor array powered by a ESP8266 for a Ruby on Rails Web Development Project
+
+Adapted base GPS code from mkconer: https://github.com/mkconer/ESP8266_GPS
+
+Wifi, WebSockets brokered by CloudMQTT, adapted from my previous code: https://github.com/lackdaz/wdi-project-2/blob/master/thing.ino
+
+Author: Seth (lackdaz)
+Teammates:
+Kenneth
+Alvin
+Jerel
+ */
+
 #include <TinyGPS++.h>                                  // Tiny GPS Plus Library
 #include <SoftwareSerial.h>                             // Software Serial Library so we can use other Pins for communication with the GPS module
 #include <PubSubClient.h>                               // for Websockets broker
