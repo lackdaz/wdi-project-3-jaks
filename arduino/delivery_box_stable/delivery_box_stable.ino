@@ -79,7 +79,6 @@ uint32_t delayMS;
 sensor_t sensor;
 float temp_reading;
 float hum_reading;
-unsigned long start_dht = millis();
 
 // For Wifi
 WiFiClient espClient;
@@ -110,11 +109,6 @@ void setup()
   digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
   digitalWrite(buzzer, LOW);   // Turn the buzzer off
 
-  /* DHT Initialise */
-  dht.begin();  // Turn the sensor on
-  // dht_intro(); // More detailed sensor reading specifications
-  delayMS = sensor.min_delay / 1000; // Seting of min. delay for DHT sensor (usually 2 secs)
-
   /* Wifi Initialise */
   setup_wifi(); // Start the wifi via the helper routine
 
@@ -123,6 +117,13 @@ void setup()
   client.setCallback(callback); // set the mqtt callback
   display.println("Set client-MQTT servers");
   display.update();
+
+  /* DHT Initialise */
+  dht.begin();  // Turn the sensor on
+  // dht_intro(); // More detailed sensor reading specifications
+  delayMS = sensor.min_delay / 1000; // Seting of min. delay for DHT sensor (usually 2 secs)
+  unsigned long start_dht = millis();
+
 }
 
 void loop() {

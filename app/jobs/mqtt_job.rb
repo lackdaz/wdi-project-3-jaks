@@ -26,6 +26,9 @@ class MqttJob < ApplicationJob
           c.get('current_GPS') do |topic, message|
             puts "#{topic}: #{message}"
             @@message_gps = message
+            ActionCable.server.broadcast 'update_gps_channel',    #code
+            content: "hello",
+            username: current_user
           end
         end
       end

@@ -1,15 +1,18 @@
 class TransactionsController < ApplicationController
   @@message = ""
+  before_action :run_mqtt
 
   def index
     # arr = []
     # arr.push(gon.lat)
     # arr.push(gon.long)
-    MqttJob.set(wait: 2.seconds).perform_later
+
+
     puts gon.lat = @@message.split(',').first
     puts gon.long = @@message.split(',').last
-    gon.lat = 1.3521
-    gon.long = 103.8198
+    puts @@message
+    # gon.lat = 1.3521
+    # gon.long = 103.8198
 
     # @all_transactions = current_user.transaction
   end
@@ -33,6 +36,10 @@ class TransactionsController < ApplicationController
   #   params.require(:order).permit(:flavor, :price, :name)
   # end
 
+private
+  def run_mqtt
+    MqttJob.set(wait: 2.seconds).perform_later
 
+  end
 
 end
