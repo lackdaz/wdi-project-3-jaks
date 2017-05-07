@@ -9,11 +9,12 @@
       </h2>
     </div>
   </div>
-  <% if current_supplier == @supplier.id %>
+  <% if current_supplier.id == @supplier.id %>
   <div class="tabs is-centered">
 <ul>
   <li class="is-active"><a href="/suppliers/<%= @supplier.id %>">Menu</a></li>
   <li><%= link_to "+IceCream", new_flavour_path, class: "navbar-link" %></li>
+    <li><%= link_to "+Addons", new_container_path, class: "navbar-link" %></li>
   <li><%= link_to "Edit Store Profile", edit_supplier_registration_path, class: "navbar-link" %></li>
 </ul>
 </div>

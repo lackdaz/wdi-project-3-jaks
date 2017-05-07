@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :suppliers
 
   resources :flavours
-
+  resources :containers
   resources :orders
   # resources :consumers
 
