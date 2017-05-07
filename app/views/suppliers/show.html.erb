@@ -21,6 +21,15 @@
 </section>
 
 <div class="column">
+  <% if user_signed_in? %>
+  <div class="columns is-multiline is-mobile is-centered">
+    <div class="column is-three-quarters">
+      <p class="notification is-info">
+          <%= link_to "+IceCream", "#", class: "btn btn-primary" %>
+      </p>
+    </div>
+  </div>
+  <% end %>
 <%  @flavours.each do |flavour| %>
 <div class="columns is-multiline is-mobile is-centered">
   <div class="column is-three-quarters">
@@ -32,7 +41,7 @@
       <span><%= link_to "Delete", "/flavours/#{flavour.id}", class: "navbar-link", method: :delete %></span>
       <% end  %>
       <% if user_signed_in? %>
-        <%= link_to "Order", "#", class: "btn btn-primary" %>
+        <%= link_to "+Flavour", "#", class: "btn btn-primary" %>
       <% end %>
     </p>
   </div>
