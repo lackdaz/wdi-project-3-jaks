@@ -66,14 +66,14 @@ var destinationA =
                 var outputDiv = document.getElementById('output');
                 outputDiv.innerHTML = '';
                 // deleteMarkers(markersArray);
-                var gps = {lat: gon.lat,lng: gon.long}
-                var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon })
-                markersArray.push(marker1);
-                var newLatLng = new google.maps.LatLng({
-                    lat: origin1.lat,
-                    lng: origin1.lng
-                  })
-                marker1.setPosition(newLatLng);
+                // var gps = {lat: gon.lat,lng: gon.long}
+                // var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon })
+                // markersArray.push(marker1);
+                // var newLatLng = new google.maps.LatLng({
+                //     lat: origin1.lat,
+                //     lng: origin1.lng
+                //   })
+                // marker1.setPosition(newLatLng);
                 var showGeocodedAddressOnMap = function (asDestination) {
                     // var icon = asDestination ? destinationIcon : originIcon;
                     return function (results, statcus) {

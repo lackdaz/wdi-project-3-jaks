@@ -56,7 +56,7 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
       var service = new google.maps.DistanceMatrixService;
 
       service.getDistanceMatrix({
-        origins: [origin1],
+        origins: [{lat: origin1.lat, lng: origin1.lng}],
         destinations: [destinationA],
         travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.METRIC,
@@ -75,11 +75,11 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
           // deleteMarkers(markersArray);
 
           var showGeocodedAddressOnMap = function(asDestination) {
-            var icon = asDestination ? destinationIcon : originIcon;
+            // var icon = asDestination ? destinationIcon : originIcon;
             return function(results, status) {
               if (status === 'OK') {
                 map.fitBounds(bounds.extend(results[0].geometry.location));
-                markersArray.push(new google.maps.Marker({   map: map,   position: results[0].geometry.location,   icon: icon }) );
+                // markersArray.push(new google.maps.Marker({   map: map,   position: results[0].geometry.location,  }) );
 
                 directionsDisplay.setMap(map)
                 directionsService.route({
