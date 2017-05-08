@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'
 
+get '/delivery_address/edit' , to:'delivery_address#edit_delivery_address', as:'delivery_address_edit'
+
+
 
   # devise_for :suppliers
 

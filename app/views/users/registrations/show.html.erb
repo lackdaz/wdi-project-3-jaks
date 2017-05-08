@@ -1,10 +1,3 @@
 <h1><%=current_user.email%> </h1>
 
-<%= form_for :delivery_address, url:delivery_address_create_path  do |f| %>
-<div class="container">
-  <div class="notification">
-<%= f.text_field :delivery_address, placeholder: 'Delivery Address: ', class: 'input' %>
-  </div>
-</div>
-
-<% end %>
+<%= link_to "Edit your profile",edit_user_registration_path, class: "btn btn-primary" %>

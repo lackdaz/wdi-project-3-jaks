@@ -1,0 +1,11 @@
+
+<%= form_for :delivery_address, url:delivery_address_update_path ,method: "put"  do |f| %>
+<div class="container">
+  <div class="notification">
+<%= f.text_field :address, placeholder: 'Delivery Address ', class: 'input' %>
+<p class="control">
+<%= f.submit 'Add Address', class: 'button is-primary' %>
+</p>
+  </div>
+</div>
+<% end %>

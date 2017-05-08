@@ -1,3 +1,4 @@
+
 <section class="hero is-medium is-primary is-bold">
   <div class="hero-body">
     <div class="container">
@@ -7,7 +8,14 @@
       <h2 class="subtitle">
           pee pooo peee pooo
       </h2>
+      <% if user_signed_in? %>
+      <%= render 'delivery_address/add_delivery_address' %>
+          <%= render 'delivery_address/show_delivery_address' %>
     </div>
+
+    <% end %>
+
+
   </div>
   <div class="tabs is-centered">
 </div>
