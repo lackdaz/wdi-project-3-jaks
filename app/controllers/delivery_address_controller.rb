@@ -10,6 +10,22 @@ class DeliveryAddressController < ApplicationController
   end
 
 
+  def show_delivery_address
+    p 'finding user_id'
+    @user_delivery_address = DeliveryAddress.Post.find_by user_id: current_user.id
+    render "delivery_address/show_delivery_address"
+
+  end
+
+  def edit_delivery_address
+    render "delivery_address/edit_delivery_address"
+  end
+
+def update_delivery_address
+
+end
+
+
 
   private
   def delivery_address_params
