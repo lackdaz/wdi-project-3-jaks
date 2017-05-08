@@ -29,8 +29,15 @@ class TransactionsController < ApplicationController
   end
   # to move this to relevant search bar view/controller
     def search
-      gon.suppliers = [{lat:-34.397, lng:150.644},{lat: 1.3521, lng: 103.8198}, {lat: 1.30838, lng: 103.83264}]
-      @suppliers = 2
+      gon.suppliers = [
+        {id: 1, name: 'test', lat:-34.397, lng:150.644},
+        {id: 2, name: 'test2', lat: 1.3521, lng: 103.8198},
+        {id: 3, name: 'test3', lat: 1.30838, lng: 103.83264},
+        {id: 4, name: 'test4', lat: 1.30838, lng: 103.83264},
+        {id: 5, name: 'test5', lat: 1.30838, lng: 103.83264},
+        {id: 6, name: 'test6', lat: 1.30838, lng: 103.83264},
+        {id: 7, name: 'test7', lat: 1.30838, lng: 103.83264}]
+    
     end
 
   # private

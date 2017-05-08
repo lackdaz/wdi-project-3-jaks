@@ -69,19 +69,21 @@ if (distance <6){
           var destinationList = response.destinationAddresses;
           var outputDiv = document.getElementById('output');
           outputDiv.innerHTML = '';
-          // deleteMarkers(markersArray);
+          var gps = {lat: 1.3343, lng: 103.8563};
 
+          // deleteMarkers(markersArray);
+          markersArray.push(new google.maps.Marker({
+            map: map,
+            position: gps,
+            icon: destinationIcon
+          })
+          );
+          
           var showGeocodedAddressOnMap = function(asDestination) {
             // var icon = asDestination ? destinationIcon : originIcon;
             return function(results, status) {
               if (status === 'OK') {
                 map.fitBounds(bounds.extend(results[0].geometry.location));
-                // markersArray.push(new google.maps.Marker({
-                //   map: map,
-                //   position: results[0].geometry.location,
-                //   icon: icon
-                // })
-              // );
 
 
                 directionsDisplay.setMap(map)
@@ -125,12 +127,12 @@ if (distance <6){
     }
 
 
-    // function deleteMarkers(markersArray) {
-    //   for (var i = 0; i < markersArray.length; i++) {
-    //     markersArray[i].setMap(null);
-    //   }
-    //   markersArray = [];
-    // }
+    function deleteMarkers(markersArray) {
+      for (var i = 0; i < markersArray.length; i++) {
+        markersArray[i].setMap(null);
+      }
+      markersArray = [];
+    }
 
 
 

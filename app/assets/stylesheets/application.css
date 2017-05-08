@@ -48,3 +48,8 @@
            #output {
              font-size: 11px;
            }
+
+
+.column.is-half {
+  width:20%;
+}
