@@ -25,6 +25,8 @@ class MqttJob < ApplicationJob
           # The block will be called when you messages arrive to the topic
           c.get('current_GPS') do |topic, message|
             puts "#{topic}: #{message}"
+
+            @@message_gps = message
           end
         end
       end
