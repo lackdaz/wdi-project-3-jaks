@@ -27,10 +27,12 @@ class TransactionsController < ApplicationController
     # @submitted_flight.save
     #  redirect_to transactions_index_path
   end
+  # to move this to relevant search bar view/controller
+    def search
+      gon.suppliers = [{lat:-34.397, lng:150.644},{lat: 1.3521, lng: 103.8198}, {lat: 1.30838, lng: 103.83264}]
+      @suppliers = 2
+    end
 
-  def search
-    
-  end
   # private
   # def filter_params
   #   params.require(:order).permit(:flavor, :price, :name)
