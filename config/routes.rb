@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :suppliers
   devise_for :users
-  root to: "mqtt#start"
+  # root to: 'rooms#show'
 
   get 'transactions/index'
-  # root 'supplier#index'
+  root 'supplier#index'
 
   resources:supplier
   resources:orders

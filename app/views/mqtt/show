@@ -1,0 +1,2 @@
+<h1>Chat room</h1> <div id="messages"> <%= render @messages %> </div> <form> <label>Say something:</label><br> <input type="text" data-behavior="room_speaker"> </form>
+Read more at https://www.pluralsight.com/guides/ruby-ruby-on-rails/creating-a-chat-using-rails-action-cable#qF2gW5KD4egY6Owv.99

@@ -25,10 +25,11 @@ class MqttJob < ApplicationJob
           # The block will be called when you messages arrive to the topic
           c.get('current_GPS') do |topic, message|
             puts "#{topic}: #{message}"
-            @@message_gps = message
+            # @@message_gps = message
             ActionCable.server.broadcast 'update_gps_channel',    #code
-            content: "hello",
-            username: current_user
+            content: message,
+            author: "seth"
+            # username: current_user
           end
         end
       end
