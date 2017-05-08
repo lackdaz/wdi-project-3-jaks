@@ -28,7 +28,9 @@ class TransactionsController < ApplicationController
     #  redirect_to transactions_index_path
   end
 
-
+  def search
+    
+  end
   # private
   # def filter_params
   #   params.require(:order).permit(:flavor, :price, :name)

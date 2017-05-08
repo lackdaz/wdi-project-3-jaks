@@ -28,7 +28,7 @@ post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_addres
 
   get 'transactions/index'
   # root 'supplier#index'
-
+  get 'transactions/search'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

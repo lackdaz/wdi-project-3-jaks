@@ -1,5 +1,5 @@
 $(document).on('page:load', function () {
-
+alert('hi')
 
 
 //
