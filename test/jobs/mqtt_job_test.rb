@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ConsumerTest < ActiveSupport::TestCase
+class MqttJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end
