@@ -10,9 +10,10 @@ class OrdersController < ApplicationController
 
   def create
 ##### to update based on Kenneth's input
+    # 
     # @new_order = Order.new(filter_params)
     # @submitted_flight.save
-     redirect_to orders_path
+
   end
 
   def destroy

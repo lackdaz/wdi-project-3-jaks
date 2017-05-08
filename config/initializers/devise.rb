@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'f3f979f2df0e01cba5ddc4ba7f0babb09cf7c605a00eb38065163ac29743318e6338339cc8981153e10f073e32749dba5b0717ac87f6c11bb5dd2753ab19165b'
+  # config.secret_key = '44e38e1ab7039eb891671ef1e7e0a82caae2f7862c8fffe4f8ba1a4f9e7fd37fd588f0781df6c64dbcda815d1595255bb44eb2103c9afe93bf4aec0277546428'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -108,7 +108,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '416aa13513559470f8655333abe128351f2570793ca5b1f2b7c9e46844be323ee4e530a8c4433deabde27376dec8920d616bcbd84cf6f036a63fe0aba43e4c3a'
+  # config.pepper = '0822088806c6053d2b7ddc735a9269aa12eaa1801a580c91a4b48d048b914989cb900deb91cd70c31d81bd600d5694f4fa8122553e7452b893e458ca36aa2f60'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -136,7 +136,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -223,7 +223,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

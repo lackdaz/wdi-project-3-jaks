@@ -1,20 +1,12 @@
-<!-- <div class="block">
-  <a class="button">Button</a>
-  <a class="button is-white">White</a>
-  <a class="button is-light">Light</a>
-  <a class="button is-dark">Dark</a>
-  <a class="button is-black">Black</a>
-  <a class="button is-link">Link</a>
-</div> -->
-
+<!-- Nav Section -->
 <nav class="nav">
   <div class="nav-left">
-    <a class="nav-item">
-      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
-    </a>
-  </div>
+     <a class="nav-item" href="/">
+       <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
+     </a>
+   </div>
 
-  <div class="nav-center">
+  <!-- <div class="nav-center">
     <a class="nav-item">
       <span class="icon">
         <i class="fa fa-github"></i>
@@ -25,7 +17,7 @@
         <i class="fa fa-twitter"></i>
       </span>
     </a>
-  </div>
+  </div> -->
 
   <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
   <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
@@ -38,38 +30,27 @@
   <!-- This "nav-menu" is hidden on mobile -->
   <!-- Add the modifier "is-active" to display it on mobile -->
   <div class="nav-right nav-menu">
-    <p class="navbar-text pull-right">
-<%= link_to "Register a Business", new_supplier_path, :class => 'navbar-link' %>
-</p>
-    <a class="nav-item">
-      Home
-    </a>
-    <a class="nav-item">
-      Documentation
-    </a>
-    <a class="nav-item">
-      Blog
-    </a>
 
-    <div class="nav-item">
-      <div class="field is-grouped">
-        <p class="control">
-          <a class="button" >
-            <span class="icon">
-              <i class="fa fa-twitter"></i>
-            </span>
-            <span>Tweet</span>
-          </a>
-        </p>
-        <p class="control">
-          <a class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-download"></i>
-            </span>
-            <span>Download</span>
-          </a>
-        </p>
-      </div>
-    </div>
+
+
+    <p class="navbar-text pull-right">
+
+  <div class="nav-right nav-menu">
+
+        <% if supplier_signed_in? %>
+      <%= link_to "My Store","/suppliers/#{current_supplier.id}", :class => 'navbar-link' %>
+      <%= link_to "Logout", destroy_supplier_session_path, class: "navbar-link", method: :delete %>
+      <% elsif user_signed_in?%>
+      <%= link_to "My Profile", profile_path(current_user.id), class: "navbar-link" %>
+      <%= link_to "LogOut", destroy_user_session_path , class: "navbar-link", method: :delete %>
+        <% else %>
+        <%= link_to "Login", new_user_session_path, class: "navbar-link" %>
+         <%= link_to "Register", new_user_registration_path, class: "navbar-link" %>
+        <%= link_to "Login", new_supplier_session_path, class: "navbar-link" %>
+        <%= link_to "Register a Business", new_supplier_registration_path, :class => 'navbar-link' %>
+      <% end %>
+    </p>
+
+
   </div>
 </nav>

@@ -6,9 +6,16 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      #custom fields
+      t.string :name
+      t.string :address
+      t.integer :postal
+      t.integer :contact
+      t.string :website
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
+
 
       ## Rememberable
       t.datetime :remember_created_at

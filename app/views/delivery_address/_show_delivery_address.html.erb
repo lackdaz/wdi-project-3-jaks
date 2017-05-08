@@ -1,0 +1,8 @@
+
+<h1>Existing address</h1>
+<% current_user.delivery_addresses.each do |address| %>
+<p>☉<%= address.address %>
+</p>
+<%= link_to "Edit",delivery_address_edit_path, class: "button is-warning" %>
+
+<% end %>
