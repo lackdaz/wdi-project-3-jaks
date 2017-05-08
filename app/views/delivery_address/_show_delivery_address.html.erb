@@ -3,6 +3,8 @@
 <% current_user.delivery_addresses.each do |address| %>
 <p>☉<%= address.address %>
 </p>
-<%= link_to "Edit",delivery_address_edit_path, class: "button is-warning" %>
+<%= link_to "Edit",delivery_address_edit_path(address), class: "button is-warning" %>
+
+    <%= link_to 'Delete', delivery_address_delete_path(address), method: :delete, data: { confirm: 'Are you sure?' } ,class: "button is-danger" %>
 
 <% end %>
