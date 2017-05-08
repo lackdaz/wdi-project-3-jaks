@@ -8,7 +8,6 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
     // return alert('disconnected')
   },
   received: function(data) {
-    alert(data.content)
     var $target = $('#flight-list')
 
 
@@ -16,14 +15,18 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
       lat: parseFloat(data.content.split(',').shift()),
       lng: parseFloat(data.content.split(',').pop())
     };
+
+
     var newLatLng = new google.maps.LatLng({
         lat: origin1.lat,
         lng: origin1.lng
       })
+
+
     var marker1 = new google.maps.Marker({
               map: map,
               draggable: true,
-              position: {lat: 40.714, lng: -74.006} // this should be last known
+              position: {lat: origin1.lat, lng: origin1.lng} // this should be last known
             });
 
     // Called when there's incoming data on the websocket for this channel
@@ -33,13 +36,13 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
 
 
       var bounds = new google.maps.LatLngBounds;
-      // var markersArray = [];
+      var markersArray = [];
 
-      marker1.setPosition(newLatLng);
+      // marker1.setPosition(newLatLng);
       var destinationA = 'Chinatown, Singapore';
 
-      // var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
-      // var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
+      var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
+      var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {
           lat: 1.3521,
@@ -69,10 +72,10 @@ App.update_gps = App.cable.subscriptions.create("UpdateGpsChannel", {
           var destinationList = response.destinationAddresses;
           var outputDiv = document.getElementById('output');
           outputDiv.innerHTML = '';
-          deleteMarkers(markersArray);
+          // deleteMarkers(markersArray);
 
           var showGeocodedAddressOnMap = function(asDestination) {
-            // var icon = asDestination ? destinationIcon : originIcon;
+            var icon = asDestination ? destinationIcon : originIcon;
             return function(results, status) {
               if (status === 'OK') {
                 map.fitBounds(bounds.extend(results[0].geometry.location));

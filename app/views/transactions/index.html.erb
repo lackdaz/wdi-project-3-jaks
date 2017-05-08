@@ -66,13 +66,19 @@ var destinationA =
                 var outputDiv = document.getElementById('output');
                 outputDiv.innerHTML = '';
                 // deleteMarkers(markersArray);
-
+                var gps = {lat: gon.lat,lng: gon.long}
+                var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon })
+                markersArray.push(marker1);
+                var newLatLng = new google.maps.LatLng({
+                    lat: origin1.lat,
+                    lng: origin1.lng
+                  })
+                marker1.setPosition(newLatLng);
                 var showGeocodedAddressOnMap = function (asDestination) {
                     // var icon = asDestination ? destinationIcon : originIcon;
-                    return function (results, status) {
+                    return function (results, statcus) {
                         if (status === 'OK') {
                             map.fitBounds(bounds.extend(results[0].geometry.location));
-                            // markersArray.push(new google.maps.Marker({   map: map,   position: results[0].geometry.location,   icon: icon }) );
 
                             directionsDisplay.setMap(map)
                             directionsService.route({
@@ -110,7 +116,7 @@ var destinationA =
         });
     }
 
-    // function deleteMarkers(markersArray) {   for (var i = 0; i < markersArray.length; i++) {     markersArray[i].setMap(null);   }   markersArray = []; }
+    function deleteMarkers(markersArray) {   for (var i = 0; i < markersArray.length; i++) {     markersArray[i].setMap(null);   }   markersArray = []; }
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>
