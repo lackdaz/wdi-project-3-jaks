@@ -53,11 +53,11 @@ const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
 
 /* WIFI SSID/PASS*/
-//const char* ssid = "GA@Spacemob";
-//const char* password = "yellowpencil";
+const char* ssid = "GA@Spacemob";
+const char* password = "yellowpencil";
 
-const char* ssid = "chewchew";
-const char* password = "chewkumwing";
+//const char* ssid = "chewchew";
+//const char* password = "chewkumwing";
 
 //const char* ssid = "iPhone (5)";
 //const char* password = "abrasion";
@@ -79,6 +79,7 @@ uint32_t delayMS;
 sensor_t sensor;
 float temp_reading;
 float hum_reading;
+unsigned long start_dht = millis();
 
 // For Wifi
 WiFiClient espClient;
@@ -122,7 +123,6 @@ void setup()
   dht.begin();  // Turn the sensor on
   // dht_intro(); // More detailed sensor reading specifications
   delayMS = sensor.min_delay / 1000; // Seting of min. delay for DHT sensor (usually 2 secs)
-  unsigned long start_dht = millis();
 
 }
 
