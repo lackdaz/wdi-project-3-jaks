@@ -67,12 +67,13 @@ class Suppliers::RegistrationsController < Devise::RegistrationsController
     # if @updated_flight.update(filter_params)
 
     loc=MultiGeocoder.geocode(filter_params[:address])
-      puts "MOTHER FUCKER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts filter_params.inspect
       if loc.success
-        puts loc.lat
-        puts loc.lng
-        puts loc.full_address
+        updated_supplier = Supplier.last
+        updated_supplier.lat = loc.lat.to_f
+        updated_supplier.lng = loc.lng.to_f
+        updated_supplier.address = loc.full_address
+        updated_supplier.neighbourhood = loc.neighborhood
+        updated_supplier.save
       end
     suppliers_path(resource)  #the path you want to route to
   end
