@@ -1,5 +1,7 @@
 <h1>Existing address</h1>
-<%if user_signed_in? && current_use %>
+
+<% if user_signed_in? && current_user.delivery_addresses %>
+
 <% current_user.delivery_addresses.each do |address| %>
 <p>☉<%= address.address %>
 </p>
