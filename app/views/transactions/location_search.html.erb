@@ -1,17 +1,36 @@
 <h1>Search#index</h1>
 
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
 
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+<div class="field has-addons">
+  <p class="control">
+    <input class="input" type="text" placeholder="Find a restaurant">
+  </p>
+  <p class="control">
+    <%= link_to 'Search', transactions_index_path, class: 'button is-info', method: :get %>
 
+  </p>
+</div>
+
+
+<div class="field has-addons">
+  <p class="control">
+    <span class="select">
+      <select>
+        <option>$</option>
+        <option>£</option>
+        <option>€</option>
+      </select>
+    </span>
+  </p>
+  <p class="control">
+    <input class="input" type="text" placeholder="Find a restaurant">
+  </p>
+  <p class="control">
+    <a class="button">
+      Search
+    </a>
+  </p>
+</div>
 
 <div class="column"></div>
 

@@ -30,7 +30,7 @@ post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_addres
   # root 'supplier#index'
   get 'transactions/location_search'
   get 'transactions/field_search'
-  post 'trasactions/field_search', to: 'transactions#search'
+  post 'transactions/field_search', to: 'transactions#search'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
