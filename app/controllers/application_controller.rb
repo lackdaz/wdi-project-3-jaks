@@ -2,7 +2,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :run_mqtt
+  before_action :geocoder
+include Geokit::Geocoders
+def geocoder
 
+      loc=MultiGeocoder.geocode('362 Onan Rd, Singapore 424758')
+        if loc.success
+          puts loc.lat
+          puts loc.lng
+          puts loc.full_address
+        end
+end
   private
   def run_mqtt
     # if MqttJob

@@ -27,4 +27,6 @@ class SuppliersController < ApplicationController
       gon.suppliers = Supplier.all
   end
 
+
+
 end

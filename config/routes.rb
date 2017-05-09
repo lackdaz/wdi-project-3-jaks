@@ -1,20 +1,32 @@
 Rails.application.routes.draw do
 
+    # devise_for :users,
+    # controllers: {
+    #   :sessions => 'users/sessions',
+    #   :registrations =>'users/registrations'
+    # },
+    # path: '/',
+    # path_names: {
+    #   sign_in: 'login',
+    #   sign_out: 'logout',
+    #   sign_up: 'signup',
+    #   edit: 'editprofile',
+    # }
+
   devise_for :deliverymen
   devise_for :users, controllers: {
     session: 'users/session'
   }
 
   devise_for :suppliers, controllers: {
-    session: 'users/session'
+    session: 'users/session',
+    registrations: 'suppliers/registrations'
   }
-
 
 
 
   root to: 'suppliers#index'
   get 'suppliers/location_search'
-  get 'suppliers/search', to: 'suppliers#index'
   resources :suppliers
 
   resources :flavours
