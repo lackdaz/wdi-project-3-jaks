@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 20170507021052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "all_flavours", force: :cascade do |t|
-    t.string   "name"
-    t.float    "price"
-    t.integer  "supplier_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["supplier_id"], name: "index_all_flavours_on_supplier_id", using: :btree
-  end
-
   create_table "containers", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
@@ -31,14 +22,6 @@ ActiveRecord::Schema.define(version: 20170507021052) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["supplier_id"], name: "index_containers_on_supplier_id", using: :btree
-  end
-
-  create_table "delivery_addresses", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_delivery_addresses_on_user_id", using: :btree
   end
 
   create_table "flavours", force: :cascade do |t|
@@ -49,11 +32,6 @@ ActiveRecord::Schema.define(version: 20170507021052) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["supplier_id"], name: "index_flavours_on_supplier_id", using: :btree
-  end
-
-  create_table "flavours_orders", id: false, force: :cascade do |t|
-    t.integer "order_id",   null: false
-    t.integer "flavour_id", null: false
   end
 
   create_table "installs", force: :cascade do |t|
@@ -77,17 +55,22 @@ ActiveRecord::Schema.define(version: 20170507021052) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "all_icecream_container_id"
+    t.integer  "container_id"
     t.integer  "transaction_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["all_icecream_container_id"], name: "index_orders_on_all_icecream_container_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["container_id"], name: "index_orders_on_container_id", using: :btree
     t.index ["transaction_id"], name: "index_orders_on_transaction_id", using: :btree
   end
 
   create_table "suppliers", force: :cascade do |t|
+    t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.string   "address"
+    t.integer  "postal"
+    t.integer  "contact"
+    t.string   "website"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -104,10 +87,8 @@ ActiveRecord::Schema.define(version: 20170507021052) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "delivery_address_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["delivery_address_id"], name: "index_transactions_on_delivery_address_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
   end
 
@@ -139,4 +120,7 @@ ActiveRecord::Schema.define(version: 20170507021052) do
   end
 
   add_foreign_key "containers", "suppliers"
+  add_foreign_key "orders", "containers"
+  add_foreign_key "orders", "transactions"
+  add_foreign_key "transactions", "users"
 end

@@ -6,13 +6,15 @@ class ApplicationController < ActionController::Base
   private
   def run_mqtt
     # if MqttJob
-
+    puts cookies[:_aj].inspect
     # MqttJob.set(wait: 2.seconds).perform_later
     MqttJob.set(wait: 2.seconds).perform_later if cookies[:_aj].nil?
     cookies[:_aj] = {
-      :value => "raymond",
-      :expires => 1.hour.from_now
+      :value => true,
+      :expires => 5.minutes.from_now
     }
+    puts cookies[:_aj].inspect
+
   end
 
   protected

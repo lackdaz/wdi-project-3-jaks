@@ -16,13 +16,12 @@ Rails.application.routes.draw do
   resources :flavours
   resources :containers
   resources :orders
-  # resources :consumers
+  resources :consumers
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'
 
 
-  # devise_for :suppliers
 
   get 'transactions/index'
   # root 'supplier#index'
