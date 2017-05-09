@@ -32,6 +32,35 @@ ActiveRecord::Schema.define(version: 20170509042347) do
     t.index ["user_id"], name: "index_delivery_addresses_on_user_id", using: :btree
   end
 
+  create_table "deliveryboxes", force: :cascade do |t|
+    t.string   "locX"
+    t.string   "locY"
+    t.string   "temperature"
+    t.integer  "transaction_id"
+    t.integer  "deliveryman_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["deliveryman_id"], name: "index_deliveryboxes_on_deliveryman_id", using: :btree
+    t.index ["transaction_id"], name: "index_deliveryboxes_on_transaction_id", using: :btree
+  end
+
+  create_table "deliverymen", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_deliverymen_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_deliverymen_on_reset_password_token", unique: true, using: :btree
+  end
+
   create_table "flavours", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
@@ -105,6 +134,11 @@ ActiveRecord::Schema.define(version: 20170509042347) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "address"
+    t.integer  "postal"
+    t.string   "website"
+    t.integer  "contact"
     t.index ["email"], name: "index_suppliers_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_suppliers_on_reset_password_token", unique: true, using: :btree
   end
@@ -146,4 +180,6 @@ ActiveRecord::Schema.define(version: 20170509042347) do
   add_foreign_key "orderitems", "invoices"
   add_foreign_key "orderitems", "suppliers"
   add_foreign_key "orderitems", "users"
+  add_foreign_key "deliveryboxes", "deliverymen"
+  add_foreign_key "deliveryboxes", "transactions"
 end

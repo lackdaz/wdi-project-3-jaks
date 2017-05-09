@@ -1,16 +1,13 @@
-class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
+class DeviseCreateDeliverymen < ActiveRecord::Migration[5.0]
   def change
-    create_table :suppliers do |t|
+    create_table :deliverymen do |t|
       ## Database authenticatable
-      t.string :name
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-      #custom fields
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
-
 
       ## Rememberable
       t.datetime :remember_created_at
@@ -19,8 +16,8 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
-      t.string   :current_sign_in_ip
-      t.string   :last_sign_in_ip
+      t.inet     :current_sign_in_ip
+      t.inet     :last_sign_in_ip
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -37,9 +34,9 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
 
-    add_index :suppliers, :email,                unique: true
-    add_index :suppliers, :reset_password_token, unique: true
-    # add_index :suppliers, :confirmation_token,   unique: true
-    # add_index :suppliers, :unlock_token,         unique: true
+    add_index :deliverymen, :email,                unique: true
+    add_index :deliverymen, :reset_password_token, unique: true
+    # add_index :deliverymen, :confirmation_token,   unique: true
+    # add_index :deliverymen, :unlock_token,         unique: true
   end
 end
