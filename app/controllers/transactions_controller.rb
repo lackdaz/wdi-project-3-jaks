@@ -30,6 +30,7 @@ class TransactionsController < ApplicationController
   # to move this to relevant search bar view/controller
     def location_search
       # the below is hard coded, but to search from database for all suppliers.
+
       # gon.suppliers = Supplier.all
       gon.suppliers = [
         {id: 1, name: 'test', lat:-34.397, lng:150.644},
@@ -41,12 +42,13 @@ class TransactionsController < ApplicationController
         {id: 7, name: 'test7', lat: 1.30838, lng: 103.83264}]
 
     end
-    def field_search
-      # the below is hard coded, but to search from database for all suppliers.
-      # gon.suppliers = Supplier.all
 
-    end
     def search
+      ##### search function below is done but need to connect to supplier db
+
+
+      # field = params[:field]? params[:field].downcase : ''
+      # @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(location) = ?", "%#{field}%", "%#{field}%")
 
     end
   # private
