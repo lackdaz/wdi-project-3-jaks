@@ -1,16 +1,13 @@
 <h1>Search#index</h1>
 
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
 
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+<form accept-charset="UTF-8" action="/transactions/search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="q">Search for:</label>
+  <input class = 'input' id="field" name="field" type="text" />
+  <input class = 'button is-info' name="commit" type="submit" value="Search" />
+</form>
+
 
 
 <div class="column"></div>
