@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509042347) do
+ActiveRecord::Schema.define(version: 20170509051019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20170509042347) do
     t.string   "locX"
     t.string   "locY"
     t.string   "temperature"
-    t.integer  "transaction_id"
     t.integer  "deliveryman_id"
+    t.integer  "invoice_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["deliveryman_id"], name: "index_deliveryboxes_on_deliveryman_id", using: :btree
-    t.index ["transaction_id"], name: "index_deliveryboxes_on_transaction_id", using: :btree
+    t.index ["invoice_id"], name: "index_deliveryboxes_on_invoice_id", using: :btree
   end
 
   create_table "deliverymen", force: :cascade do |t|
@@ -120,10 +120,6 @@ ActiveRecord::Schema.define(version: 20170509042347) do
     t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
-    t.string   "address"
-    t.integer  "postal"
-    t.integer  "contact"
-    t.string   "website"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -134,11 +130,6 @@ ActiveRecord::Schema.define(version: 20170509042347) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "name"
-    t.string   "address"
-    t.integer  "postal"
-    t.string   "website"
-    t.integer  "contact"
     t.index ["email"], name: "index_suppliers_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_suppliers_on_reset_password_token", unique: true, using: :btree
   end
@@ -172,6 +163,8 @@ ActiveRecord::Schema.define(version: 20170509042347) do
 
   add_foreign_key "containers", "suppliers"
   add_foreign_key "delivery_addresses", "users"
+  add_foreign_key "deliveryboxes", "deliverymen"
+  add_foreign_key "deliveryboxes", "invoices"
   add_foreign_key "flavours", "suppliers"
   add_foreign_key "invoices", "delivery_addresses"
   add_foreign_key "invoices", "users"
@@ -180,6 +173,4 @@ ActiveRecord::Schema.define(version: 20170509042347) do
   add_foreign_key "orderitems", "invoices"
   add_foreign_key "orderitems", "suppliers"
   add_foreign_key "orderitems", "users"
-  add_foreign_key "deliveryboxes", "deliverymen"
-  add_foreign_key "deliveryboxes", "transactions"
 end

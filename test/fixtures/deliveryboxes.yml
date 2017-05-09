@@ -4,12 +4,12 @@ one:
   locX: MyString
   locY: MyString
   temperature: MyString
-  transaction_id: MyString
-  deliveryman_id: MyString
+  deliveryman: one
+  invoice: one
 
 two:
   locX: MyString
   locY: MyString
   temperature: MyString
-  transaction_id: MyString
-  deliveryman_id: MyString
+  deliveryman: two
+  invoice: two

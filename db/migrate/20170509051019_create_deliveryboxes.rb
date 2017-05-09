@@ -4,8 +4,8 @@ class CreateDeliveryboxes < ActiveRecord::Migration[5.0]
       t.string :locX
       t.string :locY
       t.string :temperature
-      t.references :transaction, foreign_key: true
-      t.references :deliveryman, foreign_key: true
+      t.references :deliveryman, foreign_key: true,optional: true
+      t.references :invoice, foreign_key: true,optional: true
 
       t.timestamps
     end
