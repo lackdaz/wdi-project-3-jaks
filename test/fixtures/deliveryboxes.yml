@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  locX: MyString
-  locY: MyString
-  temperature: MyString
+  lat: MyString
+  lng: MyString
+  temp: MyString
   deliveryman: one
   invoice: one
 
 two:
-  locX: MyString
-  locY: MyString
-  temperature: MyString
+  lat: MyString
+  lng: MyString
+  temp: MyString
   deliveryman: two
   invoice: two
