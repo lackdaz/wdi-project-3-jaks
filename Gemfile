@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 #Use pry for console purposes
 gem 'pry'
 gem 'bulma-rails'
-
+gem 'font-awesome-sass'
 
 gem 'faker'
 gem 'devise'

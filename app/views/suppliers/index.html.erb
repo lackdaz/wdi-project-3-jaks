@@ -8,12 +8,30 @@
       <h2 class="subtitle">
           pee pooo peee pooo
       </h2>
-      <% if user_signed_in? %>
-      <%= render 'delivery_address/add_delivery_address' %>
-          <%= render 'delivery_address/show_delivery_address' %>
+      <div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container">
+              <form accept-charset="UTF-8" action="/suppliers/search" method="get">
+                <div class="input-group stylish-input-group">
+                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name or neighborhood" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+              </form>
+            </div>
+        </div>
     </div>
-
-    <% end %>
+</div>
+<form action="/suppliers/location_search" method="get">
+  <button type="submit"> Use Current Location
+    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+  </button>
+</form>
+    </div>
 
 
   </div>
