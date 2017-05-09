@@ -1,36 +1,14 @@
 <h1>Search#index</h1>
 
 
-<div class="field has-addons">
-  <p class="control">
-    <input class="input" type="text" placeholder="Find a restaurant">
-  </p>
-  <p class="control">
-    <%= link_to 'Search', transactions_index_path, class: 'button is-info', method: :get %>
-
-  </p>
-</div>
+<form accept-charset="UTF-8" action="/transactions/search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="q">Search for:</label>
+  <input class = 'input' id="field" name="field" type="text" />
+  <input class = 'button is-info' name="commit" type="submit" value="Search" />
+</form>
 
 
-<div class="field has-addons">
-  <p class="control">
-    <span class="select">
-      <select>
-        <option>$</option>
-        <option>£</option>
-        <option>€</option>
-      </select>
-    </span>
-  </p>
-  <p class="control">
-    <input class="input" type="text" placeholder="Find a restaurant">
-  </p>
-  <p class="control">
-    <a class="button">
-      Search
-    </a>
-  </p>
-</div>
 
 <div class="column"></div>
 

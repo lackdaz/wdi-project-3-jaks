@@ -1,15 +1,17 @@
 <h1>Search#index</h1>
 
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+
+<form accept-charset="UTF-8" action="/transactions/search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="q">Search for:</label>
+  <input class = 'input' id="field" name="field" type="text" />
+  <input class = 'button is-info' name="commit" type="submit" value="Search" />
+</form>
+
+<form accept-charset="UTF-8" action="/transactions/location_search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <input class = 'button is-info' name="commit" type="submit" value="Search by current location" />
+</form>
 
 
 <div class="column"></div>
@@ -17,56 +19,29 @@
 <div id = 'searched' class="columns">
 
 </div>
-    <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
 
-      var map, infoWindow;
-      function initMap() {
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
 
-            gon.suppliers.forEach(function(supplier){
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        The ice-cream man is here..
+      </h1>
+      <h2 class="subtitle">
+          pee pooo peee pooo
+      </h2>
+      <% if user_signed_in? %>
+      <%= render 'delivery_address/add_delivery_address' %>
+          <%= render 'delivery_address/show_delivery_address' %>
+    </div>
 
-              var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng({lat: pos.lat, lng: pos.lng}), new google.maps.LatLng({lat: supplier.lat, lng: supplier.lng})) / 1000
-              if (distance <5){
+    <% end %>
 
-                var $target = $('#searched')
-                  // creation of the div
-                  var $new_restaurant_link = $('<a href="/suppliers/"'+ supplier.id +' class="column is-half is multiline">')
-                  var $new_restaurant_div = $('<div id='+ supplier.id +'>')
-                  var $new_restaurant_p = $('<p class="notification is-info">')
-                  var $new_restaurant_p_code = $('<code class="html">'+  supplier.name +'</code>')
 
-                  $new_restaurant_p_code.text(supplier.name)
-                  $new_restaurant_p.append($new_restaurant_p_code)
-                  $new_restaurant_div.append($new_restaurant_p)
-                  $new_restaurant_link.append($new_restaurant_div)
-                  $target.append($new_restaurant_link)
-              }
-            })
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+  </div>
+  <div class="tabs is-centered">
+</div>
+</section>
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-    </script>
+<div class="column"></div>
