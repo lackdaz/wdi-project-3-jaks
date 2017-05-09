@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  all_icecream_container: one
-  transaction: one
-
-two:
-  all_icecream_container: two
-  transaction: two

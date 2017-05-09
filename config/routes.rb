@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :flavours
   resources :containers
-  resources :orders
+  resources :orderitems
   # resources :consumers
 
 get '/profile/:id' , to: 'users#show' , as:'profile'

@@ -1,2 +1,2 @@
-class Order < ApplicationRecord
+class Orderitem < ApplicationRecord
 end

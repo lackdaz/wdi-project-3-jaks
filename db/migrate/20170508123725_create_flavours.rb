@@ -4,7 +4,7 @@ class CreateFlavours < ActiveRecord::Migration[5.0]
       t.string :name
       t.float :price
       t.string :image
-      t.references :supplier
+      t.references :supplier, foreign_key: true
 
       t.timestamps
     end
