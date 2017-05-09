@@ -1,2 +1,2 @@
-class OrderIcecream < ApplicationRecord
+class OrderitemIcecream < ApplicationRecord
 end
