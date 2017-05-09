@@ -1,4 +1,5 @@
 class SuppliersController < ApplicationController
+
   def index
     @suppliers = Supplier.all
   end
@@ -17,8 +18,15 @@ class SuppliersController < ApplicationController
     @containers = Container.where(supplier_id: params[:id])
     @order = Orderitem.new
     gon.user = user_signed_in?
-
   end
 
+  def search
+    field = params[:field]? params[:field].downcase : ''
+    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(location) = ?", "%#{field}%", "%#{field}%")
+  end
+
+  def location_search
+      gon.suppliers = Supplier.all
+  end
 
 end
