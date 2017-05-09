@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   }
 
   devise_for :suppliers, controllers: {
-    session: 'users/session'
+    session: 'users/session',
+    registrations: 'suppliers/registrations'
   }
 
 
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
 
   root to: 'suppliers#index'
   get 'suppliers/location_search'
-  get 'suppliers/search', to: 'suppliers#index'
   resources :suppliers
 
   resources :flavours

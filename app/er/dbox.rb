@@ -1,2 +1,0 @@
-class Dbox < ApplicationRecord
-end
