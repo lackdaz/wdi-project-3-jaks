@@ -24,8 +24,8 @@ class SuppliersController < ApplicationController
   end
 
   def location_search
-      gon.suppliers = Supplier.all
-  end
+`      gon.suppliers = Supplier.all
+`  end
 
 
 

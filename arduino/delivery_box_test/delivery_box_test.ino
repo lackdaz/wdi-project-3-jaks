@@ -157,6 +157,9 @@ void loop() {
 //  display.println(gps.course.deg());
 //  display.print("Speed     : ");
 //  display.println(gps.speed.mph());
+  display.print("Target Temp : ");
+  display.print();
+  display.println("*C");
 
   unsigned long Distance_To_Home = (unsigned long)TinyGPSPlus::distanceBetween(gps.location.lat(),gps.location.lng(),Home_LAT, Home_LNG);
   display.print("M to Home: ");                        // Have TinyGPS Calculate distance to home and display it
@@ -256,6 +259,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
     display.clear();
     display.setCursor(0,0);
     display.println(topic);
+    for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+    }    
     display.update();
     delay(5000);
   }

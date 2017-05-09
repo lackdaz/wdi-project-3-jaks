@@ -6,7 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+# 1.times do
+#   User.create(
+#     firstname: "testy",
+#     email: "test@gmail.com",
+#     encrypted_password: "$2a$11$TVSyRuLaSOiqWFBmjPTn8uSkYqHX9Z8l9Y.4fGYk2xUo2MiqIJgV.",
+#     lastname: "test",
+#     current_sign_in_at: DateTime.now,
+#     last_sign_in_at: DateTime.now,
+#     created_at: DateTime.now,
+#     updated_at: DateTime.now,
+#     confirmation_token: "12345",
+#     confirmed_at: DateTime.now,
+#     confirmation_sent_at: DateTime.now
+#   )
+# end
 
 # 5.times do
 #   Supplier.create(
