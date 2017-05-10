@@ -13,7 +13,8 @@
  */
  @import "variables";
  @import "bulma";
-
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
            //Nav Bar
 
@@ -21,13 +22,17 @@
         background-color: $navbarcolor;
       }
 
+      .nav{
+        padding-bottom: 10px;
+        margin:0px;
+      }
       .nav-left h1 {
         color:white;
-        font-size : 170%;
+        font-size : 20px;
       }
 
       .nav-right , nav-menu {
-        font-size: 100%;
+        font-size: 120%;
         float :right;
         margin: 0 auto;
 
@@ -37,6 +42,75 @@
 
       .navbar-link {
         color:white;
-        padding: 13px 25px 5px 20px;
+        padding: 20px 20px 0px 20px;
 
       }
+
+      .hero{
+        background: url('/images/rootpageicecream3.jpg');
+
+
+
+
+      }
+
+
+
+
+
+
+
+            #right-panel {
+                   font-family: 'Roboto','sans-serif';
+                   line-height: 30px;
+                   padding-left: 10px;
+                 }
+
+                 #right-panel select, #right-panel input {
+                   font-size: 15px;
+                 }
+
+                 #right-panel select {
+                   width: 100%;
+                 }
+
+                 #right-panel i {
+                   font-size: 12px;
+                 }
+                 html, body {
+                   height: 100%;
+                   margin: 0;
+                   padding: 0;
+                 }
+                 #map {
+                   height: 100%;
+                   width: 50%;
+                 }
+                 #right-panel {
+                   float: right;
+                   width: 48%;
+                   padding-left: 2%;
+                 }
+                 #output {
+                   font-size: 11px;
+                 }
+
+      .column.is-half {
+        width:20%;
+      }
+
+      #imaginary_container{
+    margin-top:20%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}

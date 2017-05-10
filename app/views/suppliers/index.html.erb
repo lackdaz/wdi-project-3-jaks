@@ -1,6 +1,7 @@
 
-<section class="hero is-medium ">
+<section class="hero">
   <div class="hero-body">
+
     <div class="container">
       <h1 class="title">
         The ice-cream man is here..
@@ -8,27 +9,42 @@
       <h2 class="subtitle">
           pee pooo peee pooo
       </h2>
-
-      <% if user_signed_in? %>
-      <%= render 'delivery_address/add_delivery_address' %>
-          <%= render 'delivery_address/show_delivery_address' %>
+      </div>
+      <div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container">
+              <form accept-charset="UTF-8" action="/suppliers" method="get">
+                <div class="input-group stylish-input-group">
+                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name, neighborhood or current location" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+              </form>
+            </div>
+        </div>
     </div>
-    <% end %>
-    <%= render 'picture/add_image'%>
-    <%= render 'picture/show_image' %>
-  </div>
-
+    </div>
   </div>
 </section>
-<div class="column"></div>
-<div class="columns">
-<% @suppliers.each do |supplier|  %>
-<a href="/suppliers/<%= supplier.id %>"class="column is-half is multiline">
-  <div id="<%= supplier.id %>"
+<%= notice %></p>
+<%= alert %></p>
+
+
+<div class="column is-three-quarters `is-centered`">
+
+  <div class="columns">
+  <% @suppliers.each do |supplier|  %>
+<a href="/suppliers/<%= supplier.id %>" class="column is-centered is-one-third is-multiline">
+  <div id="<%= supplier.id %>">
     <p class="notification is-info">
       <code class="html"><%= supplier.name %></code>
     </p>
   </div>
 </a>
 <% end  %>
+</div>
 </div>

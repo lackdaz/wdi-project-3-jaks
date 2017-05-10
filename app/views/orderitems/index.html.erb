@@ -1,5 +1,37 @@
 <h1>Your Order</h1>
 
-<% @orders.each do |order|   %>
-  <%= order.flavour.name %>
-<% end  %>
+
+<% total = 0 %>
+
+<%= form_for :invoice, url: invoices_path do |f| %>
+
+    <% @orders.each do |order|   %>
+    <%= order.flavour.name %> : $<%= order.flavour.price %>
+    <% total += order.flavour.price  %>
+    <%= order.container.name %> : $<%= order.container.price %>
+    <% total += order.container.price  %>
+    </br>
+    <% end  %>
+
+    <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <label class="amount">
+          <span>Amount : <%= total %></span>
+        </label>
+    </article>
+
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%=  hidden_field_tag :total_amount, total %>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="Ice Scream!"
+    data-amount="<%= total * 100 %>"
+    data-description=""
+    data-locale="auto"
+    data-currency="SGD"></script>
+
+<% end %>

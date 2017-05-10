@@ -1,12 +1,24 @@
 <h1>Search#index</h1>
 
-
-<form accept-charset="UTF-8" action="/transactions/search" method="get">
-  <input name="utf8" type="hidden" value="&#x2713;" />
-  <label for="q">Search for:</label>
-  <input class = 'input' id="field" name="field" type="text" />
-  <input class = 'button is-info' name="commit" type="submit" value="Search" />
+<form accept-charset="UTF-8" action="/suppliers" method="get">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container">
+                <div class="input-group stylish-input-group">
+                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name or neighborhood" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </form>
+
 
 
 
@@ -51,20 +63,10 @@
                   $target.append($new_restaurant_link)
               }
             })
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
           });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
         }
       }
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
     </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>

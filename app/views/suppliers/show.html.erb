@@ -65,19 +65,17 @@
       <p id="flavourimage"></p>
       <% if user_signed_in? %>
       <%= form_for @order ,remote: true do |f| %>
-      <%= f.hidden_field :flavour_id, value: '1' %>
+      <%= f.hidden_field :flavour_id, value: '1', id: 'order_flavour_id' %>
       <%= f.hidden_field :supplier_id, value: @supplier.id %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.collection_radio_buttons(:container_id, @containers, :id , :name)  %>
 
+      <button type="submit" id="formorder" class="button is-success">Orderitem</button>
     </section>
     <footer class="modal-card-foot">
-      <button type="submit" id="formorder" class="button is-success">Orderitem</button>
       <a class="button" id="cancel">Cancel</a>
     </footer>
     <% end %>
     <% end %>
   </div>
 </div>
-
-<%= cl_image_tag(@supplier.picture, :crop => :fill, :width => 120, :height => 80) %>
