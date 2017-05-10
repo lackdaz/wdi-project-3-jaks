@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+    # devise_for :users,
+    # controllers: {
+    #   :sessions => 'users/sessions',
+    #   :registrations =>'users/registrations'
+    # },
+    # path: '/',
+    # path_names: {
+    #   sign_in: 'login',
+    #   sign_out: 'logout',
+    #   sign_up: 'signup',
+    #   edit: 'editprofile',
+    # }
+
   devise_for :deliverymen
   devise_for :users, controllers: {
     session: 'users/session'
@@ -10,9 +23,6 @@ Rails.application.routes.draw do
     registrations: 'suppliers/registrations'
   }
 
-
-
-
   root to: 'suppliers#index'
   get 'suppliers/location_search'
   resources :suppliers
@@ -21,7 +31,7 @@ Rails.application.routes.draw do
   resources :containers
 
   resources :orderitems
-
+  resources :invoices
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'
