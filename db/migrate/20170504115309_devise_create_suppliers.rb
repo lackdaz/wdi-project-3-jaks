@@ -7,6 +7,13 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       t.string :encrypted_password, null: false, default: ""
 
       #custom fields
+      t.string :address
+      t.string :name
+      t.integer :contact
+      t.float :lat
+      t.float :lng
+      t.string :neighbourhood
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

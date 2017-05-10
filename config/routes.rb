@@ -6,21 +6,20 @@ Rails.application.routes.draw do
   }
 
   devise_for :suppliers, controllers: {
-    session: 'users/session'
+    session: 'users/session',
+    registrations: 'suppliers/registrations'
   }
 
-
-
-
   root to: 'suppliers#index'
-
+  get 'suppliers/location_search'
+  get 'suppliers/search'
   resources :suppliers
 
   resources :flavours
   resources :containers
 
   resources :orderitems
-  # resources :consumers
+  resources :invoices
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'
@@ -35,8 +34,6 @@ delete '/delivery_address/delete/:id' , to:'delivery_address#destroy_delivery_ad
 
   get 'transactions/index'
   # root 'supplier#index'
-  get 'transactions/location_search'
-  get 'transactions/search'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

@@ -1,5 +1,4 @@
 $(document).on('turbolinks:load', function () {
-
   $('.showmodal').click(function (e) {
     e.preventDefault()
     if (gon.user) {

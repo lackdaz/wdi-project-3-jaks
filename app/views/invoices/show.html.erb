@@ -1,53 +1,40 @@
-<h1>Transactions#index</h1>
+<h1>Invoices#show</h1>
 <p>Find me in app/views/transactions/index.html.erb</p>
-
 <div id="right-panel">
     <div id="inputs">
         <pre>
 var origin1 =
-var destinationA =
-
+var destinationA = <%= @destination %>
         </pre>
     </div>
     <div>
         <strong>Results</strong>
     </div>
-    <div id="output"></div>
+    <div id="output">
+    </div>
 </div>
-<div id="map"></div>
-
+<div id="map">
+</div>
 <script>
-
     function initMap() {
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng({lat: 1.3521, lng: 103.8198}), new google.maps.LatLng({lat: 1.30838, lng: 103.83264})) / 1000
-
-        console.log(distance, 'geocoder km distance')
-        if (distance < 6) {
-            console.log('yes')
-        }
-
         var bounds = new google.maps.LatLngBounds;
         var markersArray = [];
         var origin1 = {
             lat: gon.lat,
             lng: gon.long
         };
-        var destinationA = 'Chinatown, Singapore';
-
+        var destinationA = gon.destination;
         var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
         var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
-        var map = new google.maps.Map(document.getElementById('map'), {
+        window.map = new google.maps.Map(document.getElementById('map'), {
             center: {
                 lat: 1.3521,
                 lng: 103.8198
             },
             zoom: 10
         });
-
         var geocoder = new google.maps.Geocoder;
-
         var service = new google.maps.DistanceMatrixService;
-
         service.getDistanceMatrix({
             origins: [origin1],
             destinations: [destinationA],
@@ -72,7 +59,6 @@ var destinationA =
                     return function (results, statcus) {
                         if (status === 'OK') {
                             map.fitBounds(bounds.extend(results[0].geometry.location));
-
                             directionsDisplay.setMap(map)
                             directionsService.route({
                                 origin: origin1,
@@ -86,13 +72,11 @@ var destinationA =
                                     alert('Geocode was not successful due to: ' + status);
                                 }
                             });
-
                         } else {
                             alert('Geocode was not successful due to: ' + status);
                         }
                     };
                 };
-
                 for (var i = 0; i < originList.length; i++) {
                     var results = response.rows[i].elements;
                     geocoder.geocode({
@@ -108,7 +92,6 @@ var destinationA =
             }
         });
     }
-
     function deleteMarkers(markersArray) {
         for (var i = 0; i < markersArray.length; i++) {
             markersArray[i].setMap(null);
@@ -116,5 +99,4 @@ var destinationA =
         markersArray = [];
     }
 </script>
-
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>
