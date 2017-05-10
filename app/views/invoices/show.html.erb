@@ -3,8 +3,8 @@
 <div id="right-panel">
     <div id="inputs">
         <pre>
-var origin1 =
-var destinationA = <%= @destination %>
+Current GPS location = <%= @start %>
+Delivery address = <%= @destination %>
         </pre>
     </div>
     <div>
@@ -18,11 +18,17 @@ var destinationA = <%= @destination %>
 <script>
     function initMap() {
         var bounds = new google.maps.LatLngBounds;
-        var markersArray = [];
-        var origin1 = {
-            lat: gon.lat,
-            lng: gon.long
-        };
+        window.markersArray = [];
+
+        // Where the tracker is
+        // var start = {
+        //     lat: gon.lat,
+        //     lng: gon.lng
+        // };
+
+        var start = gon.start
+
+        // Where the shop destination is
         var destinationA = gon.destination;
         var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
         var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
@@ -36,7 +42,7 @@ var destinationA = <%= @destination %>
         var geocoder = new google.maps.Geocoder;
         var service = new google.maps.DistanceMatrixService;
         service.getDistanceMatrix({
-            origins: [origin1],
+            origins: [start],
             destinations: [destinationA],
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.METRIC,
@@ -53,7 +59,7 @@ var destinationA = <%= @destination %>
                 var outputDiv = document.getElementById('output');
                 outputDiv.innerHTML = '';
                 // deleteMarkers(markersArray); var gps = {lat: gon.lat,lng: gon.long} var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon }) markersArray.push(marker1); var newLatLng = new google.maps.LatLng({     lat:
-                // origin1.lat,     lng: origin1.lng   }) marker1.setPosition(newLatLng);
+                // start.lat,     lng: start.lng   }) marker1.setPosition(newLatLng);
                 var showGeocodedAddressOnMap = function (asDestination) {
                     // var icon = asDestination ? destinationIcon : originIcon;
                     return function (results, statcus) {
@@ -61,7 +67,7 @@ var destinationA = <%= @destination %>
                             map.fitBounds(bounds.extend(results[0].geometry.location));
                             directionsDisplay.setMap(map)
                             directionsService.route({
-                                origin: origin1,
+                                origin: start,
                                 destination: destinationA,
                                 travelMode: 'DRIVING'
                             }, function (result, status) {

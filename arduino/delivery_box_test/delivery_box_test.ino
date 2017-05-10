@@ -53,14 +53,14 @@ const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
 
 /* WIFI SSID/PASS*/
-const char* ssid = "GA@Spacemob";
-const char* password = "yellowpencil";
+//const char* ssid = "GA@Spacemob";
+//const char* password = "yellowpencil";
 
 //const char* ssid = "chewchew";
 //const char* password = "chewkumwing";
 
-//const char* ssid = "iPhone (5)";
-//const char* password = "abrasion";
+const char* ssid = "iPhone (5)";
+const char* password = "abrasion";
 
 /*MQTT USER/PASS*/
 const char* mqtt_server = "m13.cloudmqtt.com";
@@ -228,7 +228,7 @@ if (millis() - start_dht < delayMS) {
   /* real-time logic goes here */
 //  if (event.relative_humidity > 65) {
   if (temp_reading > target_temp.toFloat() && target_temp != NULL) {
-    
+
       tone(buzzer, 1000);   // Turn the SOUND off
   }
   else noTone(buzzer);   // Turn the SOUND off
@@ -290,10 +290,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
     display.setCursor(0,0);
     display.print("saving temp..");
     display.println("as ");
-    target_temp = memory_dump.substring(2,length);        
-    display.print(target_temp);    
+    target_temp = memory_dump.substring(2,length);
+    display.print(target_temp);
     display.update();
-    delay(500);
+//    delay(500);
   }
   // Switch on the LED if a 1 was received as first character
   if ((char)payload[0] == '1') {
@@ -318,10 +318,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
     gps_message.toCharArray(message_arr, gps_message.length() + 1); // packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
-    client.publish("current_GPS", message_arr);
+    if (gps_message.startsWith("0.0")) {
+      client.publish("current_GPS", message_arr);
+    }
+    else client.publish("current_GPS", message_arr, true);
     display.println("GPS message sent");
     display.update();
-    delay(500);
+//    delay(500);
     digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
 
     String temp_str = String(temp_reading);
@@ -340,7 +343,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
     dht_message.toCharArray(message_arr, dht_message.length() + 1); //packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
-    client.publish("current_DHT", message_arr);
+    if (dht_message.startsWith("0.0")) {
+      client.publish("current_DHT", message_arr);
+    }
+    else client.publish("current_DHT", message_arr, true);
     display.println("message sent");
     display.update();
     delay(500);
