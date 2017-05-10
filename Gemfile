@@ -28,6 +28,7 @@ gem 'devise'
 gem 'stripe'
 # Google APIs gems
 gem 'geocoder'
+gem 'geokit-rails'
 gem 'polylines'
 gem 'gmaps4rails'
 

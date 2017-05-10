@@ -6,11 +6,9 @@ Rails.application.routes.draw do
   }
 
   devise_for :suppliers, controllers: {
-    session: 'users/session'
+    session: 'users/session',
+    registrations: 'suppliers/registrations'
   }
-
-
-
 
   root to: 'suppliers#index'
   get 'suppliers/location_search'
