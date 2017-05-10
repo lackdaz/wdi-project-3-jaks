@@ -68,9 +68,9 @@
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.collection_radio_buttons(:container_id, @containers, :id , :name)  %>
 
+      <button type="submit" id="formorder" class="button is-success">Orderitem</button>
     </section>
     <footer class="modal-card-foot">
-      <button type="submit" id="formorder" class="button is-success">Orderitem</button>
       <a class="button" id="cancel">Cancel</a>
     </footer>
     <% end %>

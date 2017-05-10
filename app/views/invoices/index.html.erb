@@ -28,12 +28,14 @@
             <tr>
             <td><%= order.invoice.id %></td>
             <td><%= order.supplier.name %></td>
-            <td><%= order.flavour.name +" "+ order.container.name %></td>
+
+            <td><%= order.flavour.name %> <%= order.container.name %></td>
             <td><%= order.flavour.price + order.container.price %></td>
             <td><%= order.invoice.status %></td>
             <td><%= order.invoice.delivery_address.address %></td>
             <td>
-              <form accept-charset="UTF-8" action="/invoice/" +"<%= invoice.id %>" method="get">
+
+              <form accept-charset="UTF-8" action="/invoices/<%= order.invoice.id %>" method="get">
                 <button type="submit" class="btn btn-primary">Delivery Status</button>
               </form>
             </td>
@@ -43,11 +45,6 @@
 
 
     </div>
-
-
-
-
-
 
 
       <!-- Append new invoice here -->

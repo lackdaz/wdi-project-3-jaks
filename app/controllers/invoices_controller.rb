@@ -2,15 +2,16 @@ class InvoicesController < ApplicationController
  include SendEmail
 
   def index
-        @orders = []
-        @invoice = Invoice.where(user_id: current_user.id, status: "PAID")
-        @invoice.each do |e|
-          Orderitem.where(invoice_id: e.id).each do |order|
-            @orders << order
-          end
-        end
 
+    @orders = []
 
+    @invoice = Invoice.where(user_id: current_user.id, status: "PAID")
+
+    @invoice.each do |e|
+      Orderitem.where(invoice_id: e.id).each do |order|
+        @orders << order
+      end
+    end
 
   end
 
