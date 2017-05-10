@@ -7,7 +7,7 @@ class SuppliersController < ApplicationController
     if field.to_s == 'current location'
      redirect_to action: :location_search
       else
-    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(address) = ? OR LOWER(neighbourhood) = ?", "%#{field}%", "%#{field}%", "%#{field}%")
+    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(address) LIKE ? OR LOWER(neighbourhood) LIKE ?", "%#{field}%", "%#{field}%", "%#{field}%")
   end
 end
 
@@ -28,8 +28,8 @@ end
   end
 
   def location_search
-`      gon.suppliers = Supplier.all
-`  end
+      gon.suppliers = Supplier.all
+  end
 
 
 
