@@ -8,7 +8,8 @@
       <h2 class="subtitle">
           pee pooo peee pooo
       </h2>
-
+      </div>
+      <div class="container">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <div id="imaginary_container">
@@ -26,7 +27,6 @@
             </div>
         </div>
     </div>
-
     </div>
   </div>
 </section>
@@ -34,14 +34,15 @@
 
 <div class="column"><%= @title%></div>
 
-<div class="columns">
-<% @suppliers.each do |supplier|  %>
-<a href="/suppliers/<%= supplier.id %>"class="column is-half is-multiline">
-  <div id="<%= supplier.id %>"
+  <div class="columns">
+  <% @suppliers.each do |supplier|  %>
+<a href="/suppliers/<%= supplier.id %>" class="column is-centered is-one-third is-multiline">
+  <div id="<%= supplier.id %>">
     <p class="notification is-info">
       <code class="html"><%= supplier.name %></code>
     </p>
   </div>
 </a>
 <% end  %>
+</div>
 </div>
