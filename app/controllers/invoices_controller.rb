@@ -30,7 +30,7 @@ class InvoicesController < ApplicationController
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
-
+  
     redirect_to orderitems_path unless @delivery_address
 
     begin
@@ -60,8 +60,10 @@ class InvoicesController < ApplicationController
     @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
-    @new_invoice.delivery_address_id = @delivery_address
+
+    @new_invoice.delivery_address_id = @delivery_address[0].id
     @new_invoice.status = "PAID"
+
     if @new_invoice.save
       puts @orders
       @orders.each do |order|
