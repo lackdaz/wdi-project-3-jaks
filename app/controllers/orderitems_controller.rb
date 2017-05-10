@@ -1,7 +1,7 @@
 class OrderitemsController < ApplicationController
 
   def index
-      @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
+      @orders = Orderitem.where(user_id: current_user.id)
     end
 
     def new
@@ -15,11 +15,9 @@ class OrderitemsController < ApplicationController
     end
 
     def create
-      puts '-------------------------------START--------------------'
       @new_order = Orderitem.new(filter_params)
       puts @new_order.inspect
       @new_order.save
-      puts '-------------------------------END--------------------'
     end
 
     def destroy
