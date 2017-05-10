@@ -58,7 +58,7 @@ class InvoicesController < ApplicationController
     @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
-    @new_invoice.delivery_address_id = 1
+    @new_invoice.delivery_address_id = @delivery_address
     @new_invoice.status = "PAID"
     if @new_invoice.save
       puts @orders
@@ -76,7 +76,7 @@ class InvoicesController < ApplicationController
 
   # private
   # def filter_params
-  #   params.require(:order).permit(:flavor, :price, :name)
+  #   params.require(:delivery_address).permit(:flavor, :price, :name)
   # end
 
 end
