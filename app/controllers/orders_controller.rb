@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @all_orders = current_user.order
+    # @all_orders = current_user.orders
   end
 
   def new
@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   def create
 ##### to update based on Kenneth's input
-    # 
+    #
     # @new_order = Order.new(filter_params)
     # @submitted_flight.save
 

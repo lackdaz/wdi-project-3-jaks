@@ -17,7 +17,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
-
+gem 'rest-client'
 #Use pry for console purposes
 gem 'pry'
 gem 'bulma-rails'
@@ -25,7 +25,7 @@ gem 'font-awesome-sass'
 
 gem 'faker'
 gem 'devise'
-
+gem 'stripe'
 # Google APIs gems
 gem 'geocoder'
 gem 'geokit-rails'
@@ -55,7 +55,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '3.1.11', :require => 'bcrypt'
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -81,4 +80,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.4.0'
+ruby '2.3.3'
