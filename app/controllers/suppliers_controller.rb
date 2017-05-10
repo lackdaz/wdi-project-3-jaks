@@ -2,6 +2,7 @@ class SuppliersController < ApplicationController
 
   def index
     field = params[:field]? params[:field].downcase : ''
+    @title = field.titleize
    if field.to_s == 'current location'
     redirect_to action: :location_search
      else
