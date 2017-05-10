@@ -8,20 +8,19 @@
       <h2 class="subtitle">
           pee pooo peee pooo
       </h2>
+
       <% if user_signed_in? %>
       <%= render 'delivery_address/add_delivery_address' %>
           <%= render 'delivery_address/show_delivery_address' %>
     </div>
-
     <% end %>
-
+    <%= render 'picture/add_image'%>
+    <%= render 'picture/show_image' %>
+  </div>
 
   </div>
 </section>
-
-
 <div class="column"></div>
-
 <div class="columns">
 <% @suppliers.each do |supplier|  %>
 <a href="/suppliers/<%= supplier.id %>"class="column is-half is multiline">

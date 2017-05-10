@@ -40,6 +40,12 @@ gem 'foreman'
 # gon
 gem 'gon'
 
+#cloudinary
+gem 'cloudinary'
+
+# carrierwave
+gem 'carrierwave'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

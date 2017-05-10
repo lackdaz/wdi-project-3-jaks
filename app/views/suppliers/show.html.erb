@@ -11,6 +11,8 @@
   </div>
   <% if  supplier_signed_in? && current_supplier.id == @supplier.id%>
 
+
+
   <div class="tabs is-centered">
 <ul>
   <li class="is-active"><a href="/suppliers/<%= @supplier.id %>">Menu</a></li>
@@ -77,3 +79,5 @@
     <% end %>
   </div>
 </div>
+
+<%= cl_image_tag(@supplier.picture, :crop => :fill, :width => 120, :height => 80) %>

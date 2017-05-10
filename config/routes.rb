@@ -9,9 +9,6 @@ Rails.application.routes.draw do
     session: 'users/session'
   }
 
-
-
-
   root to: 'suppliers#index'
 
   resources :suppliers
@@ -31,6 +28,8 @@ get '/delivery_address/edit/:id' , to:'delivery_address#edit_delivery_address', 
 put '/delivery_address/update/:id' , to:'delivery_address#update_delivery_address', as:'delivery_address_update'
 
 delete '/delivery_address/delete/:id' , to:'delivery_address#destroy_delivery_address', as:'delivery_address_delete'
+
+post '/image/new', to:'pictures#addimage',as:'add_image'
 
 
   get 'transactions/index'

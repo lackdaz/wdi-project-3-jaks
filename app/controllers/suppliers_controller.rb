@@ -20,5 +20,9 @@ class SuppliersController < ApplicationController
 
   end
 
+  def picture_params
+  params.require(:picture).permit(:public_id)
+end
+
 
 end
