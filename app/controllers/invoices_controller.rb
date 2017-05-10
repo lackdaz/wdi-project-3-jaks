@@ -3,11 +3,6 @@ class InvoicesController < ApplicationController
 
   def index
     @orders = Invoice.where(user_id: current_user.id)
-
-    #  need to change to last known
-    # gon.lat = 1.3521
-    # gon.long = 103.8198
-    # @all_transactions = current_user.transaction
   end
 
   def new
