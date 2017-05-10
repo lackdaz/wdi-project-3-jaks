@@ -53,11 +53,11 @@ const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
 
 /* WIFI SSID/PASS*/
-//const char* ssid = "GA@Spacemob";
-//const char* password = "yellowpencil";
+const char* ssid = "GA@Spacemob";
+const char* password = "yellowpencil";
 
-const char* ssid = "chewchew";
-const char* password = "chewkumwing";
+//const char* ssid = "chewchew";
+//const char* password = "chewkumwing";
 
 //const char* ssid = "iPhone (5)";
 //const char* password = "abrasion";
