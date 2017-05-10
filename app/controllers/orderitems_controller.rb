@@ -15,9 +15,11 @@ class OrderitemsController < ApplicationController
     end
 
     def create
+      puts '-------------------------------START--------------------'
       @new_order = Orderitem.new(filter_params)
       puts @new_order.inspect
       @new_order.save
+      puts '-------------------------------END--------------------'
     end
 
     def destroy

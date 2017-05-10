@@ -1,52 +1,35 @@
 <h1>Transactions#index</h1>
 <p>Find me in app/views/transactions/index.html.erb</p>
 
+
 <div id="right-panel">
     <div id="inputs">
         <pre>
 var origin1 =
 var destinationA =
-
         </pre>
     </div>
     <div>
         <strong>Results</strong>
     </div>
     <div id="output">
-
     </div>
 </div>
 <div id="map">
-
 </div>
 
 <script>
 
     function initMap() {
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng({lat: 1.3521, lng: 103.8198}), new google.maps.LatLng({lat: 1.30838, lng: 103.83264})) / 1000
-
-        console.log(distance, 'geocoder km distance')
-        if (distance < 6) {
-            console.log('yes')
-        }
 
         var bounds = new google.maps.LatLngBounds;
-        var markersArray = [];
         var origin1 = {
             lat: gon.lat,
             lng: gon.long
         };
         var destinationA = 'Chinatown, Singapore';
 
-        var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
-        var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
-        window.map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 1.3521,
-                lng: 103.8198
-            },
-            zoom: 10
-        });
+
 
         var geocoder = new google.maps.Geocoder;
 
@@ -69,15 +52,10 @@ var destinationA =
                 var destinationList = response.destinationAddresses;
                 var outputDiv = document.getElementById('output');
                 outputDiv.innerHTML = '';
-                // deleteMarkers(markersArray); var gps = {lat: gon.lat,lng: gon.long} var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon }) markersArray.push(marker1); var newLatLng = new google.maps.LatLng({     lat:
-                // origin1.lat,     lng: origin1.lng   }) marker1.setPosition(newLatLng);
+
                 var showGeocodedAddressOnMap = function (asDestination) {
-                    // var icon = asDestination ? destinationIcon : originIcon;
                     return function (results, statcus) {
                         if (status === 'OK') {
-                            map.fitBounds(bounds.extend(results[0].geometry.location));
-
-                            directionsDisplay.setMap(map)
                             directionsService.route({
                                 origin: origin1,
                                 destination: destinationA,
@@ -85,7 +63,6 @@ var destinationA =
                             }, function (result, status) {
                                 if (status == 'OK') {
                                     directionsDisplay.setDirections(result);
-                                    console.log('direction service')
                                 } else {
                                     alert('Geocode was not successful due to: ' + status);
                                 }
@@ -98,27 +75,26 @@ var destinationA =
                 };
 
                 for (var i = 0; i < originList.length; i++) {
+
                     var results = response.rows[i].elements;
+
                     geocoder.geocode({
                         'address': originList[i]
                     }, showGeocodedAddressOnMap(false));
+
                     for (var j = 0; j < results.length; j++) {
                         geocoder.geocode({
                             'address': destinationList[j]
                         }, showGeocodedAddressOnMap(false));
-                        outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] + ': ' + results[j].distance.text + ' in ' + results[j].duration.text + '<br>';
+
+                        outputDiv.innerHTML = results[j].duration.text;
                     }
                 }
             }
         });
     }
 
-    function deleteMarkers(markersArray) {
-        for (var i = 0; i < markersArray.length; i++) {
-            markersArray[i].setMap(null);
-        }
-        markersArray = [];
-    }
+
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>

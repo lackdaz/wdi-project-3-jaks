@@ -63,7 +63,7 @@
       <p id="flavourimage"></p>
       <% if user_signed_in? %>
       <%= form_for @order ,remote: true do |f| %>
-      <%= f.hidden_field :flavour_id, value: '1' %>
+      <%= f.hidden_field :flavour_id, value: '1', id: 'order_flavour_id' %>
       <%= f.hidden_field :supplier_id, value: @supplier.id %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.collection_radio_buttons(:container_id, @containers, :id , :name)  %>
