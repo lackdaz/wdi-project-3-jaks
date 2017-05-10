@@ -4,7 +4,7 @@
     <div id="inputs">
         <pre>
 var origin1 =
-var destinationA =
+var destinationA = <%= @destination %>
         </pre>
     </div>
     <div>
@@ -24,7 +24,7 @@ var destinationA =
             lat: gon.lat,
             lng: gon.long
         };
-        var destinationA = 'Chinatown, Singapore';
+        var destinationA = gon.destination;
         var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
         var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
         window.map = new google.maps.Map(document.getElementById('map'), {
