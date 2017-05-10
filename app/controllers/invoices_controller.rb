@@ -2,6 +2,8 @@ class InvoicesController < ApplicationController
  include SendEmail
 
   def index
+    @orders = Invoice.where(user_id: current_user.id)
+
     #  need to change to last known
     # gon.lat = 1.3521
     # gon.long = 103.8198
@@ -20,7 +22,7 @@ class InvoicesController < ApplicationController
     if (!@delivery_address)
       redirect_to orderitems_path
     end
-    
+
     begin
     @amount = (params[:total_amount].to_f * 100).to_i
 
