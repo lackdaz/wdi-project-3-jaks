@@ -1,1 +1,8 @@
 <h1>Order Tracking</h1>
+
+<% @orders.each do |order| %>
+  <%= order.supplier.name %>
+  <%= order.invoice.id %>
+</br>
+
+<% end %>

@@ -2,10 +2,17 @@ class InvoicesController < ApplicationController
  include SendEmail
 
   def index
-    #  need to change to last known
-    # gon.lat = 1.3521
-    # gon.long = 103.8198
-    # @all_transactions = current_user.transaction
+
+    @orders = []
+
+    @invoice = Invoice.where(user_id: current_user.id, status: "PAID")
+
+    @invoice.each do |e|
+      Orderitem.where(invoice_id: e.id).each do |order|
+        @orders << order
+      end
+    end
+
   end
 
   def new
@@ -20,7 +27,7 @@ class InvoicesController < ApplicationController
     if (!@delivery_address)
       redirect_to orderitems_path
     end
-    
+
     begin
     @amount = (params[:total_amount].to_f * 100).to_i
 
