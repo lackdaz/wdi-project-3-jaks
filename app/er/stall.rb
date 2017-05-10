@@ -1,2 +1,0 @@
-class Stall < ApplicationRecord
-end
