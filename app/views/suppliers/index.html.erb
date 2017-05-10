@@ -14,7 +14,8 @@
             <div id="imaginary_container">
               <form accept-charset="UTF-8" action="/suppliers" method="get">
                 <div class="input-group stylish-input-group">
-                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name, neighborhood or use current location" >
+
+                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name, neighborhood or current location" >
                     <span class="input-group-addon">
                         <button type="submit">
                             <span class="glyphicon glyphicon-search"></span>
@@ -25,9 +26,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     </div>
 
@@ -40,7 +38,7 @@
 
 <div class="columns">
 <% @suppliers.each do |supplier|  %>
-<a href="/suppliers/<%= supplier.id %>"class="column is-half is multiline">
+<a href="/suppliers/<%= supplier.id %>"class="column is-half is-multiline">
   <div id="<%= supplier.id %>"
     <p class="notification is-info">
       <code class="html"><%= supplier.name %></code>

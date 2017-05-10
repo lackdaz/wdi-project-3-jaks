@@ -23,8 +23,6 @@ Rails.application.routes.draw do
     registrations: 'suppliers/registrations'
   }
 
-
-
   root to: 'suppliers#index'
   get 'suppliers/location_search'
   resources :suppliers
@@ -33,7 +31,7 @@ Rails.application.routes.draw do
   resources :containers
 
   resources :orderitems
-
+  resources :invoices
 
 get '/profile/:id' , to: 'users#show' , as:'profile'
 post '/delivery_address/new' ,to: 'delivery_address#create', as:'delivery_address_create'

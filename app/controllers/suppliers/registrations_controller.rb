@@ -2,8 +2,8 @@ class Suppliers::RegistrationsController < Devise::RegistrationsController
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  include Geokit::Geocoders
 
+  include Geokit::Geocoders
 
   # GET /resource/sign_up
   # def new
@@ -39,7 +39,6 @@ class Suppliers::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -64,25 +63,26 @@ class Suppliers::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_sign_up_path_for(resource)
-    # @updated_supplier = Supplier.find(params[:id])
-    # if @updated_flight.update(filter_params)
 
-    loc=MultiGeocoder.geocode(filter_params[:address])
-      if loc.success
-        updated_supplier = Supplier.last
-        updated_supplier.lat = loc.lat.to_f
-        updated_supplier.lng = loc.lng.to_f
-        updated_supplier.address = loc.full_address
-        updated_supplier.neighbourhood = loc.neighborhood
-        updated_supplier.save
-      end
-    suppliers_path(resource)  #the path you want to route to
-  end
+def after_sign_up_path_for(resource)
+  # @updated_supplier = Supplier.find(params[:id])
+  # if @updated_flight.update(filter_params)
 
-  private
-  def filter_params
-    params.require(:supplier).permit(:address)
+  loc=MultiGeocoder.geocode(filter_params[:address])
+    if loc.success
+      updated_supplier = Supplier.last
+      updated_supplier.lat = loc.lat.to_f
+      updated_supplier.lng = loc.lng.to_f
+      updated_supplier.address = loc.full_address
+      updated_supplier.neighbourhood = loc.neighborhood
+      updated_supplier.save
+    end
+  suppliers_path(resource)  #the path you want to route to
+end
 
-  end
+private
+def filter_params
+  params.require(:supplier).permit(:address)
+
+end
 end
