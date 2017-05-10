@@ -2,10 +2,14 @@ class SuppliersController < ApplicationController
 
   def index
     # @suppliers = Supplier.all
-
+##############things to add to seth
     field = params[:field]? params[:field].downcase : ''
-    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(address) = ?", "%#{field}%", "%#{field}%")
+    if field.to_s == 'current location'
+     redirect_to action: :location_search
+      else
+    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(address) = ? OR LOWER(neighbourhood) = ?", "%#{field}%", "%#{field}%", "%#{field}%")
   end
+end
 
   def show
 
