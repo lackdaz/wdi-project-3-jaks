@@ -37,7 +37,7 @@
 
 <div class="columns">
 <% @suppliers.each do |supplier|  %>
-<a href="/suppliers/<%= supplier.id %>"class="column is-half is multiline">
+<a href="/suppliers/<%= supplier.id %>"class="column is-half is-multiline">
   <div id="<%= supplier.id %>"
     <p class="notification is-info">
       <code class="html"><%= supplier.name %></code>
