@@ -12,57 +12,90 @@
     </div>
 </section>
 
+<div class = "order-container">
+
+  <div class="delivery-details-wrap">
+    <div class = "order-details-header">
+      <h1 class="order-details-title">
+        Delivery Info
+      </h1>
+    </div>
+    <div class = "delivery-personal">
+
+      <%= form_for :delivery_address, url:delivery_address_create_path  do |f| %>
+
+          <%= f.text_field :address, placeholder: 'Delivery Address ', class: 'input' %>
+          <p class="control">
+            <%= f.submit 'Add Address', class: 'button is-primary' %>
+          </p>
+
+      <% end %>
+
+    </div>
+    <div class = "delivery-personal">
+      <h1 class="personal-details-title">Personal Details: </h1>
+    </br>
+      <strong>Name: </strong>
+        <p class ="order-items">
+      <%= current_user.firstname %> <%= current_user.lastname %>
+      </p>
+    </br>
+    <strong>Contact:</strong>
+      <p class ="order-items">
+     <%= current_user.contact %>
+      </p class ="order-items">
+    </br>
+  <strong>Email: </strong>
+    <p class ="order-items">
+    <%= current_user.email %>
+      </p>
+    </br>
+    <strong>Existing address</strong>
+
+    <% if user_signed_in? && current_user.delivery_addresses %>
+
+    <p class ="order-items"><%= current_user.delivery_addresses[-1].address %>
+    </p>
+        <%= link_to 'Delete', delivery_address_delete_path(current_user.delivery_addresses[-1].address), method: :delete, data: { confirm: 'Are you sure?' } ,class: "button is-danger" %>
+
+    <% end %>
+    </div>
+  </div>
+
 <div class="order-details-wrap">
   <div class = "order-details-header">
     <h1 class="order-details-title">
       Your Order
     </h1>
-  </div>
-  <div class = "order-details-store">
-    <h1 class="order-details-title">
-    </h1>
-  </div>
 
+    <div class = "order-details-icecream">
     <% total = 0 %>
     <%= form_for :invoice, url: invoices_path do |f| %>
 
     <%= f.collection_radio_buttons :delivery_address_id, current_user.delivery_addresses.all, :id, :address %>
 
     <% @orders.each do |order|   %>
-    <%= order.supplier.name %>
-    <%= order.flavour.name %> : $<%= order.flavour.prgit puice %>
+      <strong><%= order.supplier.name %></strong> </br>
+
+    <p class ="order-items"><%= order.flavour.name %>  <span class = "order-price">$<%= order.flavour.price %> </span></p>
     <% total += order.flavour.price  %>
-    <%= order.container.name %> : $<%= order.container.price %>
+    <p class ="order-items"><%= order.container.name %> <span class = "order-price"> $<%= order.container.price %></span><p>
     <% total += order.container.price  %>
-  </br>
-  <% end  %>
-
-
-  <article>
-    <% if flash[:error].present? %>
-    <div id="error_explanation">
-      <p><%= flash[:error] %></p>
-    </div>
-    <% end %>
-    <label class="amount">
-      <span>Amount : <%= total %></span>
-    </label>
-  </article>
-
-
-
-</div>
-
-
-<h1>Your Order</h1>
-<h2>Add address for delivery</h2>
-
-<br>
-
-
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <%=  hidden_field_tag :total_amount, total %>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    </br>
+    <% end  %>
+    <article>
+      <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+      <% end %>
+      <label class="order-amount">
+        <span>Total Amount : $<%= total %></span>
+      </label>
+    </article>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%=  hidden_field_tag :total_amount, total %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
     data-name="Ice Scream!"
     data-amount="<%= total * 100 %>"
@@ -70,14 +103,8 @@
     data-locale="auto"
     data-currency="SGD"></script>
 
-<% end %>
-<%= form_for :delivery_address, url:delivery_address_create_path, remote: true  do |f| %>
-<div class="container">
-  <div class="notification">
-<%= f.text_field :address, placeholder: 'Delivery Address ', class: 'input' %>
-<p class="control">
-<%= f.submit 'Add Address', class: 'button is-primary' %>
-</p>
+    <% end %>
+    </div>
+  </div>
   </div>
 </div>
-<% end %>
