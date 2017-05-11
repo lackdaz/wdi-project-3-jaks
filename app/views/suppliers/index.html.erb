@@ -37,7 +37,7 @@
     <p class="notification is-info">
       <code class="html"><%= supplier.name %></code>
       <% @Allpicture.each do |picture|  %>
-      <% if supplier.id == picture.supplier_id %>
+      <% if supplier.id == picture.supplier_id  && picture.profilepic ==true%>
       <%= cl_image_tag(picture.public_id, :width => 200, :height => 200) %>
       <%end %>
       <% end %>
