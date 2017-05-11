@@ -69,6 +69,14 @@
   margin: 5% auto;
   text-align: center;
 }
+.distance-details-wrap{
+  border-style: solid;
+  border-color: #237477;
+  border-radius: 20px;
+  height: 85%;
+  text-align: center;
+  vertical-align: middle;
+}
 
 .tracking-details-wrap{
   border-style: solid;
@@ -92,8 +100,19 @@
   color:#237477;
 }
 
+.delivery-items-output{
+  border-radius:10px;
+  font-size:24px;
+  font-weight: bold;
+  display:block;
+  margin: 3% 0;
+  text-align:center;
+  color:#237477;
+}
+
 #output{
   margin-top: 20%;
+  padding: 0 10%;
 }
 
 #map {
@@ -207,6 +226,7 @@
   position: relative;
   // transform: translate(-50%, -50%);
 }
+
 .delivery-personal {
   margin-left: 10%;
   margin-right: 10%;
