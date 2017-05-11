@@ -1,8 +1,5 @@
-
 <section class="hero">
   <div class="hero-body">
-
-
       <div class="wrap">
         <h1 class="search-title">
           Your ice cream cravings resolved right now.
@@ -19,18 +16,13 @@
          </form>
          </div>
       </div>
-
-
     </div>
 </section>
 <%= notice %></p>
 <%= alert %></p>
-
 <div class="container">
-
 <div class="column"><%= @title%></div>
-
-  <div class="columns">
+  <div class="columns is-multiline">
   <% @suppliers.each do |supplier|  %>
 <a href="/suppliers/<%= supplier.id %>" class="column is-centered is-one-third is-multiline">
   <div id="<%= supplier.id %>">
@@ -47,5 +39,4 @@
 <% end  %>
 </div>
 </div>
-
 </div>

@@ -46,8 +46,9 @@ put '/delivery_address/update/:id' , to:'delivery_address#update_delivery_addres
 delete '/delivery_address/delete/:id' , to:'delivery_address#destroy_delivery_address', as:'delivery_address_delete'
 
 post '/image/new', to:'pictures#addimage',as:'add_image'
-put '/image/profilepic' ,to: 'pictures#profilepicture',as: 'profilepicture'
-
+put '/image/profilepic' ,to: 'pictures#update_profilepicture',as: 'update_profilepicture'
+get '/image/profilepic/edit',to:'pictures#get_profilepicture',as:'get_profilepicture'
+delete '/image/profilepic/delete/:id',to:'pictures#delete_profilepicture',as:'delete_profilepicture'
 
   get 'transactions/index'
   # root 'supplier#index'

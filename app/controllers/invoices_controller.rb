@@ -34,8 +34,6 @@ class InvoicesController < ApplicationController
 
     redirect_to orderitems_path unless @delivery_address
 
-    redirect_to orderitems_path unless @delivery_address
-
     begin
       @amount = (params[:total_amount].to_f * 100).to_i
 

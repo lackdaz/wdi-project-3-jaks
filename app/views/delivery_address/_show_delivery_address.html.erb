@@ -1,0 +1,12 @@
+<strong>Existing address</strong>
+
+
+<% if user_signed_in? && current_user.delivery_addresses %>
+
+<% current_user.delivery_addresses.each do |address| %>
+<p class ="order-items"><%= address.address %>
+</p>
+    <%= link_to 'Delete', delivery_address_delete_path(address), method: :delete, data: { confirm: 'Are you sure?' } ,class: "button is-danger" %>
+
+<% end %>
+<% end %>

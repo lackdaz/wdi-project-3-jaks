@@ -25,7 +25,7 @@ class OrderitemsController < ApplicationController
     def destroy
       deleted_order = Orderitem.find(params[:id])
       deleted_order.destroy
-      redirect_to orders_path
+      redirect_to orderitems_path
     end
 
     private

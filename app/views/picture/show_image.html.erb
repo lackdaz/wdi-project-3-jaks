@@ -1,0 +1,8 @@
+<%= form_for :picture ,url: update_profilepicture_path ,method: 'put'   do |f| %>
+<% current_supplier.pictures.each do |picture| %>
+<%= link_to 'Delete', delete_profilepicture_path(picture.id), method: :'delete', data: { confirm: 'Are you sure?' } ,class: "button is-danger" %>
+   <%= f.radio_button :profilepic, picture.id%>
+     <%= cl_image_tag(picture.public_id, :width => 200,    :height => 200) %>
+ <% end %>
+<%= f.submit 'Choose profile picture', class: 'button is-primary' %>
+<% end %>
