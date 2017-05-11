@@ -1,6 +1,5 @@
-<section class="hero is-medium is-primary is-bold">
+<section class="hero">
   <div class="hero-body">
-    <div class="container">
       <h1 class="title">
         <%= @supplier.name %>
       </h1>
@@ -8,8 +7,9 @@
         <%= @supplier.address %>
       </h2>
     </div>
-  </div>
   <% if  supplier_signed_in? && current_supplier.id == @supplier.id%>
+
+
 
   <div class="tabs is-centered">
 <ul>
@@ -22,6 +22,7 @@
 <% end %>
 </section>
 
+<div class="container">
 <div class="column">
   <% if (!(supplier_signed_in?)) %>
   <div class="columns is-multiline is-mobile is-centered">
@@ -76,4 +77,6 @@
     <% end %>
     <% end %>
   </div>
+</div>
+
 </div>

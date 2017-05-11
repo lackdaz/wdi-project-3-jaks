@@ -1,0 +1,14 @@
+development:
+  cloud_name: "dfc1n6xfs"
+  api_key: "836431529237277"
+  api_secret: "a8r6zuWRAgSIQgClmKOTeTkg5ZQ"
+  enhance_image_tag: true
+  static_image_support: false
+
+
+production:
+  cloud_name: "dfc1n6xfs"
+  api_key: "836431529237277"
+  api_secret: "a8r6zuWRAgSIQgClmKOTeTkg5ZQ"
+  enhance_image_tag: true
+  static_image_support: false

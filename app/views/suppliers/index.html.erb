@@ -1,36 +1,32 @@
 
-<section class="hero is-medium ">
+<section class="hero">
   <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        The ice-cream man is here..
-      </h1>
-      <h2 class="subtitle">
-          pee pooo peee pooo
-      </h2>
+
+
+      <div class="wrap">
+        <h1 class="search-title">
+          Your ice cream cravings resolved right now.
+        </h1>
+        <h2 class="search-subtitle">
+          Ice cream delivery to
+        </h2>
+         <div class="search">
+           <form class = "search-form" accept-charset="UTF-8" action="/suppliers" method="get">
+           <input type="text" id="field" name = "field" class="searchTerm" placeholder="Search by name, neighborhood or current location" >
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+           </button>
+         </form>
+         </div>
       </div>
-      <div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div id="imaginary_container">
-              <form accept-charset="UTF-8" action="/suppliers" method="get">
-                <div class="input-group stylish-input-group">
 
-                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name, neighborhood or current location" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-              </form>
-            </div>
-        </div>
+
     </div>
-    </div>
-  </div>
 </section>
+<%= notice %></p>
+<%= alert %></p>
 
+<div class="container">
 
 <div class="column"><%= @title%></div>
 
@@ -45,4 +41,6 @@
 </a>
 <% end  %>
 </div>
+</div>
+
 </div>

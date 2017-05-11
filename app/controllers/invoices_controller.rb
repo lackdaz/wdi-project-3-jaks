@@ -15,6 +15,7 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
+
     puts 'LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts @orders = Orderitem.where(invoice_id: params[:id])
 
@@ -29,6 +30,8 @@ class InvoicesController < ApplicationController
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
+
+    redirect_to orderitems_path unless @delivery_address
 
     redirect_to orderitems_path unless @delivery_address
 
@@ -59,7 +62,8 @@ class InvoicesController < ApplicationController
     @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
-    @new_invoice.delivery_address_id = @delivery_address
+
+    @new_invoice.delivery_address_id = @delivery_address[0].id
     @new_invoice.status = 'PAID'
     if @new_invoice.save
       puts @orders
@@ -70,6 +74,7 @@ class InvoicesController < ApplicationController
       redirect_to invoices_path
     end
   end
+
   # private
   # def filter_params
   #   params.require(:delivery_address).permit(:flavor, :price, :name)
