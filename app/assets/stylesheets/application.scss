@@ -144,6 +144,39 @@
 }
 /*Resize the wrap to see the search bar change!*/
 //// for order pages
+.order-container{
+  display:flex;
+  justify-content: center;
+  position: relative;
+  top:5%;
+  height: 100%;
+}
+
+.delivery-details-wrap{
+  border-style: solid;
+  border-color: #237477;
+  border-radius: 20px;
+  width: 45%;
+  right: 1%;
+  height: 85%;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  // transform: translate(-50%, -50%);
+}
+.delivery-personal {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top:3%;
+  text-align: left;
+}
+.personal-details-title{
+  font-weight: bold;
+  margin-top: 3%;
+  color:#237477;
+  font-size: 18px;
+}
+
 .order-title{
   margin-top: 13%;
   color:#237477;
@@ -172,13 +205,11 @@
   border-color: #237477;
   border-radius: 20px;
   width: 45%;
-  height: 60%;
-  top:5%;
-  left: 52%;
+  height: 85%;
+  left:1%;
   text-align: center;
   vertical-align: middle;
   position: relative;
-  background-color: #f5edad;
   // transform: translate(-50%, -50%);
 }
 .order-details-title{
@@ -186,7 +217,28 @@
   color:#237477;
   font-size: 45px;
 }
-.order-details-store {
-  text-align: left;  
-  margin-left: 5%;
+
+.order-details-icecream {
+  margin-left: 10%;
+  text-align: left;
+}
+.order-amount{
+  margin-top: 3%;
+  color:#237477;
+  font-size: 45px;
+}
+
+.order-items{
+  display:block;
+  text-align:left;
+  color:#237477;
+}
+.order-price{
+  display:block;
+  float:right;
+  margin-right: 10%;
+  color:#237477;
+}
+strong {
+  color:#237477;
 }
