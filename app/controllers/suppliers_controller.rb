@@ -8,7 +8,11 @@ class SuppliersController < ApplicationController
     redirect_to action: :location_search
      else
    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(address) LIKE ? OR LOWER(neighbourhood) LIKE ?", "%#{field}%", "%#{field}%", "%#{field}%")
+
+  @Allpicture = Picture.all
+
  end
+
   end
 
   def show

@@ -3,11 +3,12 @@ require 'uri'
 require 'cgi'
 
 class MqttJob < ApplicationJob
-  RUN_EVERY = 1.hour
   queue_as :urgent
 
   def perform(*_args)
-    # Create a hash with the connection parameters from the URL
+    # sets up the recurring job
+
+    # Create a hash with the connection parameters from the URL or collect to the local mqtt client server (on heroku)
     uri = URI.parse ENV['CLOUDMQTT_URL'] || 'mqtt://localhost:1883'
 
     conn_opts = {
@@ -19,12 +20,14 @@ class MqttJob < ApplicationJob
     puts conn_opts
 
     # Subscribe example
+    # Threads are the most awesome thing ever
     Thread.new do
       MQTT::Client.connect(conn_opts) do |c|
         # The block will be called when you messages arrive to the topic
         c.get('current_GPS') do |topic, message|
           puts "#{topic}: #{message}"
-          ActionCable.server.broadcast 'update_gps_channel', # code
+          # broadcasts the message upon receiving it via action cable
+          ActionCable.server.broadcast 'update_gps_channel',
                                        content: message,
                                        author: 'seth'
           # username: current_user
@@ -33,10 +36,17 @@ class MqttJob < ApplicationJob
     end
 
     # Publish example
-    MQTT::Client.connect(conn_opts) do |c|
-      # publish a message to the topic 'test'
-      c.publish('action', '1', retain = false)
+    # Threads are the most awesome thing ever
+    Thread.new do
+      MQTT::Client.connect(conn_opts) do |c|
+        # publish a message to the topic 'test'
+        loop do
+          # polling the device for GPS coordinates please
+          c.publish('action', '1', retain = false)
+          # set the time frequency here
+          sleep 7
+        end
+      end
     end
-    self.class.perform_later(wait: RUN_EVERY)
   end
 end

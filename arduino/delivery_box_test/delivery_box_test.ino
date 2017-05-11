@@ -53,14 +53,14 @@ const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
 
 /* WIFI SSID/PASS*/
-//const char* ssid = "GA@Spacemob";
-//const char* password = "yellowpencil";
+const char* ssid = "GA@Spacemob";
+const char* password = "yellowpencil";
 
 //const char* ssid = "chewchew";
 //const char* password = "chewkumwing";
 
-const char* ssid = "iPhone (5)";
-const char* password = "abrasion";
+//const char* ssid = "iPhone (5)";
+//const char* password = "abrasion";
 
 /*MQTT USER/PASS*/
 const char* mqtt_server = "m13.cloudmqtt.com";
@@ -228,7 +228,7 @@ if (millis() - start_dht < delayMS) {
   /* real-time logic goes here */
 //  if (event.relative_humidity > 65) {
   if (temp_reading > target_temp.toFloat() && target_temp != NULL) {
-
+    
       tone(buzzer, 1000);   // Turn the SOUND off
   }
   else noTone(buzzer);   // Turn the SOUND off
@@ -290,8 +290,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
     display.setCursor(0,0);
     display.print("saving temp..");
     display.println("as ");
-    target_temp = memory_dump.substring(2,length);
-    display.print(target_temp);
+    target_temp = memory_dump.substring(2,length);        
+    display.print(target_temp);    
     display.update();
 //    delay(500);
   }

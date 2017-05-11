@@ -1,12 +1,11 @@
 class InvoicesController < ApplicationController
   include SendEmail
+  # QUEUES the run_mqtt recurring active job only on the show function
   before_action :run_mqtt, only: [:show]
 
   def index
     @orders = []
-
     @invoice = Invoice.where(user_id: current_user.id, status: 'PAID')
-
     @invoice.each do |e|
       Orderitem.where(invoice_id: e.id).each do |order|
         @orders << order
@@ -17,27 +16,22 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
 
-
     puts 'LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts @orders = Orderitem.where(invoice_id: params[:id])
 
+    # required for views and javascript -- passing store addresses to be geocoded
     @start = @orders[0].supplier.address
     gon.start = @orders[0].supplier.address
 
+    # required for views and javascript -- passing delivery addresses to be geocoded
     @destination = @invoice.delivery_address.address
     gon.destination = @invoice.delivery_address.address
-    gon.lat = 1.3521
-    gon.lng = 103.8198
-
   end
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
 
-
-    if (!@delivery_address)
-      redirect_to orderitems_path
-    end
+    redirect_to orderitems_path unless @delivery_address
 
     redirect_to orderitems_path unless @delivery_address
 
@@ -68,9 +62,8 @@ class InvoicesController < ApplicationController
     @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
-
-    @new_invoice.delivery_address_id = @delivery_address[0].id
-    @new_invoice.status = "PAID"
+    @new_invoice.delivery_address_id = address_param['delivery_address_id']
+    @new_invoice.status = 'PAID'
 
     if @new_invoice.save
       puts @orders
@@ -83,7 +76,11 @@ class InvoicesController < ApplicationController
   end
   # to move this to relevant search bar view/controller
 
+  private
 
+  def address_param
+    params.require(:invoice).permit(:delivery_address_id)
+  end
   # private
   # def filter_params
   #   params.require(:delivery_address).permit(:flavor, :price, :name)

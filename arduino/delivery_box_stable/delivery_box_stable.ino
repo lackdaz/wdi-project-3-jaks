@@ -4,11 +4,11 @@ Adapted base GPS code from mkconer: https://github.com/mkconer/ESP8266_GPS
 
 Wifi, WebSockets brokered by CloudMQTT, adapted from my previous code: https://github.com/lackdaz/wdi-project-2/blob/master/thing.ino
 
-Author: Seth (lackdaz)
-Teammates:
-Kenneth
-Alvin
-Jerel
+Contributors:
+Seth (lackdaz)
+Kenneth (darkartistry)
+Alvin ()
+Jerel (jerel-lim)
  */
 
 #include <TinyGPS++.h>                                  // Tiny GPS Plus Library

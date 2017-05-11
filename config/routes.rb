@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'transactions/index'
+
     # devise_for :users,
     # controllers: {
     #   :sessions => 'users/sessions',
@@ -44,6 +46,7 @@ put '/delivery_address/update/:id' , to:'delivery_address#update_delivery_addres
 delete '/delivery_address/delete/:id' , to:'delivery_address#destroy_delivery_address', as:'delivery_address_delete'
 
 post '/image/new', to:'pictures#addimage',as:'add_image'
+put '/image/profilepic' ,to: 'pictures#profilepicture',as: 'profilepicture'
 
 
   get 'transactions/index'

@@ -1,31 +1,36 @@
-<h1>Search#index</h1>
 
-<form accept-charset="UTF-8" action="/suppliers" method="get">
+<section class="hero">
+  <div class="hero-body">
+
+<div class="wrap">
+  <h1 class="search-title">
+    Your ice cream cravings resolved right now.
+  </h1>
+  <h2 class="search-subtitle">
+    Ice cream delivery to
+  </h2>
+   <div class="search">
+     <form class = "search-form" accept-charset="UTF-8" action="/suppliers" method="get">
+     <input type="text" id="field" name = "field" class="searchTerm" placeholder="Search by name or neighborhood" >
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </form>
+   </div>
+
+
+
+
+
+
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div id="imaginary_container">
-                <div class="input-group stylish-input-group">
-                    <input type="text" id="field" name = "field" class="form-control"  placeholder="Search by name or neighborhood" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
-
-
 
 
 <div class="column"></div>
 
 <div id = 'searched' class="columns">
 
+</div>
 </div>
     <script>
       // Note: This example requires that you consent to location sharing when
@@ -51,7 +56,7 @@
 
                 var $target = $('#searched')
                   // creation of the div
-                  var $new_restaurant_link = $('<a href="/suppliers/"'+ supplier.id +' class="column is-half is multiline">')
+                  var $new_restaurant_link = $('<a href="/suppliers/'+ supplier.id +'" class="column is-centered is-one-third is-multiline">')
                   var $new_restaurant_div = $('<div id='+ supplier.id +'>')
                   var $new_restaurant_p = $('<p class="notification is-info">')
                   var $new_restaurant_p_code = $('<code class="html">'+  supplier.name +'</code>')
