@@ -3,8 +3,6 @@ require 'uri'
 require 'cgi'
 
 class MqttJob < ApplicationJob
-  # set how often you wish to run it here
-  RUN_EVERY = 5.seconds
   queue_as :urgent
 
   def perform(*_args)
@@ -22,13 +20,14 @@ class MqttJob < ApplicationJob
     puts conn_opts
 
     # Subscribe example
+    # Threads are the most awesome thing ever
     Thread.new do
       MQTT::Client.connect(conn_opts) do |c|
         # The block will be called when you messages arrive to the topic
         c.get('current_GPS') do |topic, message|
           puts "#{topic}: #{message}"
           # broadcasts the message upon receiving it via action cable
-          ActionCable.server.broadcast 'update_gps_channel', # code
+          ActionCable.server.broadcast 'update_gps_channel',
                                        content: message,
                                        author: 'seth'
           # username: current_user
@@ -37,11 +36,17 @@ class MqttJob < ApplicationJob
     end
 
     # Publish example
-    MQTT::Client.connect(conn_opts) do |c|
-      # publish a message to the topic 'action' -- polls the device via the MQTT server to request for GPS coordinates
-      c.publish('action', '1', retain = false)
+    # Threads are the most awesome thing ever
+    Thread.new do
+      MQTT::Client.connect(conn_opts) do |c|
+        # publish a message to the topic 'test'
+        loop do
+          # polling the device for GPS coordinates please
+          c.publish('action', '1', retain = false)
+          # set the time frequency here
+          sleep 2
+        end
+      end
     end
-    #  automagically enqueues the task again to run every x.time
-    self.class.perform_later(wait: RUN_EVERY)
   end
 end
