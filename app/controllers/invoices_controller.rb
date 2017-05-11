@@ -30,7 +30,7 @@ class InvoicesController < ApplicationController
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
-  
+
     redirect_to orderitems_path unless @delivery_address
 
     begin
