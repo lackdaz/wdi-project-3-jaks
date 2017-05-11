@@ -1,7 +1,9 @@
 class DeliveryAddressController < ApplicationController
   def create
 
+
   @delivery_address = DeliveryAddress.new(delivery_address_params)
+
   @delivery_address.user_id = current_user.id
   if @delivery_address.save
     redirect_to orderitems_path

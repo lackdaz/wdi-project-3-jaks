@@ -12,7 +12,6 @@
     </div>
 </section>
 
-
 <div class = "order-container">
 
   <div class="delivery-details-wrap">
@@ -51,6 +50,7 @@
     <%= current_user.email %>
       </p>
     </br>
+
     <%= render 'delivery_address/show_delivery_address' %>
 
     </div>
@@ -69,15 +69,15 @@
     </br>
     <% @orders.each do |order|   %>
 
-
       <strong><%= order.supplier.name %></strong> </br>
-
 
     <p class ="order-items"><%= order.flavour.name %>  <span class = "order-price">$<%= order.flavour.price %> </span></p>
     <% total += order.flavour.price  %>
     <p class ="order-items"><%= order.container.name %> <span class = "order-price"> $<%= order.container.price %></span><p>
     <% total += order.container.price  %>
+
     <%= link_to "Delete", orderitem_path(order.id), class: "button is-danger is-outlined" , method: :delete %>
+
     </br>
     <% end  %>
     <article>

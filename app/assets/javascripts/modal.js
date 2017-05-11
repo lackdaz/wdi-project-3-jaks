@@ -25,4 +25,5 @@ $(document).on('turbolinks:load', function () {
   $('#cancel').click(function () {
     $('.modal').toggleClass('is-active')
   })
+
 })
