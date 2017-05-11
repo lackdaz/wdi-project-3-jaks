@@ -27,7 +27,7 @@
   background-color: $navbarcolor;
   padding-bottom: 10px;
   margin:0px;
-      }
+}
 .nav-left h1 {
   color:white;
   font-size : 20px;
@@ -46,7 +46,7 @@
 
 .hero{
   background: url('/images/rootpageicecream3.jpg');
-  height: 35%;
+  height: 40%;
 }
 //GOOGLE MAPS
 #right-panel {
@@ -82,8 +82,12 @@
 
 //search bars
 .search {
-  width: 100%;
-  position: relative
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  position: relative;
+  top: 5%;
 }
 
 .searchTerm {
@@ -114,12 +118,28 @@
   cursor: pointer;
   font-size: 20px;
 }
+.search-title{
+  margin-top:1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  color:white;
+  font-size: 40px;
+}
+.search-subtitle{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+  color:white;
+  font-size: 20px;
+}
 
 .wrap{
-  width: 45%;
+  width: 40%;
+  height: 30%;
   position: absolute;
-  top: 32%;
+  top: 28%;
   left: 50%;
+  background-color: #d45c84;
   transform: translate(-50%, -50%);
 }
 /*Resize the wrap to see the search bar change!*/
