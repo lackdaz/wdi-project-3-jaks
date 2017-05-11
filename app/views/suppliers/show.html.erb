@@ -34,10 +34,10 @@
   <div class="columns is-multiline is-mobile is-centered">
 <%  @flavours.each do |flavour| %>
   <div id='flavour<%= flavour.id %>' class="column is-three-quarters">
-    <p class="notification is-info">
-      <code class="html"><%= flavour.name %></code>
-      <code class="html"><%= flavour.price %></code>
-      <code class="html"><%= flavour.image %></code>
+    <div class="notification is-info">
+      <image href="<%= flavour.image %>">
+      <h2 class="html"><%= flavour.name %></h2>
+      <h3 class="html"><%= flavour.price %></h3>
       <% if supplier_signed_in? && current_supplier.id == @supplier.id %>
       <span><%= link_to "Delete", "/flavours/#{flavour.id}", class: "navbar-link", method: :delete %></span>
       <% end  %>
@@ -48,7 +48,7 @@
 
       <% end %>
 
-    </p>
+    </div>
   </div>
 <% end %>
 </div>
@@ -68,7 +68,6 @@
       <%= f.hidden_field :supplier_id, value: @supplier.id %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.collection_radio_buttons(:container_id, @containers, :id , :name)  %>
-
       <button type="submit" id="formorder" class="button is-success">Orderitem</button>
     </section>
     <footer class="modal-card-foot">

@@ -24,19 +24,26 @@
 <div class="column"><%= @title%></div>
   <div class="columns is-multiline">
   <% @suppliers.each do |supplier|  %>
-<a href="/suppliers/<%= supplier.id %>" class="column is-centered is-one-third is-multiline">
-  <div id="<%= supplier.id %>">
-    <p class="notification is-info">
-      <code class="html"><%= supplier.name %></code>
+<a href="/suppliers/<%= supplier.id %>" class="column is-centered is-half is-multiline">
+  <div id="<%= supplier.id %>" >
+    <div class="notification is-info supplierclass">
+
       <% @Allpicture.each do |picture|  %>
       <% if supplier.id == picture.supplier_id  && picture.profilepic ==true%>
-      <%= cl_image_tag(picture.public_id, :width => 200, :height => 200) %>
+      <div class="cloudinary-image">
+      <%= cl_image_tag(picture.public_id, :width => 250, :height => 150) %>
+      </div>
       <%end %>
       <% end %>
-    </p>
+
+      <div class="notification is-info">
+        <h2><%= supplier.name %></h2>
+      </div>
+    </div>
+
+
   </div>
 </a>
 <% end  %>
-</div>
 </div>
 </div>

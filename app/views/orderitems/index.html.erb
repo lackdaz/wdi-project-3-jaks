@@ -65,7 +65,8 @@
     <div class = "order-details-icecream">
     <% total = 0 %>
     <%= form_for :invoice, url: invoices_path do |f| %>
-      <%= f.collection_radio_buttons :delivery_address_id, current_user.delivery_addresses.all, :id, :address %>
+    <%= f.collection_radio_buttons :delivery_address_id, current_user.delivery_addresses.all, :id, :address %>
+    </br>
     <% @orders.each do |order|   %>
 
 
