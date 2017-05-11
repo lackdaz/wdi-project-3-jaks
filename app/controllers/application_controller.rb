@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :run_mqtt
   # before_action :geocode
-  #
   # include Geokit::Geocoders
 
   private
@@ -12,8 +11,8 @@ class ApplicationController < ActionController::Base
     # if MqttJob
     puts 'GPS starts from HERE HERE HERE!!!!!!!!!!!!!!!!!'
     puts cookies[:_aj].inspect
-    MqttJob.set(wait: 2.seconds).perform_later
-    # MqttJob.set(wait: 2.seconds).perform_later if cookies[:_aj].nil?
+    # MqttJob.set(wait: 2.seconds).perform_later
+    MqttJob.set(wait: 2.seconds).perform_later if cookies[:_aj].nil?
     cookies[:_aj] = {
       value: true,
       expires: 10.seconds.from_now

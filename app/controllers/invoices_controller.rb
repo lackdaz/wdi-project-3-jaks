@@ -1,12 +1,11 @@
 class InvoicesController < ApplicationController
   include SendEmail
+  # QUEUES the run_mqtt recurring active job only on the show function
   before_action :run_mqtt, only: [:show]
 
   def index
     @orders = []
-
     @invoice = Invoice.where(user_id: current_user.id, status: 'PAID')
-
     @invoice.each do |e|
       Orderitem.where(invoice_id: e.id).each do |order|
         @orders << order
@@ -19,13 +18,13 @@ class InvoicesController < ApplicationController
     puts 'LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts @orders = Orderitem.where(invoice_id: params[:id])
 
+    # required for views and javascript -- passing store addresses to be geocoded
     @start = @orders[0].supplier.address
     gon.start = @orders[0].supplier.address
 
+    # required for views and javascript -- passing delivery addresses to be geocoded
     @destination = @invoice.delivery_address.address
     gon.destination = @invoice.delivery_address.address
-    gon.lat = 1.3521
-    gon.lng = 103.8198
   end
 
   def create
@@ -61,7 +60,7 @@ class InvoicesController < ApplicationController
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
     @new_invoice.delivery_address_id = @delivery_address
-    @new_invoice.status = "PAID"
+    @new_invoice.status = 'PAID'
     if @new_invoice.save
       puts @orders
       @orders.each do |order|
@@ -71,8 +70,6 @@ class InvoicesController < ApplicationController
       redirect_to invoices_path
     end
   end
-  # to move this to relevant search bar view/controller
-
   # private
   # def filter_params
   #   params.require(:delivery_address).permit(:flavor, :price, :name)
