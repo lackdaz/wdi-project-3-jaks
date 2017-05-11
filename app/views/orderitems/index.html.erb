@@ -51,8 +51,15 @@
     <%= current_user.email %>
       </p>
     </br>
-    <%= render 'delivery_address/show_delivery_address' %>
+    <strong>Existing address</strong>
 
+    <% if user_signed_in? && current_user.delivery_addresses %>
+
+    <p class ="order-items"><%= current_user.delivery_addresses[-1].address %>
+    </p>
+        <%= link_to 'Delete', delivery_address_delete_path(current_user.delivery_addresses[-1].address), method: :delete, data: { confirm: 'Are you sure?' } ,class: "button is-danger" %>
+
+    <% end %>
     </div>
   </div>
 
