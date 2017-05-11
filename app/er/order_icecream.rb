@@ -1,2 +1,0 @@
-class OrderitemIcecream < ApplicationRecord
-end

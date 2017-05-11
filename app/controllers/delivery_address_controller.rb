@@ -1,9 +1,10 @@
 class DeliveryAddressController < ApplicationController
   def create
+    puts "****************************************"
+    puts params.inspect
   @delivery_address =DeliveryAddress.new(delivery_address_params)
   @delivery_address.user_id = current_user.id
   if @delivery_address.save
-    redirect_to root_path
   else
     render "users/registrations/show"
   end

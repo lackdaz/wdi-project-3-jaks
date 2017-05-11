@@ -23,7 +23,6 @@ gem 'pry'
 gem 'bulma-rails'
 gem 'font-awesome-sass'
 
-gem 'redis'
 gem 'faker'
 gem 'devise'
 gem 'stripe'

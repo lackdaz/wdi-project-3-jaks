@@ -1,6 +1,7 @@
 class SuppliersController < ApplicationController
 
   def index
+
     field = params[:field]? params[:field].downcase : ''
     @title = field.titleize
    if field.to_s == 'current location'
@@ -26,13 +27,10 @@ class SuppliersController < ApplicationController
     gon.user = user_signed_in?
   end
 
-  def search
-    field = params[:field]? params[:field].downcase : ''
-    @suppliers = Supplier.where("LOWER(name) LIKE ? OR LOWER(location) = ?", "%#{field}%", "%#{field}%")
-  end
-
   def location_search
       gon.suppliers = Supplier.all
   end
+
+
 
 end

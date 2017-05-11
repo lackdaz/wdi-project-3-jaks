@@ -13,6 +13,7 @@
     </br>
     <% end  %>
 
+
     <article>
         <% if flash[:error].present? %>
           <div id="error_explanation">
@@ -34,4 +35,14 @@
     data-locale="auto"
     data-currency="SGD"></script>
 
+<% end %>
+<%= form_for :delivery_address, url:delivery_address_create_path, remote: true  do |f| %>
+<div class="container">
+  <div class="notification">
+<%= f.text_field :address, placeholder: 'Delivery Address ', class: 'input' %>
+<p class="control">
+<%= f.submit 'Add Address', class: 'button is-primary' %>
+</p>
+  </div>
+</div>
 <% end %>
