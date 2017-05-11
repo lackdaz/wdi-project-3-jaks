@@ -44,7 +44,7 @@ class MqttJob < ApplicationJob
           # polling the device for GPS coordinates please
           c.publish('action', '1', retain = false)
           # set the time frequency here
-          sleep 2
+          sleep 7
         end
       end
     end

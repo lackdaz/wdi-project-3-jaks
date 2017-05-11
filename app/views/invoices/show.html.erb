@@ -19,18 +19,11 @@
     function initMap() {
         var bounds = new google.maps.LatLngBounds;
         window.markersArray = [];
-
-        // Where the tracker is
-        // var start = {
-        //     lat: gon.lat,
-        //     lng: gon.lng
-        // };
+        // where the restaurant is
         var start = gon.start
 
         // Where the shop destination is
         var destinationA = gon.destination;
-        var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
-        var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
         window.mappymap = new google.maps.Map(document.getElementById('map'), {
             center: {
                 lat: 1.3521,
@@ -57,14 +50,12 @@
                 var destinationList = response.destinationAddresses;
                 var outputDiv = document.getElementById('output');
                 outputDiv.innerHTML = '';
-                // deleteMarkers(markersArray); var gps = {lat: gon.lat,lng: gon.long} var marker1 = new google.maps.Marker({   map: map,   position: gps,   icon: destinationIcon }) markersArray.push(marker1); var newLatLng = new google.maps.LatLng({     lat:
-                // start.lat,     lng: start.lng   }) marker1.setPosition(newLatLng);
+
                 var showGeocodedAddressOnMap = function (asDestination) {
-                    // var icon = asDestination ? destinationIcon : originIcon;
                     return function (results, statcus) {
                         if (status === 'OK') {
-                            map.fitBounds(bounds.extend(results[0].geometry.location));
-                            directionsDisplay.setMap(map)
+                            mappymap.fitBounds(bounds.extend(results[0].geometry.location));
+                            directionsDisplay.setMap(mappymap)
                             directionsService.route({
                                 origin: start,
                                 destination: destinationA,
@@ -96,12 +87,6 @@
                 }
             }
         });
-    }
-    function deleteMarkers(markersArray) {
-        for (var i = 0; i < markersArray.length; i++) {
-            markersArray[i].setMap(null);
-        }
-        markersArray = [];
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>

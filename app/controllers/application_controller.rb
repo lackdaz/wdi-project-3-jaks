@@ -8,16 +8,17 @@ class ApplicationController < ActionController::Base
   private
 
   def run_mqtt
-    # if MqttJob
+    # to look for the mqtt line inside the terminal (really hard)
     puts 'GPS starts from HERE HERE HERE!!!!!!!!!!!!!!!!!'
     puts cookies[:_aj].inspect
     MqttJob.set(wait: 2.seconds).perform_later
+
+    # This code ensures that no two instances of the code is running at the same time
     # MqttJob.set(wait: 2.seconds).perform_later if cookies[:_aj].nil?
     cookies[:_aj] = {
       value: true,
-      expires: 10.seconds.from_now
+      expires: 30.minutes.from_now
     }
-    # puts cookies[:_aj].inspect
   end
 
   # def geocode
