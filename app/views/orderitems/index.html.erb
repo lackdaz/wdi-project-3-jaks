@@ -21,7 +21,6 @@
   </div>
   <div class = "order-details-store">
     <h1 class="order-details-title">
-      <%= @orders[-1].supplier.name %>
     </h1>
   </div>
 
@@ -31,7 +30,8 @@
     <%= f.collection_radio_buttons :delivery_address_id, current_user.delivery_addresses.all, :id, :address %>
 
     <% @orders.each do |order|   %>
-    <%= order.flavour.name %> : $<%= order.flavour.price %>
+    <%= order.supplier.name %>
+    <%= order.flavour.name %> : $<%= order.flavour.prgit puice %>
     <% total += order.flavour.price  %>
     <%= order.container.name %> : $<%= order.container.price %>
     <% total += order.container.price  %>
