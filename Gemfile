@@ -38,6 +38,8 @@ gem 'mqtt'
 # ENV helper
 gem 'foreman'
 
+gem 'resque'
+
 # gon
 gem 'gon'
 
