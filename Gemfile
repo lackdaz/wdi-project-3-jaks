@@ -40,6 +40,9 @@ gem 'foreman'
 
 gem 'resque'
 
+# For JSON parsing
+gem 'httparty'
+
 # gon
 gem 'gon'
 
