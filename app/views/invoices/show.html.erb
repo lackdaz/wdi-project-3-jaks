@@ -1,20 +1,43 @@
-
-<h1 class="order-title">Invoices#show</h1>
-<p>Find me in app/views/transactions/index.html.erb</p>
-<div id="right-panel">
-    <div id="inputs">
-        <h1 class="order-details-wrap" id="heading">
-          Coming from = <%= @start %>
-          Delivering to = <%= @destination %>
+<section class="hero">
+  <div class="hero-body">
+      <div class="order-wrap">
+        <h1 class="order-title">
+          Your Tracking Details
         </h1>
+        <h2 class="order-subtitle">
+          Watch Your Ice Cream Melt
+        </h2>
+      </div>
     </div>
-    <div>
-        <strong>Results</strong>
+</section>
+
+<div class = "columns map-container">
+  <div class="column is-two-thirds tracking-details-wrap">
+    <div class = "order-details-header">
+      <h1 class="left-delivery-details-title">
+        Location
+      </h1>
     </div>
-    <div id="output">
+    <div id="map">
     </div>
-</div>
-<div id="map">
+  </div>
+
+  <div class="column order-details-wrap">
+    <div class = "order-details-header">
+      <h1 class="left-delivery-details-title">
+        Delivery Details
+      </h1>
+
+      <div class = "right-delivery-details-icecream">
+        <strong>Coming From</strong>
+        <p class="delivery-items"><%= @start %></p>
+        <strong>Delivering To</strong>
+        <p class="delivery-items"><%= @destination %></p>
+      </div>
+        <div id="output" class="delivery-items">
+      </div>
+    </div>
+  </div>
 </div>
 
 <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb2ofRZ6CYSwvlrBc0do9tCkR9U89VxCM&libraries=geometry&callback=initMap"></script>
@@ -104,10 +127,13 @@
                         geocoder.geocode({
                             'address': destinationList[j]
                         }, showGeocodedAddressOnMap(false));
-                        outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] + ': ' + results[j].distance.text + ' in ' + results[j].duration.text + '<br>';
+                        outputDiv.innerHTML += 'Your ice cream is '+ results[j].distance.text + ' away and arriving in ' + results[j].duration.text
                     }
                 }
             }
         });
     }
 </script>
+
+<!--
+originList[i] + destinationList[j] + ': ' + results[j].distance.text + ' in ' + results[j].duration.text + '<br>'; -->
