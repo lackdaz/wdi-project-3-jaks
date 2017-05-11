@@ -3,6 +3,7 @@ require 'uri'
 require 'cgi'
 
 class MqttJob < ApplicationJob
+  RUN_EVERY = 1.hour
   queue_as :urgent
 
   def perform(*_args)
@@ -34,10 +35,8 @@ class MqttJob < ApplicationJob
     # Publish example
     MQTT::Client.connect(conn_opts) do |c|
       # publish a message to the topic 'test'
-      loop do
-        c.publish('action', '1', retain = false)
-        sleep 10
-      end
+      c.publish('action', '1', retain = false)
     end
+    self.class.perform_later(wait: RUN_EVERY)
   end
 end
