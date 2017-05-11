@@ -13,7 +13,7 @@ App.update_gps = App.cable.subscriptions.create('UpdateGpsChannel', {
 
     // this gateway blocks any GPS data that is unknown
     if (parseFloat(data.content.split(',').shift()) === 0) {
-      $heading.text("Skipped")
+      $heading.text('Skipped')
       return
     }
 
@@ -40,74 +40,65 @@ App.update_gps = App.cable.subscriptions.create('UpdateGpsChannel', {
     // pushes the GPS marker into an array -- in case we have more than one marker
     markersArray.push(newGpsMarker)
 
-    calculateNewDist(gps,window.gpsDestination)
+    calculateNewDist(gps, window.gpsDestination)
 
-    function calculateNewDist(gps_A,gps_B){
-      var geocoder = new google.maps.Geocoder;
-      var service = new google.maps.DistanceMatrixService;
+    function calculateNewDist (gps_A, gps_B) {
+      var geocoder = new google.maps.Geocoder()
+      var service = new google.maps.DistanceMatrixService()
       service.getDistanceMatrix({
-          origins: [gps_A],
-          destinations: [gps_B],
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false
+        origins: [gps_A],
+        destinations: [gps_B],
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false
       }, function (response, status) {
-          if (status !== 'OK') {
-              alert('Error was: ' + status);
-          } else {
-              var directionsDisplay = new google.maps.DirectionsRenderer;
-              var directionsService = new google.maps.DirectionsService()
-              var originList = response.originAddresses;
-              var destinationList = response.destinationAddresses;
+        if (status !== 'OK') {
+          alert('Error was: ' + status)
+        } else {
+          var directionsDisplay = new google.maps.DirectionsRenderer()
+          var directionsService = new google.maps.DirectionsService()
+          var originList = response.originAddresses
+          var destinationList = response.destinationAddresses
 
-              var showGeocodedAddressOnMap = function (asDestination) {
-                  return function (results, status) {
-                      if (status === 'OK') {
-                          window.mappymap.fitBounds(bounds.extend(results[0].geometry.location));
-                          directionsDisplay.setMap(window.mappymap)
-                          directionsService.route({
-                              origin: gps_A,
-                              destination: gps_B,
-                              travelMode: 'DRIVING'
-                          }, function (result, status) {
-                              if (status == 'OK') {
-                                  directionsDisplay.setDirections(result);
-                                  console.log('direction service')
-                              } else {
+          var showGeocodedAddressOnMap = function (asDestination) {
+            return function (results, status) {
+              if (status === 'OK') {
+                window.mappymap.fitBounds(bounds.extend(results[0].geometry.location))
+                directionsDisplay.setMap(window.mappymap)
+                directionsService.route({
+                  origin: gps_A,
+                  destination: gps_B,
+                  travelMode: 'DRIVING'
+                }, function (result, status) {
+                  if (status == 'OK') {
+                    directionsDisplay.setDirections(result)
+                    console.log('direction service')
+                  } else {
                                   // alert('Geocode was not successful due to: ' + status);
-                              }
-                          });
-                      } else {
-                          // alert('Geocode was not successful due to: ' + status);
-                      }
-                  };
-              };
-              for (var i = 0; i < originList.length; i++) {
-                  var results = response.rows[i].elements;
-                  // geocoder.geocode({
-                  //     'address': originList[i]
-                  // }, showGeocodedAddressOnMap(false));
-                  for (var j = 0; j < results.length; j++) {
-                      geocoder.geocode({
-                          'address': destinationList[j]
-                      }, showGeocodedAddressOnMap(false));
-                      if (results[j].distance.value < 10) {
-                        $output.text('Your ice cream has arrived');
-                        // $output.css({"font-color": "yellow","font-size": "150%"});
-                        $output.css({"background-color": "#82B588","font-size": "36px"});
-
-
-                      }
-                      else {
-                        // $output.text(results[j].distance.value)
-                        // $output.text(results[j].distance.text)
-                        $output.text('Your ice cream is '+ results[j].distance.text + ' away and arriving in ' + results[j].duration.text)
-                      }
                   }
+                })
+              } else {
+                          // alert('Geocode was not successful due to: ' + status);
               }
+            }
           }
-      });
+          for (var i = 0; i < originList.length; i++) {
+            var results = response.rows[i].elements
+            for (var j = 0; j < results.length; j++) {
+              geocoder.geocode({
+                'address': destinationList[j]
+              }, showGeocodedAddressOnMap(false))
+              if (results[j].distance.value < 10) {
+                $output.text('Your ice cream has arrived')
+                $output.css({'background-color': '#82B588', 'font-size': '36px'})
+              } else {
+                $output.text('Your ice cream is ' + results[j].distance.text + ' away and arriving in ' + results[j].duration.text)
+              }
+            }
+          }
+        }
+      })
     }
     // Function to delete all markers
     function deleteMarkers (markersArray) {
