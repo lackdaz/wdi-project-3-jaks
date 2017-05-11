@@ -8,6 +8,13 @@ App.update_gps = App.cable.subscriptions.create('UpdateGpsChannel', {
     // return alert('disconnected')
   },
   received: function (data) {
+    var $heading = $('#heading') // for troubleshooting because console.log doesnt work
+
+    // this gateway blocks any GPS data that is unknown
+    if (parseFloat(data.content.split(',').shift()) === 0) {
+      $heading.text("Skipped")
+      return
+    }
 
     // splits concatenated gps data into .lat lng)
     var gps = {
