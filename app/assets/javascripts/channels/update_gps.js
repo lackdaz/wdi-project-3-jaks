@@ -20,7 +20,7 @@ App.update_gps = App.cable.subscriptions.create('UpdateGpsChannel', {
 
     // creates a new GPS marker
     var newGpsMarker = new google.maps.Marker({
-      map: window.map, // teehee
+      map: window.mappymap, // teehee
       draggable: true,
       icon: '/images/icecream1.png', // customize your markers here!
       position: {
