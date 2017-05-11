@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def run_mqtt
     # if MqttJob
-    puts 'Data starts from HERE HERE HERE!!!!!!!!!!!!!!!!!'
+    puts 'GPS starts from HERE HERE HERE!!!!!!!!!!!!!!!!!'
     puts cookies[:_aj].inspect
     MqttJob.set(wait: 2.seconds).perform_later
     # MqttJob.set(wait: 2.seconds).perform_later if cookies[:_aj].nil?
@@ -33,6 +33,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
+
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name firstname lastname contact address website])
+
   end
 end

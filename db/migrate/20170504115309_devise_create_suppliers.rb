@@ -14,6 +14,7 @@ class DeviseCreateSuppliers < ActiveRecord::Migration[5.0]
       t.float :lng
       t.string :neighbourhood
 
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
