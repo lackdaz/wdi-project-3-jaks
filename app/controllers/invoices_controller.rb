@@ -16,7 +16,6 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
 
-    puts 'LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts @orders = Orderitem.where(invoice_id: params[:id])
 
     # required for views and javascript -- passing store addresses to be geocoded
@@ -29,6 +28,8 @@ class InvoicesController < ApplicationController
   end
 
   def create
+
+    puts "INVOICEEEEERRRRRR"
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
 
     redirect_to orderitems_path unless @delivery_address

@@ -1,9 +1,10 @@
 class DeliveryAddressController < ApplicationController
   def create
+
   @delivery_address =DeliveryAddress.new(delivery_address_params)
   @delivery_address.user_id = current_user.id
   if @delivery_address.save
-    @invoice.user_id= current_user.id
+    
   else
     render "users/registrations/show"
   end
