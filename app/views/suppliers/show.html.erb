@@ -35,7 +35,7 @@
 <%  @flavours.each do |flavour| %>
   <div id='flavour<%= flavour.id %>' class="column is-three-quarters">
     <div class="notification is-info">
-      <image href="<%= flavour.image %>">
+      <image src="<%= flavour.image %>">
       <h2 class="html"><%= flavour.name %></h2>
       <h3 class="html"><%= flavour.price %></h3>
       <% if supplier_signed_in? && current_supplier.id == @supplier.id %>
