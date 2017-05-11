@@ -1,59 +1,42 @@
-<h1>Current Orders</h1>
+<section class="section">
+  <p class="title is-2 is-spaced">Welcome <%= current_user.firstname%></p>
+  <p class="subtitle is-4">Current Orders</p>
 
-<section id='all-invoice' class='section'>
-  <div class='container'>
+  <table class="table is-striped ">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>Team</th>
+        <th>Store Name</th>
+        <th>Ice Cream Details</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Delivery Address</th>
+        <th></th>
+      </tr>
+    </thead>
 
-
-    <h2>Welcome <%= current_user.firstname%></h2>
-
-
-
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">Current Orders</div>
-        <table class="table">
-          <tr>
-            <th>Transaction ID</th>
-            <th>Store Name</th>
-            <th>Ice Cream Details</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th>Delivery Address</th>
-            <th>
-            </th>
-
-          </tr>x
-
-
-
-          <% @orders.each do |order| %>
-            <tr>
-            <td><%= order.invoice.id %></td>
-            <td><%= order.supplier.name %></td>
-            <td><%= order.flavour.name %> <%= order.container.name %></td>
-            <td><%= order.flavour.price + order.container.price %></td>
-            <td><%= order.invoice.status %></td>
-            <td><%= order.invoice.delivery_address.address %></td>
-            <td>
-              <form accept-charset="UTF-8" action="/invoices/<%= order.invoice.id %>" method="get">
-                <button type="submit" class="btn btn-primary">Delivery Status</button>
-              </form>
-            </td>
-            <% end %>
-        </table>
-      </div>
-
-
-    </div>
-
-      <!-- Append new invoice here -->
-
-      <form accept-charset="UTF-8" action="/suppliers" method="get">
-          <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus"></span> Make new order</button>
-      </form>
-
-
-
-    </div>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.invoice.id %></td>
+          <td><%= order.supplier.name %></td>
+          <td><%= order.flavour.name %> <%= order.container.name %></td>
+          <td><%= order.flavour.price + order.container.price %></td>
+          <td><%= order.invoice.status %></td>
+          <td><%= order.invoice.delivery_address.address %></td>
+          <td>
+            <form accept-charset="UTF-8" action="/invoices/<%= order.invoice.id %>" method="get">
+            <button type="submit" class="btn btn-primary">Delivery Status</button>
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <form accept-charset="UTF-8" action="/suppliers" method="get">
+    <button type="submit" class="button is-info is-outlined">
+      <i class="fa fa-plus" aria-hidden="true"> Make New Order</i>
+    </button>
+  </form>
 </section>

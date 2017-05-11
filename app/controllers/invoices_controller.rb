@@ -3,6 +3,7 @@ class InvoicesController < ApplicationController
   before_action :run_mqtt, only: [:show]
 
   def index
+
     @orders = []
 
     @invoice = Invoice.where(user_id: current_user.id, status: 'PAID')
@@ -12,6 +13,7 @@ class InvoicesController < ApplicationController
         @orders << order
       end
     end
+
   end
 
   def show
@@ -33,6 +35,7 @@ class InvoicesController < ApplicationController
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
+
 
     if (!@delivery_address)
       redirect_to orderitems_path

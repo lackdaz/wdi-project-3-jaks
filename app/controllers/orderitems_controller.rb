@@ -1,6 +1,7 @@
 class OrderitemsController < ApplicationController
 
   def index
+
       @delivery = DeliveryAddress.new
       @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     end
