@@ -21,16 +21,18 @@ class PicturesController < ApplicationController
     end
     end
 
+    def profilepicture
+
+    redirect_to root_path
+    end
+
   private
   def picture_params
   params.require(:picture).permit(:public_id)
 end
 
-def show
-  p 'finding supplier_id'
-  @supplier_picture = Picture.Post.find_by supplier_id: current_supplier.id
-  render "picture/show_image"
 
-end
+
+
 
 end
