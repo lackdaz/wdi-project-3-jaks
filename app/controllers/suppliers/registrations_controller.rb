@@ -1,4 +1,5 @@
 class Suppliers::RegistrationsController < Devise::RegistrationsController
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -61,6 +62,7 @@ class Suppliers::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
 
 def after_sign_up_path_for(resource)
   # @updated_supplier = Supplier.find(params[:id])
