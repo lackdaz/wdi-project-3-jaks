@@ -31,7 +31,7 @@
 
     <% @orders.each do |order|   %>
     <%= order.supplier.name %>
-    <%= order.flavour.name %> : $<%= order.flavour.prgit puice %>
+    <%= order.flavour.name %> : $<%= order.flavour.price %>
     <% total += order.flavour.price  %>
     <%= order.container.name %> : $<%= order.container.price %>
     <% total += order.container.price  %>
