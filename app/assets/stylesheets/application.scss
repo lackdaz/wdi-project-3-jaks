@@ -16,106 +16,71 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+ html, body {
+   height: 100%;
+   margin: 0;
+   padding: 0;
+ }
            //Nav Bar
 
-      .nav {
-        background-color: $navbarcolor;
+.nav {
+  background-color: $navbarcolor;
+  padding-bottom: 10px;
+  margin:0px;
       }
+.nav-left h1 {
+  color:white;
+  font-size : 20px;
+}
 
-      .nav{
-        padding-bottom: 10px;
-        margin:0px;
-      }
-      .nav-left h1 {
-        color:white;
-        font-size : 20px;
-      }
+.nav-right , nav-menu {
+  font-size: 120%;
+  float :right;
+  margin: 0 auto;
+}
 
-      .nav-right , nav-menu {
-        font-size: 120%;
-        float :right;
-        margin: 0 auto;
+.navbar-link {
+  color:white;
+  padding: 20px 20px 0px 20px;
+}
+
+.hero{
+  background: url('/images/rootpageicecream3.jpg');
+  height: 35%;
+}
+//GOOGLE MAPS
+#right-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+#map {
+  height: 100%;
+  width: 50%;
+}
+#right-panel {
+  float: right;
+  width: 48%;
+  padding-left: 2%;
+}
+#output {
+  font-size: 11px;
+}
 
 
-
-      }
-
-      .navbar-link {
-        color:white;
-        padding: 20px 20px 0px 20px;
-
-      }
-
-      .hero{
-        background: url('/images/rootpageicecream3.jpg');
-        height: 35%;
-
-
-
-      }
-
-
-
-
-
-
-
-            #right-panel {
-                   font-family: 'Roboto','sans-serif';
-                   line-height: 30px;
-                   padding-left: 10px;
-                 }
-
-                 #right-panel select, #right-panel input {
-                   font-size: 15px;
-                 }
-
-                 #right-panel select {
-                   width: 100%;
-                 }
-
-                 #right-panel i {
-                   font-size: 12px;
-                 }
-                 html, body {
-                   height: 100%;
-                   margin: 0;
-                   padding: 0;
-                 }
-                 #map {
-                   height: 100%;
-                   width: 50%;
-                 }
-                 #right-panel {
-                   float: right;
-                   width: 48%;
-                   padding-left: 2%;
-                 }
-                 #output {
-                   font-size: 11px;
-                 }
-
-      .column.is-half {
-        width:20%;
-      }
-
-//       #imaginary_container{
-//     margin-top:20%; /* Don't copy this */
-// // }
-// .stylish-input-group .input-group-addon{
-//     background: white !important;
-// }
-// .stylish-input-group .form-control{
-//
-//     border-right:0;
-//     box-shadow:0 0 0;
-//     border-color:#ccc;
-// }
-// .stylish-input-group button{
-//     border:0;
-//     background:transparent;
-// }
-
+//search bars
 .search {
   width: 100%;
   position: relative
@@ -150,7 +115,6 @@
   font-size: 20px;
 }
 
-/*Resize the wrap to see the search bar change!*/
 .wrap{
   width: 45%;
   position: absolute;
@@ -158,3 +122,4 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/*Resize the wrap to see the search bar change!*/
