@@ -1,0 +1,3 @@
+<% current_supplier.pictures.each do |picture| %>
+<%= cl_image_tag(picture.public_id, :width => 200, :height => 200) %>
+<% end %>

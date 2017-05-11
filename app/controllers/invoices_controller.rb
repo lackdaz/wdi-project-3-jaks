@@ -16,6 +16,8 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
+
+
     puts 'LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts @orders = Orderitem.where(invoice_id: params[:id])
 
@@ -26,10 +28,16 @@ class InvoicesController < ApplicationController
     gon.destination = @invoice.delivery_address.address
     gon.lat = 1.3521
     gon.lng = 103.8198
+
   end
 
   def create
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
+
+
+    if (!@delivery_address)
+      redirect_to orderitems_path
+    end
 
     redirect_to orderitems_path unless @delivery_address
 
@@ -74,6 +82,7 @@ class InvoicesController < ApplicationController
     end
   end
   # to move this to relevant search bar view/controller
+
 
   # private
   # def filter_params

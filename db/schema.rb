@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509064314) do
+ActiveRecord::Schema.define(version: 20170510065516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,14 @@ ActiveRecord::Schema.define(version: 20170509064314) do
     t.index ["user_id"], name: "index_orderitems_on_user_id", using: :btree
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.string   "public_id"
+    t.integer  "supplier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["supplier_id"], name: "index_pictures_on_supplier_id", using: :btree
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string   "name"
     t.string   "email",                  default: "", null: false
@@ -177,4 +185,5 @@ ActiveRecord::Schema.define(version: 20170509064314) do
   add_foreign_key "orderitems", "invoices"
   add_foreign_key "orderitems", "suppliers"
   add_foreign_key "orderitems", "users"
+  add_foreign_key "pictures", "suppliers"
 end
