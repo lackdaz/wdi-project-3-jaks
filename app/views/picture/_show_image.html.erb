@@ -1,3 +1,8 @@
+
+
 <% current_supplier.pictures.each do |picture| %>
 <%= cl_image_tag(picture.public_id, :width => 200, :height => 200) %>
+<%form_for :picture url: do |f| %>
+  <%= f.collection_radio_buttons :picture_id , current_supplier.picture.all ,:id, :public_id
+
 <% end %>

@@ -1,14 +1,15 @@
 <h1>Your Order</h1>
-<h2>Add address for delivery</h2>
-<%= render 'delivery_address/add_delivery_address' %>
 
-<%= render 'delivery_address/show_delivery_address' %>
+
+
 <br>
 
 <% total = 0 %>
 
 
 <%= form_for :invoice, url: invoices_path do |f| %>
+
+    <%= f.collection_radio_buttons :delivery_address_id, current_user.delivery_addresses.all, :id, :address %>
 
     <% @orders.each do |order|   %>
     <%= order.flavour.name %> : $<%= order.flavour.price %>

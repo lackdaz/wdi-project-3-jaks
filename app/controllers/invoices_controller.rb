@@ -67,8 +67,7 @@ class InvoicesController < ApplicationController
     @orders = Orderitem.where(user_id: current_user.id, invoice_id: nil)
     @new_invoice = Invoice.new
     @new_invoice.user_id = current_user.id
-
-    @new_invoice.delivery_address_id = @delivery_address[0].id
+    @new_invoice.delivery_address_id = address_param['delivery_address_id']
     @new_invoice.status = "PAID"
 
     if @new_invoice.save
@@ -82,6 +81,11 @@ class InvoicesController < ApplicationController
   end
   # to move this to relevant search bar view/controller
 
+private
+
+def address_param
+  params.require(:invoice).permit(:delivery_address_id)
+end
 
   # private
   # def filter_params
