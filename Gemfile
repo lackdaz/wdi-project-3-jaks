@@ -23,7 +23,6 @@ gem 'pry'
 gem 'bulma-rails'
 gem 'font-awesome-sass'
 
-gem 'redis'
 gem 'faker'
 gem 'devise'
 gem 'stripe'
@@ -55,6 +54,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '3.1.11', :require => 'bcrypt'
+
+gem 'font-awesome-sass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

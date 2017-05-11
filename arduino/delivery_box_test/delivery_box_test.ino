@@ -53,14 +53,14 @@ const double Home_LAT = 1.306101;                      // Your Home Latitude
 const double Home_LNG = 103.90341;                     // Your Home Longitude
 
 /* WIFI SSID/PASS*/
-const char* ssid = "GA@Spacemob";
-const char* password = "yellowpencil";
+//const char* ssid = "GA@Spacemob";
+//const char* password = "yellowpencil";
 
 //const char* ssid = "chewchew";
 //const char* password = "chewkumwing";
 
-//const char* ssid = "iPhone (5)";
-//const char* password = "abrasion";
+const char* ssid = "iPhone (5)";
+const char* password = "abrasion";
 
 /*MQTT USER/PASS*/
 const char* mqtt_server = "m13.cloudmqtt.com";
@@ -77,6 +77,7 @@ SoftwareSerial ss(RXPin, TXPin);                        // The serial connection
 DHT_Unified dht(DHTPIN, DHTTYPE);
 uint32_t delayMS;
 sensor_t sensor;
+String target_temp;
 float temp_reading;
 float hum_reading;
 unsigned long start_dht = millis();
@@ -158,7 +159,7 @@ void loop() {
 //  display.print("Speed     : ");
 //  display.println(gps.speed.mph());
   display.print("Target Temp : ");
-  display.print();
+  display.print(target_temp);
   display.println("*C");
 
   unsigned long Distance_To_Home = (unsigned long)TinyGPSPlus::distanceBetween(gps.location.lat(),gps.location.lng(),Home_LAT, Home_LNG);
@@ -225,7 +226,9 @@ if (millis() - start_dht < delayMS) {
   }
 
   /* real-time logic goes here */
-  if (event.relative_humidity > 65) {
+//  if (event.relative_humidity > 65) {
+  if (temp_reading > target_temp.toFloat() && target_temp != NULL) {
+
       tone(buzzer, 1000);   // Turn the SOUND off
   }
   else noTone(buzzer);   // Turn the SOUND off
@@ -249,26 +252,51 @@ if (millis() - start_dht < delayMS) {
 
 // Called when message is received
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
+//  display.clear();
+//  display.setCursor(0,0);
+//  display.print("Message arrived from [");
+//  display.print(topic);
+//  display.println("] ");
+//  display.print("Length: ");
+//  display.println(length);
+//  display.println("Message: ");
+//  for (int i = 0; i < length; i++) {
+//    display.print((char)payload[i]);
+//  }
+//  display.update();
+//  delay(5000);
+
+  display.clear();
+  display.setCursor(0,0);
+  // In order to republish this payload, a copy must be made
+  // as the orignal payload buffer will be overwritten whilst
+  // constructing the PUBLISH packet.
+  // Allocate the correct amount of memory for the payload copy
+  byte* p = (byte*)malloc(length);
+  // Copy the payload to the new buffer
+  memcpy(p,payload,length);
+  // converting the array to a string
+  String memory_dump((char*)p);
+  memory_dump = memory_dump.substring(0,length);
+  // removing the ? operator
+  display.println(memory_dump);
+  display.update();
+  // Free the memory
+//  delay(5000);
+  free(p);
+
   if ((char)payload[0] == '2') {
     display.clear();
     display.setCursor(0,0);
-    display.println(topic);
-    for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-    }    
+    display.print("saving temp..");
+    display.println("as ");
+    target_temp = memory_dump.substring(2,length);
+    display.print(target_temp);
     display.update();
-    delay(5000);
+//    delay(500);
   }
   // Switch on the LED if a 1 was received as first character
   if ((char)payload[0] == '1') {
-    display.clear();
-    display.setCursor(0,0);
     display.println("received 1");
     display.update();
     digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
@@ -290,10 +318,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
     gps_message.toCharArray(message_arr, gps_message.length() + 1); // packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
-    client.publish("current_GPS", message_arr);
+    if (gps_message.startsWith("0.0")) {
+      client.publish("current_GPS", message_arr);
+    }
+    else client.publish("current_GPS", message_arr, true);
     display.println("GPS message sent");
     display.update();
-    delay(500);
+//    delay(500);
     digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
 
     String temp_str = String(temp_reading);
@@ -312,7 +343,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
     dht_message.toCharArray(message_arr, dht_message.length() + 1); //packaging up the data to publish to mqtt whoa...
 
   // Publishing the message
-    client.publish("current_DHT", message_arr);
+    if (dht_message.startsWith("0.0")) {
+      client.publish("current_DHT", message_arr);
+    }
+    else client.publish("current_DHT", message_arr, true);
     display.println("message sent");
     display.update();
     delay(500);
