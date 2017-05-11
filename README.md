@@ -179,6 +179,8 @@ Redirection of routes from the devise controller. Typically, devise automaticall
 
 #### 4. MQTT
 
+![MQTT](/app/assets/images/MQTT.png)
+
 I used CGI (Common Gateway Interface) to access ENV variables and URI (Universal Resource Identifiers) to parse the common url into host, post, user and password into key-value pairs. Format:  
 
 ```
@@ -330,4 +332,4 @@ From the C++ codes:
 * John Ang (the IoT Tony Stark)
 * Raymond (our 3rd TA)
 * UX TEAM
-![UX TEAM](/app/assets/images/ux3ux3.jpeg)
+![UX TEAM](/app/assets/images/ux3.jpeg)
