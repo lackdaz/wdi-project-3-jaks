@@ -25,6 +25,9 @@ class InvoicesController < ApplicationController
 
     @delivery_address = DeliveryAddress.where(user_id: current_user.id)
 
+
+
+
     if (!@delivery_address)
       redirect_to orderitems_path
     end
