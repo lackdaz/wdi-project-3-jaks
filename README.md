@@ -10,7 +10,7 @@
 
 ### WDI-JAKS MEETS UX- Tom Allan Elky Wendy
 
-![UX TEAM](/app/assets/images/ux1.jpeg)
+![UX TEAM](https://68.media.tumblr.com/a357ef9b5d4504110b42e35c173a2211/tumblr_oa8ddyQuDs1s46koto1_500.gif)
 ![UX TEAM](/app/assets/images/ux2.jpeg)
 
 [Lick Here](https://jaksicecream.herokuapp.com/)
