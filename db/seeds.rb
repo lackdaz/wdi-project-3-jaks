@@ -32,6 +32,5 @@
     neighbourhood: "Toa Payoh",
     email: Faker::Internet.email,
     password: Faker::Internet.password(8),
-    website: Faker::Internet.url
   )
 end
