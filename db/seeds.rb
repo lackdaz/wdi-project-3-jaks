@@ -31,7 +31,7 @@
     lng: 103.846586,
     neighbourhood: "Toa Payoh",
     email: Faker::Internet.email,
-    password_digest: Faker::Internet.password(8),
+    password: Faker::Internet.password(8),
     website: Faker::Internet.url
   )
 end
