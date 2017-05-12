@@ -2,6 +2,8 @@
 
 ![Ice-Cream Truck](https://s-media-cache-ak0.pinimg.com/originals/f9/d0/d4/f9d0d41c3e65ca986b1e5af0264bc357.gif)
 
+![Ice-Cream Scoop](http://i.imgur.com/wzR2nEH.gif)
+
 ### In memories of the all Singapore's Ice-Cream Uncles
 
 ![Ice-Cream Uncle](http://goodyfeed.com/wp-content/uploads/2016/07/Uncle-Sun-Icecream-Vendor.png)
